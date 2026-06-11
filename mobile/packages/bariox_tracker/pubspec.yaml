@@ -1,0 +1,21 @@
+name: bariox_tracker
+description: Bariox GPS tracker commands and event types
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+  flutter: ^3.41.0
+resolution: workspace
+
+dependencies:
+  ble_framed_protocol: ^0.1.0
+  flutter:
+    sdk: flutter
+  flutter_blue_plus: ^2.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^10.2.0

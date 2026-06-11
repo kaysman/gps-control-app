@@ -1,0 +1,205 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Bariox Kontrol",
+
+  "tabBluetooth": "Bluetooth",
+  "tabSms": "SMS",
+  "tabSettings": "Ayarlar",
+
+  "bluetoothTitle": "Bluetooth",
+  "bluetoothConnected": "Bağlı",
+  "bluetoothOffTitle": "Bluetooth {state}",
+  "@bluetoothOffTitle": {
+    "placeholders": { "state": { "type": "String" } }
+  },
+  "bluetoothOffMessage": "Bir takip cihazına bağlanmak için Bluetooth'u açın.",
+  "bluetoothScanCountdown": "{seconds}s",
+  "@bluetoothScanCountdown": {
+    "placeholders": { "seconds": { "type": "int" } }
+  },
+  "bluetoothTapToScan": "Taramak için dokunun",
+  "bluetoothRssiDbm": "{rssi} dBm",
+  "@bluetoothRssiDbm": {
+    "placeholders": { "rssi": { "type": "int" } }
+  },
+
+  "bleStatusSealed": "Mühürlü",
+  "bleStatusOpen": "Açık",
+  "bleStatusFetching": "Alınıyor…",
+  "bleStatBattery": "PİL",
+  "bleStatCover": "KAPAK",
+  "bleStatUpdated": "GÜNCELLEME",
+  "bleStatCoverOpen": "Açık",
+  "bleStatCoverClosed": "Kapalı",
+  "bleStatUpdatedJustNow": "az önce",
+  "bleStatPending": "—",
+  "bleStatBusy": "…",
+
+  "bleSending": "Gönderiliyor…",
+  "bleTapToRefresh": "Yenilemek için dokunun",
+  "bleTapToUnlock": "Açmak için dokunun",
+  "bleTapToLock": "Kilitlemek için dokunun",
+
+  "bleCommandsHeader": "BLUETOOTH KOMUTLARI",
+  "bleCmdUnlock": "Kilidi aç",
+  "bleCmdUnlockSub": "Ana kilidi aç",
+  "bleCmdLock": "Kilitle",
+  "bleCmdLockSub": "Ana kilidi mühürle",
+  "bleCmdRefresh": "Durumu yenile",
+  "bleCmdRefreshSub": "Pil, kapak ve kilit durumunu al",
+  "bleCmdDisconnect": "Bağlantıyı kes",
+  "bleCmdDisconnectSub": "BLE bağlantısını kapat",
+
+  "bleToastUnlocked": "Kilit açıldı",
+  "bleToastLocked": "Kilitlendi",
+  "bleToastStatusRefreshed": "Durum yenilendi",
+
+  "smsHeader": "SMS",
+  "smsRecipientCount": "{count, plural, =1{{count} takip cihazı} other{{count} takip cihazı}}",
+  "@smsRecipientCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "smsToLabel": "Kime:",
+  "smsAddRecipient": "+ Ekle",
+  "smsOverflowCount": "+{count}",
+  "@smsOverflowCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "smsEmptyTitle": "Henüz mesaj yok",
+  "smsEmptySub": "Başlamak için aşağıdan bir komut seçin",
+  "smsPickCommand": "Göndermek için bir komut seçin",
+  "smsSendFailed": "{tracker} cihazına gönderilemedi",
+  "@smsSendFailed": {
+    "placeholders": { "tracker": { "type": "String" } }
+  },
+  "smsBubbleYouTo": "Sen · {count, plural, =1{{count} cihaza} other{{count} cihaza}}",
+  "@smsBubbleYouTo": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "smsDateToday": "BUGÜN {hour}:{minute}",
+  "@smsDateToday": {
+    "placeholders": {
+      "hour": { "type": "String" },
+      "minute": { "type": "String" }
+    }
+  },
+  "smsDateFull": "{day}/{month}/{year} {hour}:{minute}",
+  "@smsDateFull": {
+    "placeholders": {
+      "day": { "type": "String" },
+      "month": { "type": "String" },
+      "year": { "type": "String" },
+      "hour": { "type": "String" },
+      "minute": { "type": "String" }
+    }
+  },
+
+  "trackerPickerTitle": "Takip cihazı ekle",
+  "trackerPickerDone": "Tamam · {count, plural, =1{{count} cihaz} other{{count} cihaz}}",
+  "@trackerPickerDone": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "allRecipientsHeading": "KİME",
+  "allRecipientsCount": "{count, plural, =1{{count} cihaz} other{{count} cihaz}}",
+  "@allRecipientsCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+
+  "commandPickerHeading": "KOMUT",
+  "commandPickerTitle": "Birini seçin",
+  "commandGroupRead": "OKU",
+  "commandGroupSet": "AYARLA",
+  "commandGroupAction": "EYLEM",
+  "commandGroupSetNeedsInput": "· giriş gerekli",
+  "commandPickerInputBadge": "giriş",
+
+  "composeTagSet": "AYARLA",
+  "composeTagAction": "EYLEM",
+  "composeTagCommand": "KOMUT",
+  "composeDangerWarning": "Emin misiniz? Bu, {count, plural, =1{{count} cihazdaki} other{{count} cihazdaki}} her şeyi siler.",
+  "@composeDangerWarning": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "composeNoParams": "Parametre gerekmez.",
+  "composeSendTo": "{count, plural, =1{{count} cihaza gönder} other{{count} cihaza gönder}}",
+  "@composeSendTo": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "composeToggleOn": "Açık",
+  "composeToggleOff": "Kapalı",
+
+  "smsCmdBatteryName": "Pili al",
+  "smsCmdBatterySub": "Pil seviyesi ve şarj",
+  "smsCmdStatusName": "Kilit durumunu al",
+  "smsCmdStatusSub": "Mühürlü · kapak · motor",
+  "smsCmdPositionName": "Konumu al",
+  "smsCmdPositionSub": "GPS koordinatları · hız",
+  "smsCmdRfidName": "RFID kartları listele",
+  "smsCmdRfidSub": "Tüm yetkili kartlar",
+  "smsCmdSubsName": "Alt kilitleri listele",
+  "smsCmdSubsSub": "Eşli alt kilitler ve durum",
+  "smsCmdFwName": "Firmware sürümünü al",
+  "smsCmdFwSub": "",
+  "smsCmdSleepName": "Uyku modunu ayarla",
+  "smsCmdSleepInputLabel": "Uyku modu",
+  "smsCmdIntervalName": "Konum aralığını ayarla",
+  "smsCmdIntervalInputLabel": "Konumu her",
+  "smsCmdAutolockName": "Otomatik kilit süresini ayarla",
+  "smsCmdAutolockInputLabel": "Şu süreden sonra kilitle",
+  "smsCmdAddrfidName": "RFID kart ekle",
+  "smsCmdAddrfidInputLabel": "Kart numarası",
+  "smsCmdAddphoneName": "Yetkili telefon ekle",
+  "smsCmdAddphoneInputLabel": "Telefon numarası",
+  "smsCmdPwdName": "Açma şifresini değiştir",
+  "smsCmdPwdInputLabel": "Yeni 6 haneli şifre",
+  "smsCmdSensorName": "Sensör hassasiyetini ayarla",
+  "smsCmdSensorInputLabel": "Hassasiyet",
+  "smsCmdUnlockName": "Kilidi aç",
+  "smsCmdUnlockSub": "Ana kilidi aç",
+  "smsCmdLockName": "Kilitle",
+  "smsCmdLockSub": "Ana kilidi mühürle",
+  "smsCmdRebootName": "Cihazı yeniden başlat",
+  "smsCmdRebootSub": "",
+  "smsCmdClearName": "Konum önbelleğini temizle",
+  "smsCmdClearSub": "",
+  "smsCmdResetName": "Fabrika ayarlarına dön",
+  "smsCmdResetSub": "Her şeyi siler",
+
+  "smsUnitSeconds": "saniye",
+
+  "sensorLow": "Düşük",
+  "sensorMedium": "Orta",
+  "sensorHigh": "Yüksek",
+
+  "settingsTitle": "Ayarlar",
+  "settingsSectionApp": "UYGULAMA",
+  "settingsSectionSims": "SIM KARTLAR",
+  "settingsRowLanguage": "Dil",
+  "settingsFooter": "Bariox Kontrol · v1.0",
+
+  "simsNone": "SIM kart bulunamadı",
+  "simsRefresh": "Yenile",
+  "simSlotLabel": "Yuva {slot}",
+  "@simSlotLabel": {
+    "placeholders": { "slot": { "type": "int" } }
+  },
+  "simSubtitle": "Yuva {slot} · {country}",
+  "@simSubtitle": {
+    "placeholders": {
+      "slot": { "type": "int" },
+      "country": { "type": "String" }
+    }
+  },
+  "smsActiveSimChip": "{carrier} (Yuva {slot})",
+  "@smsActiveSimChip": {
+    "placeholders": {
+      "carrier": { "type": "String" },
+      "slot": { "type": "int" }
+    }
+  },
+  "smsNoSimChip": "SIM yok",
+
+  "languagePickerTitle": "Dil",
+  "languageTurkish": "Türkçe",
+  "languageEnglish": "İngilizce"
+}

@@ -1,0 +1,22 @@
+name: bariox_control
+
+packages:
+  - .
+  - packages/**
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  analyze:
+    run: melos exec -- flutter analyze --fatal-infos
+    description: Analyze all packages
+
+  test:
+    run: melos exec -- flutter test
+    description: Run tests in all packages
+
+  format:
+    run: melos exec -- dart format .
+    description: Format all packages

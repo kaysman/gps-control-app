@@ -1,0 +1,38 @@
+name: bariox_control
+description: Bariox tracker control app — BLE and SMS command interface
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+  flutter: ^3.41.0
+
+workspace:
+  - packages/bariox_tracker
+  - packages/sms_tracker_commands
+
+dependencies:
+  bariox_tracker:
+    path: packages/bariox_tracker
+  sms_tracker_commands:
+    path: packages/sms_tracker_commands
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  bloc: ^9.2.0
+  flutter_bloc: ^9.1.1
+  flutter_blue_plus: ^2.2.1
+  google_fonts: ^6.1.0
+  another_telephony: ^0.4.1
+  permission_handler: ^11.3.1
+  intl: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^10.2.0
+
+flutter:
+  uses-material-design: true
+  generate: true
