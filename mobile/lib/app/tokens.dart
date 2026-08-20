@@ -16,3 +16,8 @@ const kOk       = Color(0xFF2D8F5A);
 const kBad      = Color(0xFFC8473F);
 const kInkSoft  = Color(0xFF3A4E64);
 const kWhite    = Color(0xFFFFFFFF);
+
+// ── Typography ──────────────────────────────────────────────────────────
+// Bundled in assets/fonts (see pubspec.yaml) — no runtime font fetching.
+const kSans = 'Inter';
+const kMono = 'JetBrainsMono';

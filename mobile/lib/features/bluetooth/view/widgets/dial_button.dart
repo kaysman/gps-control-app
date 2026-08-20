@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:bariox_control/app/tokens.dart';
 import 'package:bariox_control/l10n/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Big circular tap target at the centre of the dial: shows "Tap to unlock"
 /// / "Tap to lock" / "Tap to refresh" depending on [isLocked] and busy state.
@@ -89,7 +88,8 @@ class _DialLabel extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.center,
-      style: GoogleFonts.inter(
+      style: TextStyle(
+        fontFamily: kSans,
         fontWeight: FontWeight.w700,
         fontSize: large ? 15 : 13,
         color: kNavy,

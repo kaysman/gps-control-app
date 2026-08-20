@@ -3,7 +3,6 @@ import 'package:bariox_control/features/sms/sms_command_labels.dart';
 import 'package:bariox_control/l10n/l10n.dart';
 import 'package:bariox_control/mock/mock_data.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SmsCommandPickerSheet extends StatelessWidget {
   const SmsCommandPickerSheet({super.key, required this.onPick});
@@ -60,7 +59,8 @@ class SmsCommandPickerSheet extends StatelessWidget {
                     children: [
                       Text(
                         l10n.commandPickerHeading,
-                        style: GoogleFonts.jetBrainsMono(
+                        style: TextStyle(
+                          fontFamily: kMono,
                           fontSize: 10.5,
                           color: kMute,
                           letterSpacing: 1.4,
@@ -69,7 +69,8 @@ class SmsCommandPickerSheet extends StatelessWidget {
                       ),
                       Text(
                         l10n.commandPickerTitle,
-                        style: GoogleFonts.inter(
+                        style: TextStyle(
+                          fontFamily: kSans,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                           color: kNavy,
@@ -104,7 +105,8 @@ class SmsCommandPickerSheet extends StatelessWidget {
                       children: [
                         Text(
                           labels[group]!,
-                          style: GoogleFonts.inter(
+                          style: TextStyle(
+                            fontFamily: kSans,
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                             color: kMute,
@@ -115,7 +117,8 @@ class SmsCommandPickerSheet extends StatelessWidget {
                           const SizedBox(width: 6),
                           Text(
                             l10n.commandGroupSetNeedsInput,
-                            style: GoogleFonts.inter(
+                            style: TextStyle(
+                              fontFamily: kSans,
                               fontSize: 11,
                               color: kOrangeD,
                             ),
@@ -189,7 +192,8 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                     children: [
                                       Text(
                                         smsCommandName(l10n, cmd.id),
-                                        style: GoogleFonts.inter(
+                                        style: TextStyle(
+                                          fontFamily: kSans,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
                                           color: cmd.danger ? kBad : kNavy,
@@ -198,7 +202,8 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                       if (sub.isNotEmpty)
                                         Text(
                                           sub,
-                                          style: GoogleFonts.inter(
+                                          style: TextStyle(
+                                            fontFamily: kSans,
                                             fontSize: 11.5,
                                             color: kMute,
                                           ),
@@ -218,7 +223,8 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                     ),
                                     child: Text(
                                       l10n.commandPickerInputBadge,
-                                      style: GoogleFonts.inter(
+                                      style: TextStyle(
+                                        fontFamily: kSans,
                                         fontSize: 9.5,
                                         fontWeight: FontWeight.w700,
                                         color: kOrangeD,

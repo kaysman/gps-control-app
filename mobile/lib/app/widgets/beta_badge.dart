@@ -1,6 +1,5 @@
 import 'package:bariox_control/app/tokens.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Small "BETA" pill used to flag work-in-progress areas of the app.
 class BetaBadge extends StatelessWidget {
@@ -23,7 +22,8 @@ class BetaBadge extends StatelessWidget {
       ),
       child: Text(
         'BETA',
-        style: GoogleFonts.jetBrainsMono(
+        style: TextStyle(
+          fontFamily: kMono,
           fontSize: compact ? 8 : 9,
           fontWeight: FontWeight.w800,
           color: kOrangeD,

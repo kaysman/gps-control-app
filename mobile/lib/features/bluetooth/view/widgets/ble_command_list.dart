@@ -1,7 +1,6 @@
 import 'package:bariox_control/app/tokens.dart';
 import 'package:bariox_control/l10n/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Stacked list of BLE actions: unlock, lock, refresh, disconnect.
 class BleCommandList extends StatelessWidget {
@@ -109,7 +108,8 @@ class _BleRow extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 14.5,
                       fontWeight: FontWeight.w700,
                       color: kNavy,
@@ -117,7 +117,11 @@ class _BleRow extends StatelessWidget {
                   ),
                   Text(
                     sub,
-                    style: GoogleFonts.inter(fontSize: 12, color: kMute),
+                    style: TextStyle(
+                      fontFamily: kSans,
+                      fontSize: 12,
+                      color: kMute,
+                    ),
                   ),
                 ],
               ),

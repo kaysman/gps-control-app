@@ -7,7 +7,6 @@ import 'package:bariox_control/l10n/l10n.dart';
 import 'package:bariox_tracker/bariox_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Radar-style screen while no tracker is connected: animated rings + sweep,
 /// scanned devices arranged around the centre hub, tap-to-scan button.
@@ -99,7 +98,8 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                     left: 20,
                     child: Text(
                       l10n.bluetoothTitle,
-                      style: GoogleFonts.inter(
+                      style: TextStyle(
+                        fontFamily: kSans,
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
                         color: kWhite,
@@ -120,7 +120,8 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                             child: Text(
                               state.connectionError!,
                               textAlign: TextAlign.center,
-                              style: GoogleFonts.inter(
+                              style: TextStyle(
+                                fontFamily: kSans,
                                 fontSize: 12,
                                 color: kOrange,
                               ),
@@ -130,7 +131,8 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                           Text(
                             l10n.bluetoothScanCountdown(state.scanSecondsLeft),
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.jetBrainsMono(
+                            style: TextStyle(
+                              fontFamily: kMono,
                               fontSize: 11,
                               color: kMute2,
                             ),
@@ -139,7 +141,8 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                           Text(
                             l10n.bluetoothTapToScan,
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(
+                            style: TextStyle(
+                              fontFamily: kSans,
                               fontSize: 12,
                               color: kMute2,
                             ),
@@ -415,7 +418,8 @@ class _DeviceNode extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.jetBrainsMono(
+                style: TextStyle(
+                  fontFamily: kMono,
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
                   color: kWhite,
@@ -424,7 +428,7 @@ class _DeviceNode extends StatelessWidget {
               Text(
                 context.l10n.bluetoothRssiDbm(tracker.rssi),
                 textAlign: TextAlign.center,
-                style: GoogleFonts.inter(fontSize: 9, color: kMute2),
+                style: TextStyle(fontFamily: kSans, fontSize: 9, color: kMute2),
               ),
             ],
           ),

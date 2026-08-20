@@ -3,7 +3,6 @@ import 'package:bariox_control/features/sms/sms_command_labels.dart';
 import 'package:bariox_control/l10n/l10n.dart';
 import 'package:bariox_control/mock/mock_data.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SmsComposeDock extends StatefulWidget {
   const SmsComposeDock({
@@ -76,7 +75,8 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
                   ),
                   child: Text(
                     tagLabel,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 9.5,
                       fontWeight: FontWeight.w700,
                       color: kNavy,
@@ -87,7 +87,8 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
                 const SizedBox(width: 8),
                 Text(
                   smsCommandName(l10n, cmd.id),
-                  style: GoogleFonts.inter(
+                  style: TextStyle(
+                    fontFamily: kSans,
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                     color: kNavy,
@@ -119,7 +120,8 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
                   cmd.danger
                       ? l10n.composeDangerWarning(widget.recipientCount)
                       : (sub.isEmpty ? l10n.composeNoParams : sub),
-                  style: GoogleFonts.inter(
+                  style: TextStyle(
+                    fontFamily: kSans,
                     fontSize: 12.5,
                     color: cmd.danger ? kBad : kInkSoft,
                   ),
@@ -141,7 +143,8 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
                     const SizedBox(width: 8),
                     Text(
                       l10n.composeSendTo(widget.recipientCount),
-                      style: GoogleFonts.inter(
+                      style: TextStyle(
+                        fontFamily: kSans,
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                         color: cmd.danger ? kWhite : kNavy,
@@ -190,7 +193,8 @@ class _SmsInputWidget extends StatelessWidget {
           children: [
             Text(
               label,
-              style: GoogleFonts.inter(
+              style: TextStyle(
+                fontFamily: kSans,
                 fontSize: 13.5,
                 fontWeight: FontWeight.w600,
                 color: kNavy,
@@ -234,7 +238,8 @@ class _SmsInputWidget extends StatelessWidget {
           children: [
             Text(
               label,
-              style: GoogleFonts.inter(
+              style: TextStyle(
+                fontFamily: kSans,
                 fontSize: 13.5,
                 fontWeight: FontWeight.w600,
                 color: kNavy,
@@ -273,7 +278,7 @@ class _SmsInputWidget extends StatelessWidget {
         children: [
           Text(
             label,
-            style: GoogleFonts.inter(fontSize: 12, color: kMute),
+            style: TextStyle(fontFamily: kSans, fontSize: 12, color: kMute),
           ),
           const SizedBox(height: 6),
           Row(
@@ -288,7 +293,8 @@ class _SmsInputWidget extends StatelessWidget {
                       : TextInputType.text,
                   controller: TextEditingController(text: input.defaultStr),
                   textAlign: isPin ? TextAlign.center : TextAlign.start,
-                  style: GoogleFonts.jetBrainsMono(
+                  style: TextStyle(
+                    fontFamily: kMono,
                     fontSize: isPin ? 18 : 14,
                     fontWeight: FontWeight.w700,
                     color: kNavy,
@@ -319,7 +325,11 @@ class _SmsInputWidget extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   unit,
-                  style: GoogleFonts.inter(fontSize: 12.5, color: kMute),
+                  style: TextStyle(
+                    fontFamily: kSans,
+                    fontSize: 12.5,
+                    color: kMute,
+                  ),
                 ),
               ],
             ],
@@ -352,7 +362,8 @@ class _SmsToggleBtn extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: GoogleFonts.inter(
+          style: TextStyle(
+            fontFamily: kSans,
             fontSize: 13,
             fontWeight: FontWeight.w700,
             color: active ? kWhite : kNavy,

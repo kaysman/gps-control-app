@@ -4,7 +4,6 @@ import 'package:bariox_control/l10n/l10n.dart';
 import 'package:bariox_control/mock/mock_data.dart';
 import 'package:bariox_control/models/chat_message.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SmsEmptyConversation extends StatelessWidget {
   const SmsEmptyConversation({super.key, required this.onPickCommand});
@@ -21,7 +20,8 @@ class SmsEmptyConversation extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             l10n.smsEmptyTitle,
-            style: GoogleFonts.inter(
+            style: TextStyle(
+              fontFamily: kSans,
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: kMute,
@@ -30,7 +30,7 @@ class SmsEmptyConversation extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             l10n.smsEmptySub,
-            style: GoogleFonts.inter(fontSize: 12, color: kMute2),
+            style: TextStyle(fontFamily: kSans, fontSize: 12, color: kMute2),
           ),
         ],
       ),
@@ -62,7 +62,8 @@ class SmsSentBubble extends StatelessWidget {
               children: [
                 Text(
                   l10n.smsBubbleYouTo(msg.recipientShorts.length),
-                  style: GoogleFonts.jetBrainsMono(
+                  style: TextStyle(
+                    fontFamily: kMono,
                     fontSize: 10.5,
                     color: kMute,
                     letterSpacing: 0.6,
@@ -88,7 +89,8 @@ class SmsSentBubble extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: commandLabel,
-                          style: GoogleFonts.inter(
+                          style: TextStyle(
+                            fontFamily: kSans,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: kWhite,
@@ -97,7 +99,8 @@ class SmsSentBubble extends StatelessWidget {
                         if (valueLabel != null)
                           TextSpan(
                             text: ' → $valueLabel',
-                            style: GoogleFonts.inter(
+                            style: TextStyle(
+                              fontFamily: kSans,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: kOrange,
@@ -110,7 +113,8 @@ class SmsSentBubble extends StatelessWidget {
                 const SizedBox(height: 3),
                 Text(
                   msg.smsText,
-                  style: GoogleFonts.jetBrainsMono(
+                  style: TextStyle(
+                    fontFamily: kMono,
                     fontSize: 9.5,
                     color: kMute2,
                   ),
@@ -147,7 +151,8 @@ class SmsReceivedBubble extends StatelessWidget {
               children: [
                 Text(
                   msg.from,
-                  style: GoogleFonts.jetBrainsMono(
+                  style: TextStyle(
+                    fontFamily: kMono,
                     fontSize: 10.5,
                     color: kMute,
                     letterSpacing: 0.6,
@@ -171,7 +176,8 @@ class SmsReceivedBubble extends StatelessWidget {
                   ),
                   child: Text(
                     msg.body,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: kNavy,
@@ -218,7 +224,8 @@ class SmsDateChip extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: GoogleFonts.jetBrainsMono(
+          style: TextStyle(
+            fontFamily: kMono,
             fontSize: 10.5,
             color: kMute,
             letterSpacing: 1.4,
@@ -262,7 +269,8 @@ class SmsRecipientChip extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             tracker.short,
-            style: GoogleFonts.inter(
+            style: TextStyle(
+              fontFamily: kSans,
               fontSize: 12.5,
               fontWeight: FontWeight.w600,
               color: kNavy,

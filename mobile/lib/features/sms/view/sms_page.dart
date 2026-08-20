@@ -15,7 +15,6 @@ import 'package:bariox_control/services/sms_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 String _buildSmsText(SmsCommand cmd, String pw, Object? value) {
   final p = pw.isEmpty ? '000000' : pw;
@@ -73,13 +72,12 @@ class _SmsPageState extends State<SmsPage> {
   }
 
   Future<void> _requestAndListen() async {
-    debugPrint('[SmsPage] _requestAndListen: requesting permissions');
-    final granted = await SmsService.instance.requestPermissions();
+    debugPrint('[SmsPage] _requestAndListen: waiting for permissions');
+    final granted = await SmsService.instance.ensureReady();
     debugPrint(
       '[SmsPage] _requestAndListen: granted=$granted mounted=$mounted',
     );
     if (!granted || !mounted) return;
-    SmsService.instance.startListening();
     _smsSub = SmsService.instance.incoming.listen(_onIncoming);
     debugPrint('[SmsPage] _requestAndListen: subscribed to incoming stream');
     // SIM enumeration also needs READ_PHONE_STATE — refresh now that the
@@ -226,22 +224,24 @@ class _SmsPageState extends State<SmsPage> {
         '[SmsPage] _sendCommand: → ${tracker.short}(${tracker.id}) '
         'phone=${tracker.phone} smsText=$smsText',
       );
-      SmsService.instance.send(
-        to: tracker.phone,
-        body: smsText,
-        subscriptionId: subscriptionId,
-        onStatus: (success) {
-          if (!mounted) return;
-          if (!success) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(context.l10n.smsSendFailed(tracker.short)),
-                backgroundColor: kBad,
-                behavior: SnackBarBehavior.floating,
-              ),
-            );
-          }
-        },
+      unawaited(
+        SmsService.instance.send(
+          to: tracker.phone,
+          body: smsText,
+          subscriptionId: subscriptionId,
+          onStatus: (success) {
+            if (!mounted) return;
+            if (!success) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(context.l10n.smsSendFailed(tracker.short)),
+                  backgroundColor: kBad,
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            }
+          },
+        ),
       );
     }
   }
@@ -271,7 +271,8 @@ class _SmsPageState extends State<SmsPage> {
                     children: [
                       Text(
                         l10n.smsHeader,
-                        style: GoogleFonts.inter(
+                        style: TextStyle(
+                          fontFamily: kSans,
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
                           color: kNavy,
@@ -300,7 +301,8 @@ class _SmsPageState extends State<SmsPage> {
                   const SizedBox(width: 6),
                   Text(
                     l10n.smsRecipientCount(recDevs.length),
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: kOrangeD,
@@ -326,7 +328,8 @@ class _SmsPageState extends State<SmsPage> {
                 padding: const EdgeInsets.only(top: 6),
                 child: Text(
                   l10n.smsToLabel,
-                  style: GoogleFonts.inter(
+                  style: TextStyle(
+                    fontFamily: kSans,
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
                     color: kMute,
@@ -363,7 +366,8 @@ class _SmsPageState extends State<SmsPage> {
                             l10n.smsOverflowCount(
                               recDevs.length - _maxVisible,
                             ),
-                            style: GoogleFonts.inter(
+                            style: TextStyle(
+                              fontFamily: kSans,
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: kWhite,
@@ -385,7 +389,8 @@ class _SmsPageState extends State<SmsPage> {
                         ),
                         child: Text(
                           l10n.smsAddRecipient,
-                          style: GoogleFonts.inter(
+                          style: TextStyle(
+                            fontFamily: kSans,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
                             color: kNavy,
@@ -448,7 +453,8 @@ class _SmsPageState extends State<SmsPage> {
                 children: [
                   Text(
                     '+',
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 18,
                       color: kOrange,
                       fontWeight: FontWeight.w800,
@@ -457,7 +463,8 @@ class _SmsPageState extends State<SmsPage> {
                   const SizedBox(width: 10),
                   Text(
                     l10n.smsPickCommand,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                       color: kNavy,
@@ -499,7 +506,8 @@ class _ActiveSimChip extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             label,
-            style: GoogleFonts.jetBrainsMono(
+            style: TextStyle(
+              fontFamily: kMono,
               fontSize: 11,
               fontWeight: FontWeight.w600,
               color: kMute,

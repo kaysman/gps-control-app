@@ -8,7 +8,6 @@ import 'package:bariox_control/features/bluetooth/view/widgets/dial_card.dart';
 import 'package:bariox_control/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Screen shown once a tracker is connected over BLE: header with tracker
 /// name, dial card with lock state, and the command list.
@@ -142,7 +141,8 @@ class _ConnectedViewState extends State<ConnectedView>
                         padding: const EdgeInsets.fromLTRB(22, 0, 22, 6),
                         child: Text(
                           context.l10n.bleCommandsHeader,
-                          style: GoogleFonts.jetBrainsMono(
+                          style: TextStyle(
+                            fontFamily: kMono,
                             fontSize: 10.5,
                             fontWeight: FontWeight.w700,
                             color: kMute,

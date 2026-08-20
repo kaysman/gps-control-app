@@ -3,7 +3,6 @@ import 'package:bariox_control/features/bluetooth/view/widgets/dial_button.dart'
 import 'package:bariox_control/l10n/l10n.dart';
 import 'package:bariox_tracker/bariox_tracker.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// The hero card on the connected screen: tracker name, lock status pill,
 /// dial + central tap target, battery/cover/updated stats, and an optional
@@ -57,7 +56,8 @@ class DialCard extends StatelessWidget {
                     tracker.advName.isNotEmpty
                         ? tracker.advName
                         : tracker.deviceId,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 17,
                       fontWeight: FontWeight.w700,
                       color: kWhite,
@@ -173,7 +173,8 @@ class _StatusPill extends StatelessWidget {
             (locked
                 ? context.l10n.bleStatusSealed
                 : context.l10n.bleStatusOpen),
-        style: GoogleFonts.inter(
+        style: TextStyle(
+          fontFamily: kSans,
           fontSize: 11,
           fontWeight: FontWeight.w600,
           color: locked ? kMute2 : kOrangeD,
@@ -211,7 +212,8 @@ class _StatCell extends StatelessWidget {
           children: [
             Text(
               label,
-              style: GoogleFonts.jetBrainsMono(
+              style: TextStyle(
+                fontFamily: kMono,
                 fontSize: 10,
                 color: kMute2,
                 letterSpacing: 1.2,
@@ -220,7 +222,8 @@ class _StatCell extends StatelessWidget {
             const SizedBox(height: 3),
             Text(
               value,
-              style: GoogleFonts.inter(
+              style: TextStyle(
+                fontFamily: kSans,
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
                 color: warn ? kOrange : kWhite,
@@ -252,7 +255,8 @@ class _Toast extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             message,
-            style: GoogleFonts.inter(
+            style: TextStyle(
+              fontFamily: kSans,
               fontSize: 13.5,
               fontWeight: FontWeight.w700,
               color: kNavy,
@@ -285,7 +289,8 @@ class _ErrorToast extends StatelessWidget {
           Expanded(
             child: Text(
               message,
-              style: GoogleFonts.inter(
+              style: TextStyle(
+                fontFamily: kSans,
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
                 color: kBad,

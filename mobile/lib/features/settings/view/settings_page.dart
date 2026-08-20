@@ -4,7 +4,6 @@ import 'package:bariox_control/l10n/l10n.dart';
 import 'package:bariox_control/services/sim_card_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -24,7 +23,8 @@ class SettingsPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(18, 10, 18, 14),
             child: Text(
               l10n.settingsTitle,
-              style: GoogleFonts.inter(
+              style: TextStyle(
+                fontFamily: kSans,
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
                 color: kNavy,
@@ -36,7 +36,8 @@ class SettingsPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(22, 6, 22, 6),
             child: Text(
               l10n.settingsSectionApp,
-              style: GoogleFonts.inter(
+              style: TextStyle(
+                fontFamily: kSans,
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
                 color: kMute,
@@ -64,7 +65,8 @@ class SettingsPage extends StatelessWidget {
                     Expanded(
                       child: Text(
                         l10n.settingsRowLanguage,
-                        style: GoogleFonts.inter(
+                        style: TextStyle(
+                          fontFamily: kSans,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: kNavy,
@@ -73,7 +75,11 @@ class SettingsPage extends StatelessWidget {
                     ),
                     Text(
                       _languageLabel(l10n, locale),
-                      style: GoogleFonts.inter(fontSize: 12.5, color: kMute),
+                      style: TextStyle(
+                        fontFamily: kSans,
+                        fontSize: 12.5,
+                        color: kMute,
+                      ),
                     ),
                     const SizedBox(width: 6),
                     Icon(Icons.chevron_right, size: 18, color: kMute2),
@@ -88,7 +94,7 @@ class SettingsPage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 24),
               child: Text(
                 l10n.settingsFooter,
-                style: GoogleFonts.jetBrainsMono(fontSize: 11, color: kMute),
+                style: TextStyle(fontFamily: kMono, fontSize: 11, color: kMute),
               ),
             ),
           ),
@@ -155,7 +161,8 @@ class _LanguagePickerSheet extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 l10n.languagePickerTitle,
-                style: GoogleFonts.inter(
+                style: TextStyle(
+                  fontFamily: kSans,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                   color: kNavy,
@@ -218,7 +225,8 @@ class _LanguageRow extends StatelessWidget {
             Expanded(
               child: Text(
                 label,
-                style: GoogleFonts.inter(
+                style: TextStyle(
+                  fontFamily: kSans,
                   fontSize: 14.5,
                   fontWeight: FontWeight.w600,
                   color: kNavy,
@@ -251,7 +259,8 @@ class _SimsSection extends StatelessWidget {
               Expanded(
                 child: Text(
                   l10n.settingsSectionSims,
-                  style: GoogleFonts.inter(
+                  style: TextStyle(
+                    fontFamily: kSans,
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                     color: kMute,
@@ -269,7 +278,8 @@ class _SimsSection extends StatelessWidget {
                   ),
                   child: Text(
                     l10n.simsRefresh,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
                       color: kOrangeD,
@@ -305,7 +315,8 @@ class _SimsSection extends StatelessWidget {
                       Expanded(
                         child: Text(
                           l10n.simsNone,
-                          style: GoogleFonts.inter(
+                          style: TextStyle(
+                            fontFamily: kSans,
                             fontSize: 13.5,
                             color: kMute,
                           ),
@@ -374,7 +385,8 @@ class _SimRow extends StatelessWidget {
                 children: [
                   Text(
                     sim.label,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                       color: kNavy,
@@ -382,12 +394,17 @@ class _SimRow extends StatelessWidget {
                   ),
                   Text(
                     l10n.simSubtitle(sim.slotIndex + 1, country),
-                    style: GoogleFonts.inter(fontSize: 11.5, color: kMute),
+                    style: TextStyle(
+                      fontFamily: kSans,
+                      fontSize: 11.5,
+                      color: kMute,
+                    ),
                   ),
                   if (sim.number.isNotEmpty)
                     Text(
                       sim.number,
-                      style: GoogleFonts.jetBrainsMono(
+                      style: TextStyle(
+                        fontFamily: kMono,
                         fontSize: 11,
                         color: kMute2,
                       ),

@@ -5,7 +5,6 @@ import 'package:bariox_control/features/settings/view/settings_page.dart';
 import 'package:bariox_control/features/sms/view/sms_page.dart';
 import 'package:bariox_control/l10n/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 enum _Tab { ble, sms, settings }
 
@@ -130,7 +129,8 @@ class _TabBtn extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: GoogleFonts.inter(
+                    style: TextStyle(
+                      fontFamily: kSans,
                       fontSize: 11,
                       fontWeight: active ? FontWeight.w700 : FontWeight.w500,
                       color: color,

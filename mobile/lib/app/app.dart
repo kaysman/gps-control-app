@@ -4,7 +4,6 @@ import 'package:bariox_control/l10n/l10n.dart';
 import 'package:bariox_control/shell/shell_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -27,7 +26,7 @@ class App extends StatelessWidget {
             theme: ThemeData(
               useMaterial3: true,
               scaffoldBackgroundColor: kPaper,
-              textTheme: GoogleFonts.interTextTheme(),
+              fontFamily: kSans,
               colorScheme: ColorScheme.fromSeed(
                 seedColor: kNavy,
                 surface: kPaper,

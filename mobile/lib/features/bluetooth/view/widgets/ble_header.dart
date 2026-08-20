@@ -1,6 +1,5 @@
 import 'package:bariox_control/app/tokens.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Header strip used on the connected BLE screen. Shows the back chevron when
 /// [onBack] is provided and the [title] (tracker name or "Bluetooth" by
@@ -34,7 +33,8 @@ class BleHeader extends StatelessWidget {
             child: Text(
               title,
               overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.inter(
+              style: TextStyle(
+                fontFamily: kSans,
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: kNavy,

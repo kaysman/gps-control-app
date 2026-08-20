@@ -2,7 +2,6 @@ import 'package:bariox_control/app/tokens.dart';
 import 'package:bariox_control/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Shown when the system BLE adapter is off, unavailable, etc.
 class BluetoothOffPlaceholder extends StatelessWidget {
@@ -23,7 +22,8 @@ class BluetoothOffPlaceholder extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             l10n.bluetoothOffTitle(label),
-            style: GoogleFonts.inter(
+            style: TextStyle(
+              fontFamily: kSans,
               fontSize: 17,
               fontWeight: FontWeight.w700,
               color: kNavy,
@@ -33,7 +33,7 @@ class BluetoothOffPlaceholder extends StatelessWidget {
           Text(
             l10n.bluetoothOffMessage,
             textAlign: TextAlign.center,
-            style: GoogleFonts.inter(fontSize: 13, color: kMute),
+            style: TextStyle(fontFamily: kSans, fontSize: 13, color: kMute),
           ),
         ],
       ),

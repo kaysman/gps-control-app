@@ -2,7 +2,6 @@ import 'package:bariox_control/app/tokens.dart';
 import 'package:bariox_control/l10n/l10n.dart';
 import 'package:bariox_control/mock/mock_data.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SmsTrackerPickerSheet extends StatefulWidget {
   const SmsTrackerPickerSheet({
@@ -76,7 +75,8 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                     children: [
                       Text(
                         context.l10n.trackerPickerTitle,
-                        style: GoogleFonts.inter(
+                        style: TextStyle(
+                          fontFamily: kSans,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                           color: kNavy,
@@ -169,7 +169,8 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                                     children: [
                                       Text(
                                         t.short,
-                                        style: GoogleFonts.inter(
+                                        style: TextStyle(
+                                          fontFamily: kSans,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
                                           color: kNavy,
@@ -177,14 +178,16 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                                       ),
                                       Text(
                                         t.name,
-                                        style: GoogleFonts.inter(
+                                        style: TextStyle(
+                                          fontFamily: kSans,
                                           fontSize: 11.5,
                                           color: kMute,
                                         ),
                                       ),
                                       Text(
                                         t.phone,
-                                        style: GoogleFonts.inter(
+                                        style: TextStyle(
+                                          fontFamily: kSans,
                                           fontSize: 11.5,
                                           color: kMute,
                                         ),
@@ -225,7 +228,8 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                   child: Center(
                     child: Text(
                       context.l10n.trackerPickerDone(_sel.length),
-                      style: GoogleFonts.inter(
+                      style: TextStyle(
+                        fontFamily: kSans,
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                         color: kNavy,
@@ -283,7 +287,8 @@ class SmsAllRecipientsSheet extends StatelessWidget {
                   children: [
                     Text(
                       context.l10n.allRecipientsHeading,
-                      style: GoogleFonts.jetBrainsMono(
+                      style: TextStyle(
+                        fontFamily: kMono,
                         fontSize: 10.5,
                         color: kMute,
                         letterSpacing: 1.4,
@@ -292,7 +297,8 @@ class SmsAllRecipientsSheet extends StatelessWidget {
                     ),
                     Text(
                       context.l10n.allRecipientsCount(recipients.length),
-                      style: GoogleFonts.inter(
+                      style: TextStyle(
+                        fontFamily: kSans,
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                         color: kNavy,
@@ -356,7 +362,8 @@ class SmsAllRecipientsSheet extends StatelessWidget {
                           children: [
                             Text(
                               t.short,
-                              style: GoogleFonts.inter(
+                              style: TextStyle(
+                                fontFamily: kSans,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
                                 color: kNavy,
@@ -364,7 +371,8 @@ class SmsAllRecipientsSheet extends StatelessWidget {
                             ),
                             Text(
                               t.name,
-                              style: GoogleFonts.inter(
+                              style: TextStyle(
+                                fontFamily: kSans,
                                 fontSize: 11.5,
                                 color: kMute,
                               ),
@@ -450,7 +458,8 @@ class _PasswordRowState extends State<_PasswordRow> {
           autofocus: true,
           keyboardType: TextInputType.number,
           maxLength: 6,
-          style: GoogleFonts.jetBrainsMono(
+          style: TextStyle(
+            fontFamily: kMono,
             fontSize: 14,
             fontWeight: FontWeight.w700,
             color: kNavy,
@@ -459,7 +468,8 @@ class _PasswordRowState extends State<_PasswordRow> {
           decoration: InputDecoration(
             isDense: true,
             hintText: '000000',
-            hintStyle: GoogleFonts.jetBrainsMono(
+            hintStyle: TextStyle(
+              fontFamily: kMono,
               fontSize: 13,
               color: kMute2,
               letterSpacing: 0,
@@ -504,7 +514,7 @@ class _PasswordRowState extends State<_PasswordRow> {
               : '000000';
           return Text(
             value,
-            style: GoogleFonts.inter(fontSize: 11.5, color: kMute),
+            style: TextStyle(fontFamily: kSans, fontSize: 11.5, color: kMute),
           );
         },
       ),
