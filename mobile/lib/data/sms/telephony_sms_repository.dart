@@ -1,18 +1,17 @@
 import 'dart:async';
 
 import 'package:another_telephony/telephony.dart';
+import 'package:gps_control/data/sms/sms_repository.dart';
+import 'package:gps_control/models/chat_message.dart';
 import 'package:flutter/foundation.dart';
 
 /// Background handler — runs in a separate Dart isolate when the app is
 /// killed/backgrounded. Cannot touch Flutter UI state; foreground reception
-/// via [SmsService.incoming] is sufficient for testing.
+/// via [SmsRepository.incoming] is sufficient for testing.
 @pragma('vm:entry-point')
 void onBackgroundSms(SmsMessage message) {}
 
-/// Thin singleton wrapper around the [Telephony] package.
-///
-/// Call [ensureReady] before anything else — it grants permissions and
-/// registers the broadcast receiver. Send with [send].
+/// [SmsRepository] backed by the device's telephony stack.
 ///
 /// ## Why everything funnels through [ensureReady]
 ///
@@ -29,25 +28,32 @@ void onBackgroundSms(SmsMessage message) {}
 ///
 /// So: only ever one permission request in flight, and never touch a
 /// permission-gated telephony call before the grant has landed.
-class SmsService {
-  SmsService._();
-  static final instance = SmsService._();
-
+class TelephonySmsRepository implements SmsRepository {
   final _telephony = Telephony.instance;
-  final _incomingCtrl = StreamController<SmsMessage>.broadcast();
+  final _incoming = StreamController<IncomingSms>.broadcast();
   bool _listening = false;
   bool _granted = false;
   Future<bool>? _pending;
 
-  /// Emits every incoming [SmsMessage] while the app is in the foreground.
-  Stream<SmsMessage> get incoming => _incomingCtrl.stream;
+  @override
+  Stream<IncomingSms> get incoming => _incoming.stream;
+
+  /// Nothing is persisted yet, so history starts empty on every launch and
+  /// lives only in the page's own state for the session.
+  @override
+  Future<List<ChatMessage>> loadHistory() async => const [];
+
+  /// Likewise: no persisted selection yet.
+  @override
+  Future<Set<String>> loadRecipientSelection() async => const {};
 
   /// Requests SEND_SMS/RECEIVE_SMS/phone permissions and, once granted,
   /// registers the incoming-SMS broadcast receiver.
   ///
-  /// Safe to call from anywhere, any number of times: concurrent callers all
-  /// await the same in-flight request instead of starting a second one. A
-  /// grant is remembered; a denial is not, so a later call can ask again.
+  /// Concurrent callers all await the same in-flight request instead of
+  /// starting a second one. A grant is remembered; a denial is not, so a later
+  /// call can ask again.
+  @override
   Future<bool> ensureReady() {
     final pending = _pending;
     if (pending != null) return pending;
@@ -62,11 +68,38 @@ class SmsService {
     return request;
   }
 
+  @override
+  Future<bool> send({
+    required String to,
+    required String body,
+    int subscriptionId = -1,
+  }) async {
+    if (!await ensureReady()) {
+      debugPrint('[SmsRepo] send: no permission, dropping message to $to');
+      return false;
+    }
+
+    debugPrint('[SmsRepo] send: to=$to body=$body subId=$subscriptionId');
+    // sendSms reports SENT and then DELIVERED; the first verdict is the answer.
+    final settled = Completer<bool>();
+    await _telephony.sendSms(
+      to: to,
+      message: body,
+      subscriptionId: subscriptionId,
+      statusListener: (status) {
+        final ok = status == SendStatus.SENT || status == SendStatus.DELIVERED;
+        debugPrint('[SmsRepo] send status: to=$to status=$status ok=$ok');
+        if (!settled.isCompleted) settled.complete(ok);
+      },
+    );
+    return settled.future;
+  }
+
   Future<bool> _prepare() async {
     if (!_granted) {
-      debugPrint('[SmsService] ensureReady: requesting permissions');
+      debugPrint('[SmsRepo] ensureReady: requesting permissions');
       _granted = await _telephony.requestPhoneAndSmsPermissions ?? false;
-      debugPrint('[SmsService] ensureReady: granted=$_granted');
+      debugPrint('[SmsRepo] ensureReady: granted=$_granted');
     }
     if (!_granted) return false;
     _startListening();
@@ -79,46 +112,18 @@ class SmsService {
   void _startListening() {
     if (_listening) return;
     _listening = true;
-    debugPrint('[SmsService] registering broadcast receiver');
+    debugPrint('[SmsRepo] registering broadcast receiver');
     _telephony.listenIncomingSms(
       onNewMessage: (msg) {
         debugPrint(
-          '[SmsService] incoming SMS — from=${msg.address} body=${msg.body}',
+          '[SmsRepo] incoming SMS — from=${msg.address} body=${msg.body}',
         );
-        _incomingCtrl.add(msg);
+        _incoming.add(
+          IncomingSms(from: msg.address ?? 'unknown', body: msg.body ?? ''),
+        );
       },
       onBackgroundMessage: onBackgroundSms,
       listenInBackground: true,
-    );
-  }
-
-  /// Sends [body] as an SMS to [to]. The [onStatus] callback fires once the
-  /// platform confirms SENT or DELIVERED, or with `false` if the permissions
-  /// were refused.
-  ///
-  /// Pass [subscriptionId] (from `SimCard.subscriptionId`) to send via a
-  /// specific SIM; -1 leaves the choice to the Android default-SMS SIM.
-  Future<void> send({
-    required String to,
-    required String body,
-    int subscriptionId = -1,
-    void Function(bool success)? onStatus,
-  }) async {
-    if (!await ensureReady()) {
-      debugPrint('[SmsService] send: no permission, dropping message to $to');
-      onStatus?.call(false);
-      return;
-    }
-    debugPrint('[SmsService] send: to=$to body=$body subId=$subscriptionId');
-    await _telephony.sendSms(
-      to: to,
-      message: body,
-      subscriptionId: subscriptionId,
-      statusListener: (status) {
-        final ok = status == SendStatus.SENT || status == SendStatus.DELIVERED;
-        debugPrint('[SmsService] send status: to=$to status=$status ok=$ok');
-        onStatus?.call(ok);
-      },
     );
   }
 }

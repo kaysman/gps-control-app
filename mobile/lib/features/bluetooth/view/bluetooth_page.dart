@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:bariox_control/features/bluetooth/bloc/bluetooth_bloc.dart';
-import 'package:bariox_control/features/bluetooth/view/bluetooth_off_placeholder.dart';
-import 'package:bariox_control/features/bluetooth/view/connected_view.dart';
-import 'package:bariox_control/features/bluetooth/view/scan_view.dart';
+import 'package:gps_control/data/tracker/tracker_repository.dart';
+import 'package:gps_control/features/bluetooth/bloc/bluetooth_bloc.dart';
+import 'package:gps_control/features/bluetooth/view/bluetooth_off_placeholder.dart';
+import 'package:gps_control/features/bluetooth/view/connected_view.dart';
+import 'package:gps_control/features/bluetooth/view/scan_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 /// Root of the Bluetooth tab. Monitors the system BLE adapter and shows an
 /// explanatory placeholder when Bluetooth is off; otherwise hands off to the
@@ -26,13 +26,13 @@ class BluetoothPage extends StatefulWidget {
 }
 
 class _BluetoothPageState extends State<BluetoothPage> {
-  BluetoothAdapterState _adapterState = BluetoothAdapterState.unknown;
-  late StreamSubscription<BluetoothAdapterState> _adapterSub;
+  BluetoothAdapterStatus _adapterState = BluetoothAdapterStatus.unknown;
+  late StreamSubscription<BluetoothAdapterStatus> _adapterSub;
 
   @override
   void initState() {
     super.initState();
-    _adapterSub = FlutterBluePlus.adapterState.listen((s) {
+    _adapterSub = context.read<TrackerRepository>().adapterStatus.listen((s) {
       if (mounted) setState(() => _adapterState = s);
     });
   }
@@ -45,12 +45,12 @@ class _BluetoothPageState extends State<BluetoothPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_adapterState != BluetoothAdapterState.on &&
-        _adapterState != BluetoothAdapterState.unknown) {
+    if (_adapterState != BluetoothAdapterStatus.on &&
+        _adapterState != BluetoothAdapterStatus.unknown) {
       return BluetoothOffPlaceholder(state: _adapterState);
     }
     return BlocProvider(
-      create: (_) => BluetoothBloc(),
+      create: (ctx) => BluetoothBloc(ctx.read<TrackerRepository>()),
       child: _BleBody(isActive: widget.isActive),
     );
   }

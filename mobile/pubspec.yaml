@@ -1,5 +1,5 @@
-name: bariox_control
-description: Bariox tracker control app — BLE and SMS command interface
+name: gps_control
+description: GPS tracker control app — BLE and SMS command interface
 version: 1.0.0+1
 publish_to: none
 

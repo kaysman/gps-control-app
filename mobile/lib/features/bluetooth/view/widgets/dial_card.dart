@@ -1,6 +1,7 @@
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/features/bluetooth/view/widgets/dial_button.dart';
-import 'package:bariox_control/l10n/l10n.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/features/bluetooth/view/widgets/dial_button.dart';
+import 'package:gps_control/l10n/l10n.dart';
+import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:bariox_tracker/bariox_tracker.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class DialCard extends StatelessWidget {
     required this.onToggle,
   });
 
-  final DiscoveredTracker tracker;
+  final ScannedTracker tracker;
   final LegacyStatus? status;
   final bool? isLocked;
   final bool busy;
@@ -53,9 +54,7 @@ class DialCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    tracker.advName.isNotEmpty
-                        ? tracker.advName
-                        : tracker.deviceId,
+                    tracker.label,
                     style: TextStyle(
                       fontFamily: kSans,
                       fontSize: 17,

@@ -1,22 +1,26 @@
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/app/widgets/beta_badge.dart';
-import 'package:bariox_control/features/bluetooth/view/bluetooth_page.dart';
-import 'package:bariox_control/features/settings/view/settings_page.dart';
-import 'package:bariox_control/features/sms/view/sms_page.dart';
-import 'package:bariox_control/l10n/l10n.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/app/widgets/beta_badge.dart';
+import 'package:gps_control/features/bluetooth/view/bluetooth_page.dart';
+import 'package:gps_control/features/settings/view/settings_page.dart';
+import 'package:gps_control/features/sms/view/sms_page.dart';
+import 'package:gps_control/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
-enum _Tab { ble, sms, settings }
+/// The shell's three top-level destinations.
+enum AppTab { ble, sms, settings }
 
 class ShellPage extends StatefulWidget {
-  const ShellPage({super.key});
+  const ShellPage({super.key, this.initialTab = AppTab.ble});
+
+  /// Tab shown on first build.
+  final AppTab initialTab;
 
   @override
   State<ShellPage> createState() => _ShellPageState();
 }
 
 class _ShellPageState extends State<ShellPage> {
-  _Tab _tab = _Tab.ble;
+  late AppTab _tab = widget.initialTab;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,7 @@ class _ShellPageState extends State<ShellPage> {
             child: IndexedStack(
               index: _tab.index,
               children: [
-                BluetoothPage(isActive: _tab == _Tab.ble),
+                BluetoothPage(isActive: _tab == AppTab.ble),
                 const SmsPage(),
                 const SettingsPage(),
               ],
@@ -55,8 +59,8 @@ class _ShellPageState extends State<ShellPage> {
 class _BottomTabBar extends StatelessWidget {
   const _BottomTabBar({required this.tab, required this.onTab});
 
-  final _Tab tab;
-  final ValueChanged<_Tab> onTab;
+  final AppTab tab;
+  final ValueChanged<AppTab> onTab;
 
   @override
   Widget build(BuildContext context) {
@@ -71,23 +75,23 @@ class _BottomTabBar extends StatelessWidget {
       child: Row(
         children: [
           _TabBtn(
-            id: _Tab.ble,
+            id: AppTab.ble,
             label: l10n.tabBluetooth,
-            active: tab == _Tab.ble,
-            onTap: () => onTab(_Tab.ble),
+            active: tab == AppTab.ble,
+            onTap: () => onTab(AppTab.ble),
           ),
           _TabBtn(
-            id: _Tab.sms,
+            id: AppTab.sms,
             label: l10n.tabSms,
-            active: tab == _Tab.sms,
+            active: tab == AppTab.sms,
             showBeta: true,
-            onTap: () => onTab(_Tab.sms),
+            onTap: () => onTab(AppTab.sms),
           ),
           _TabBtn(
-            id: _Tab.settings,
+            id: AppTab.settings,
             label: l10n.tabSettings,
-            active: tab == _Tab.settings,
-            onTap: () => onTab(_Tab.settings),
+            active: tab == AppTab.settings,
+            onTap: () => onTab(AppTab.settings),
           ),
         ],
       ),
@@ -104,7 +108,7 @@ class _TabBtn extends StatelessWidget {
     this.showBeta = false,
   });
 
-  final _Tab id;
+  final AppTab id;
   final String label;
   final bool active;
   final VoidCallback onTap;
@@ -154,16 +158,16 @@ class _TabBtn extends StatelessWidget {
 class _TabIcon extends StatelessWidget {
   const _TabIcon({required this.id, required this.active});
 
-  final _Tab id;
+  final AppTab id;
   final bool active;
 
   @override
   Widget build(BuildContext context) {
     final color = active ? kNavy : kMute2;
     final icon = switch (id) {
-      _Tab.ble => Icons.bluetooth,
-      _Tab.sms => active ? Icons.chat_bubble : Icons.chat_bubble_outline,
-      _Tab.settings => active ? Icons.settings : Icons.settings_outlined,
+      AppTab.ble => Icons.bluetooth,
+      AppTab.sms => active ? Icons.chat_bubble : Icons.chat_bubble_outline,
+      AppTab.settings => active ? Icons.settings : Icons.settings_outlined,
     };
     return Icon(icon, size: 24, color: color);
   }

@@ -16,7 +16,7 @@ final class BleScanStopped extends BluetoothEvent {
 
 final class BleConnectRequested extends BluetoothEvent {
   const BleConnectRequested(this.tracker);
-  final DiscoveredTracker tracker;
+  final ScannedTracker tracker;
 }
 
 final class BleDisconnectRequested extends BluetoothEvent {
@@ -42,8 +42,8 @@ final class _BleScanTicked extends BluetoothEvent {
 }
 
 final class _BleResultsUpdated extends BluetoothEvent {
-  const _BleResultsUpdated(this.results);
-  final List<ScanResult> results;
+  const _BleResultsUpdated(this.found);
+  final List<ScannedTracker> found;
 }
 
 final class _BleScanCompleted extends BluetoothEvent {

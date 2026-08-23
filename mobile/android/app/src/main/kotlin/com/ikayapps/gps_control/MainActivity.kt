@@ -1,4 +1,4 @@
-package com.example.mobile
+package com.ikayapps.gps_control
 
 import android.annotation.SuppressLint
 import android.os.Build

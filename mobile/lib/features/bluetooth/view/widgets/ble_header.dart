@@ -1,4 +1,4 @@
-import 'package:bariox_control/app/tokens.dart';
+import 'package:gps_control/app/tokens.dart';
 import 'package:flutter/material.dart';
 
 /// Header strip used on the connected BLE screen. Shows the back chevron when

@@ -1,5 +1,5 @@
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/l10n/l10n.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 /// Stacked list of BLE actions: unlock, lock, refresh, disconnect.

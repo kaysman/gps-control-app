@@ -1,18 +1,18 @@
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/l10n/l10n.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/l10n/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:gps_control/data/tracker/tracker_repository.dart';
 
 /// Shown when the system BLE adapter is off, unavailable, etc.
 class BluetoothOffPlaceholder extends StatelessWidget {
   const BluetoothOffPlaceholder({super.key, required this.state});
 
-  final BluetoothAdapterState state;
+  final BluetoothAdapterStatus state;
 
   @override
   Widget build(BuildContext context) {
     final topPad = MediaQuery.of(context).padding.top;
-    final label = state.toString().split('.').last;
+    final label = state.name;
     final l10n = context.l10n;
     return Padding(
       padding: EdgeInsets.fromLTRB(32, topPad + 80, 32, 0),

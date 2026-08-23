@@ -1,17 +1,16 @@
 import 'dart:async';
 
-import 'package:another_telephony/telephony.dart';
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/app/widgets/beta_badge.dart';
-import 'package:bariox_control/features/sim/cubit/sim_cubit.dart';
-import 'package:bariox_control/features/sms/widgets/command_picker_sheet.dart';
-import 'package:bariox_control/features/sms/widgets/compose_dock.dart';
-import 'package:bariox_control/features/sms/widgets/sms_bubbles.dart';
-import 'package:bariox_control/features/sms/widgets/tracker_picker_sheet.dart';
-import 'package:bariox_control/l10n/l10n.dart';
-import 'package:bariox_control/mock/mock_data.dart';
-import 'package:bariox_control/models/chat_message.dart';
-import 'package:bariox_control/services/sms_service.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/app/widgets/beta_badge.dart';
+import 'package:gps_control/data/sms/sms_repository.dart';
+import 'package:gps_control/features/sim/cubit/sim_cubit.dart';
+import 'package:gps_control/features/sms/widgets/command_picker_sheet.dart';
+import 'package:gps_control/features/sms/widgets/compose_dock.dart';
+import 'package:gps_control/features/sms/widgets/sms_bubbles.dart';
+import 'package:gps_control/features/sms/widgets/tracker_picker_sheet.dart';
+import 'package:gps_control/l10n/l10n.dart';
+import 'package:gps_control/mock/mock_data.dart';
+import 'package:gps_control/models/chat_message.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -63,37 +62,47 @@ class _SmsPageState extends State<SmsPage> {
 
   final _messages = <ChatMessage>[];
   final _scrollCtrl = ScrollController();
-  StreamSubscription<SmsMessage>? _smsSub;
+  late final SmsRepository _sms;
+  StreamSubscription<IncomingSms>? _smsSub;
 
   @override
   void initState() {
     super.initState();
-    _requestAndListen();
+    _sms = context.read<SmsRepository>();
+    unawaited(_restore());
   }
 
-  Future<void> _requestAndListen() async {
-    debugPrint('[SmsPage] _requestAndListen: waiting for permissions');
-    final granted = await SmsService.instance.ensureReady();
-    debugPrint(
-      '[SmsPage] _requestAndListen: granted=$granted mounted=$mounted',
-    );
-    if (!granted || !mounted) return;
-    _smsSub = SmsService.instance.incoming.listen(_onIncoming);
-    debugPrint('[SmsPage] _requestAndListen: subscribed to incoming stream');
+  /// Restores the conversation, then opens the line for new replies.
+  Future<void> _restore() async {
+    final history = await _sms.loadHistory();
+    final recipients = await _sms.loadRecipientSelection();
+    if (!mounted) return;
+    if (history.isNotEmpty || recipients.isNotEmpty) {
+      setState(() {
+        _messages.addAll(history);
+        _recipients.addAll(recipients);
+      });
+      _scrollToBottom();
+    }
+
+    final ready = await _sms.ensureReady();
+    debugPrint('[SmsPage] restore: sms ready=$ready mounted=$mounted');
+    if (!ready || !mounted) return;
+    _smsSub = _sms.incoming.listen(_onIncoming);
     // SIM enumeration also needs READ_PHONE_STATE — refresh now that the
     // user has granted it.
-    if (mounted) unawaited(context.read<SimCubit>().load());
+    unawaited(context.read<SimCubit>().load());
   }
 
-  void _onIncoming(SmsMessage msg) {
-    debugPrint('[SmsPage] _onIncoming: from=${msg.address} body=${msg.body}');
+  void _onIncoming(IncomingSms msg) {
+    debugPrint('[SmsPage] _onIncoming: from=${msg.from} body=${msg.body}');
     if (!mounted) return;
     setState(() {
       _messages.add(
         ReceivedChatMessage(
           timestamp: DateTime.now(),
-          from: msg.address ?? 'unknown',
-          body: msg.body ?? '',
+          from: msg.from,
+          body: msg.body,
         ),
       );
     });
@@ -190,7 +199,6 @@ class _SmsPageState extends State<SmsPage> {
   }
 
   void _sendCommand(SmsCommand cmd, Object? value) {
-    final previewText = _buildSmsText(cmd, _password, value);
     final recDevs = _recipients
         .map((id) => smsTrackers.firstWhere((t) => t.id == id))
         .toList();
@@ -209,7 +217,9 @@ class _SmsPageState extends State<SmsPage> {
           recipientShorts: recDevs.map((t) => t.short).toList(),
           commandId: cmd.id,
           commandValue: value?.toString(),
-          smsText: previewText,
+          // Preview uses the shared password; each recipient's own password is
+          // substituted per message below.
+          smsText: _buildSmsText(cmd, _password, value),
         ),
       );
     });
@@ -219,31 +229,38 @@ class _SmsPageState extends State<SmsPage> {
       final password = _trackerPasswords[tracker.id]?.trim().isNotEmpty == true
           ? _trackerPasswords[tracker.id]!.trim()
           : _password;
-      final smsText = _buildSmsText(cmd, password, value);
-      debugPrint(
-        '[SmsPage] _sendCommand: → ${tracker.short}(${tracker.id}) '
-        'phone=${tracker.phone} smsText=$smsText',
-      );
       unawaited(
-        SmsService.instance.send(
-          to: tracker.phone,
-          body: smsText,
-          subscriptionId: subscriptionId,
-          onStatus: (success) {
-            if (!mounted) return;
-            if (!success) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(context.l10n.smsSendFailed(tracker.short)),
-                  backgroundColor: kBad,
-                  behavior: SnackBarBehavior.floating,
-                ),
-              );
-            }
-          },
+        _sendTo(
+          tracker,
+          _buildSmsText(cmd, password, value),
+          subscriptionId,
         ),
       );
     }
+  }
+
+  Future<void> _sendTo(
+    MockTracker tracker,
+    String smsText,
+    int subscriptionId,
+  ) async {
+    debugPrint(
+      '[SmsPage] _sendTo: ${tracker.short}(${tracker.id}) '
+      'phone=${tracker.phone} smsText=$smsText',
+    );
+    final sent = await _sms.send(
+      to: tracker.phone,
+      body: smsText,
+      subscriptionId: subscriptionId,
+    );
+    if (sent || !mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(context.l10n.smsSendFailed(tracker.short)),
+        backgroundColor: kBad,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
   }
 
   @override

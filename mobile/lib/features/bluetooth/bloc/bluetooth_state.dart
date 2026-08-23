@@ -37,13 +37,13 @@ class BleState {
 
   /// The tracker we are connected to, when [bleStatus] is
   /// [BleStatus.connected].
-  final DiscoveredTracker? connectedTracker;
+  final ScannedTracker? connectedTracker;
 
   /// Human-readable scan / connection error, if any.
   final String? connectionError;
 
   /// Bariox HB_ devices found during the most recent scan.
-  final List<DiscoveredTracker> scannedDevices;
+  final List<ScannedTracker> scannedDevices;
 
   /// Seconds remaining in the current scan; counts down from
   /// [kBleScanDuration].
@@ -67,7 +67,7 @@ class BleState {
     BleStatus? bleStatus,
     Object? connectedTracker = _absent,
     Object? connectionError = _absent,
-    List<DiscoveredTracker>? scannedDevices,
+    List<ScannedTracker>? scannedDevices,
     int? scanSecondsLeft,
     Object? busyCommand = _absent,
     Object? lastStatus = _absent,
@@ -78,7 +78,7 @@ class BleState {
       bleStatus: bleStatus ?? this.bleStatus,
       connectedTracker: identical(connectedTracker, _absent)
           ? this.connectedTracker
-          : connectedTracker as DiscoveredTracker?,
+          : connectedTracker as ScannedTracker?,
       connectionError: identical(connectionError, _absent)
           ? this.connectionError
           : connectionError as String?,

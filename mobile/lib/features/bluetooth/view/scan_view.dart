@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/features/bluetooth/bloc/bluetooth_bloc.dart';
-import 'package:bariox_control/l10n/l10n.dart';
-import 'package:bariox_tracker/bariox_tracker.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/features/bluetooth/bloc/bluetooth_bloc.dart';
+import 'package:gps_control/l10n/l10n.dart';
+import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -359,17 +359,17 @@ class _DeviceNode extends StatelessWidget {
     required this.onTap,
   });
 
-  final DiscoveredTracker tracker;
+  final ScannedTracker tracker;
   final bool disabled;
   final VoidCallback onTap;
 
   String get _label {
-    final name = tracker.advName;
+    final name = tracker.name;
     if (name.startsWith('HB_')) {
       final sn = name.substring(3);
       return sn.length > 6 ? sn.substring(sn.length - 6) : sn;
     }
-    return name.isNotEmpty ? name : tracker.deviceId;
+    return tracker.label;
   }
 
   @override

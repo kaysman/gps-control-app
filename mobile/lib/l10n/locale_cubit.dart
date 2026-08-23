@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// Holds the currently selected app locale. Turkish is the default; English
 /// is the only other supported choice for now.
 class LocaleCubit extends Cubit<Locale> {
-  /// Starts in Turkish — the app's default locale.
-  LocaleCubit() : super(const Locale('tr'));
+  /// Starts in [initial], defaulting to Turkish — the app's default locale.
+  LocaleCubit({Locale initial = const Locale('tr')}) : super(initial);
 
   /// All locales the app knows how to render.
   static const supported = [Locale('tr'), Locale('en')];

@@ -1,7 +1,7 @@
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/features/sim/cubit/sim_cubit.dart';
-import 'package:bariox_control/l10n/l10n.dart';
-import 'package:bariox_control/services/sim_card_service.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/features/sim/cubit/sim_cubit.dart';
+import 'package:gps_control/l10n/l10n.dart';
+import 'package:gps_control/data/sim/sim_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

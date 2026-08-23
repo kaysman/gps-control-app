@@ -1,6 +1,6 @@
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/l10n/l10n.dart';
-import 'package:bariox_control/mock/mock_data.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/l10n/l10n.dart';
+import 'package:gps_control/mock/mock_data.dart';
 import 'package:flutter/material.dart';
 
 class SmsTrackerPickerSheet extends StatefulWidget {

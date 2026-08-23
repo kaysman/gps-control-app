@@ -1,4 +1,4 @@
-name: bariox_control
+name: gps_control
 
 packages:
   - .

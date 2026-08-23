@@ -1,4 +1,4 @@
-import 'package:bariox_control/services/sim_card_service.dart';
+import 'package:gps_control/data/sim/sim_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -49,18 +49,16 @@ class SimState {
 
 /// Manages the active-SIMs list and the per-app default for outgoing SMS.
 class SimCubit extends Cubit<SimState> {
-  SimCubit({SimCardService? service})
-    : _service = service ?? SimCardService.instance,
-      super(const SimState());
+  SimCubit(this._sims) : super(const SimState());
 
-  final SimCardService _service;
+  final SimRepository _sims;
 
   /// Reloads the SIM list. Auto-selects the first SIM if nothing is selected
   /// yet, or if the previously selected SIM is no longer present.
   Future<void> load() async {
     emit(state.copyWith(status: SimLoadStatus.loading, clearError: true));
     try {
-      final sims = await _service.getActiveSims();
+      final sims = await _sims.getActiveSims();
       final stillThere = sims.any(
         (s) => s.subscriptionId == state.selectedSubscriptionId,
       );

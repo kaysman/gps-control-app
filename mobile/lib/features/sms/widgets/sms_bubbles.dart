@@ -1,8 +1,8 @@
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/features/sms/sms_command_labels.dart';
-import 'package:bariox_control/l10n/l10n.dart';
-import 'package:bariox_control/mock/mock_data.dart';
-import 'package:bariox_control/models/chat_message.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/features/sms/sms_command_labels.dart';
+import 'package:gps_control/l10n/l10n.dart';
+import 'package:gps_control/mock/mock_data.dart';
+import 'package:gps_control/models/chat_message.dart';
 import 'package:flutter/material.dart';
 
 class SmsEmptyConversation extends StatelessWidget {

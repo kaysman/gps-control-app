@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:bariox_control/app/tokens.dart';
-import 'package:bariox_control/features/bluetooth/bloc/bluetooth_bloc.dart';
-import 'package:bariox_control/features/bluetooth/view/widgets/ble_command_list.dart';
-import 'package:bariox_control/features/bluetooth/view/widgets/ble_header.dart';
-import 'package:bariox_control/features/bluetooth/view/widgets/dial_card.dart';
-import 'package:bariox_control/l10n/l10n.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/features/bluetooth/bloc/bluetooth_bloc.dart';
+import 'package:gps_control/features/bluetooth/view/widgets/ble_command_list.dart';
+import 'package:gps_control/features/bluetooth/view/widgets/ble_header.dart';
+import 'package:gps_control/features/bluetooth/view/widgets/dial_card.dart';
+import 'package:gps_control/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -101,9 +101,7 @@ class _ConnectedViewState extends State<ConnectedView>
           }
         }
 
-        final title = tracker.advName.isNotEmpty
-            ? tracker.advName
-            : tracker.deviceId;
+        final title = tracker.label;
 
         return Padding(
           padding: EdgeInsets.only(top: topPad),
