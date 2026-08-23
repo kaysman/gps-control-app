@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/services.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/features/bluetooth/bloc/bluetooth_bloc.dart';
 import 'package:gps_control/l10n/l10n.dart';
@@ -47,115 +48,122 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final topPad = MediaQuery.of(context).padding.top;
     final l10n = context.l10n;
-    return BlocBuilder<BluetoothBloc, BleState>(
-      builder: (context, state) {
-        final isScanning = state.bleStatus == BleStatus.scanning;
-        final isConnecting = state.bleStatus == BleStatus.connecting;
-        return LayoutBuilder(
-          builder: (_, constraints) {
-            final w = constraints.maxWidth;
-            final h = constraints.maxHeight;
-            final cx = w / 2;
-            // Reserve space for title and bottom hint
-            final topArea = topPad + 60.0;
-            const bottomArea = 150.0; // tab bar + hint
-            final radarCy = topArea + (h - topArea - bottomArea) / 2;
-            final radarR = math.min(cx - 24, (h - topArea - bottomArea) / 2);
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: BlocBuilder<BluetoothBloc, BleState>(
+        builder: (context, state) {
+          final isScanning = state.bleStatus == BleStatus.scanning;
+          final isConnecting = state.bleStatus == BleStatus.connecting;
+          return LayoutBuilder(
+            builder: (_, constraints) {
+              final w = constraints.maxWidth;
+              final h = constraints.maxHeight;
+              final cx = w / 2;
+              // Reserve space for title and bottom hint
+              final topArea = topPad + 60.0;
+              const bottomArea = 150.0; // tab bar + hint
+              final radarCy = topArea + (h - topArea - bottomArea) / 2;
+              final radarR = math.min(cx - 24, (h - topArea - bottomArea) / 2);
 
-            return Container(
-              color: kNavyInk,
-              child: Stack(
-                children: [
-                  // Animated rings + sweep
-                  AnimatedBuilder(
-                    animation: Listenable.merge([_pulseCtrl, _sweepCtrl]),
-                    builder: (_, _) => CustomPaint(
-                      size: Size(w, h),
-                      painter: _RadarPainter(
-                        cx: cx,
-                        cy: radarCy,
-                        maxRadius: radarR,
-                        pulseProgress: _pulseCtrl.value,
-                        sweepAngle: _sweepCtrl.value * 2 * math.pi,
-                        isScanning: isScanning,
+              return Container(
+                color: kNavyInk,
+                child: Stack(
+                  children: [
+                    // Animated rings + sweep
+                    AnimatedBuilder(
+                      animation: Listenable.merge([_pulseCtrl, _sweepCtrl]),
+                      builder: (_, _) => CustomPaint(
+                        size: Size(w, h),
+                        painter: _RadarPainter(
+                          cx: cx,
+                          cy: radarCy,
+                          maxRadius: radarR,
+                          pulseProgress: _pulseCtrl.value,
+                          sweepAngle: _sweepCtrl.value * 2 * math.pi,
+                          isScanning: isScanning,
+                        ),
                       ),
                     ),
-                  ),
-                  // Device nodes
-                  ..._deviceNodes(
-                    context,
-                    state,
-                    cx,
-                    radarCy,
-                    radarR,
-                    isConnecting,
-                  ),
-                  // Centre hub
-                  _hub(context, state, cx, radarCy),
-                  // Title
-                  Positioned(
-                    top: topPad + 14,
-                    left: 20,
-                    child: Text(
-                      l10n.bluetoothTitle,
-                      style: TextStyle(
-                        fontFamily: kSans,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        color: kWhite,
-                        letterSpacing: -0.5,
+                    // Device nodes
+                    ..._deviceNodes(
+                      context,
+                      state,
+                      cx,
+                      radarCy,
+                      radarR,
+                      isConnecting,
+                    ),
+                    // Centre hub
+                    _hub(context, state, cx, radarCy),
+                    // Title
+                    Positioned(
+                      top: topPad + 14,
+                      left: 20,
+                      child: Text(
+                        l10n.bluetoothTitle,
+                        style: TextStyle(
+                          fontFamily: kSans,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: kWhite,
+                          letterSpacing: -0.5,
+                        ),
                       ),
                     ),
-                  ),
-                  // Bottom status
-                  Positioned(
-                    bottom: 116,
-                    left: 0,
-                    right: 0,
-                    child: Column(
-                      children: [
-                        if (state.connectionError != null)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 32),
-                            child: Text(
-                              state.connectionError!,
+                    // Bottom status
+                    Positioned(
+                      bottom: 116,
+                      left: 0,
+                      right: 0,
+                      child: Column(
+                        children: [
+                          if (state.connectionError != null)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 32,
+                              ),
+                              child: Text(
+                                state.connectionError!,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: kSans,
+                                  fontSize: 12,
+                                  color: kOrange,
+                                ),
+                              ),
+                            )
+                          else if (isScanning)
+                            Text(
+                              l10n.bluetoothScanCountdown(
+                                state.scanSecondsLeft,
+                              ),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: kMono,
+                                fontSize: 11,
+                                color: kMute2,
+                              ),
+                            )
+                          else if (!isConnecting)
+                            Text(
+                              l10n.bluetoothTapToScan,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: kSans,
                                 fontSize: 12,
-                                color: kOrange,
+                                color: kMute2,
                               ),
                             ),
-                          )
-                        else if (isScanning)
-                          Text(
-                            l10n.bluetoothScanCountdown(state.scanSecondsLeft),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: kMono,
-                              fontSize: 11,
-                              color: kMute2,
-                            ),
-                          )
-                        else if (!isConnecting)
-                          Text(
-                            l10n.bluetoothTapToScan,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: kSans,
-                              fontSize: 12,
-                              color: kMute2,
-                            ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-      },
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 
