@@ -1,26 +1,19 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/app/widgets/beta_badge.dart';
-import 'package:gps_control/features/bluetooth/view/bluetooth_page.dart';
-import 'package:gps_control/features/settings/view/settings_page.dart';
-import 'package:gps_control/features/sms/view/sms_page.dart';
 import 'package:gps_control/l10n/l10n.dart';
-import 'package:flutter/material.dart';
 
 /// The shell's three top-level destinations.
 enum AppTab { ble, sms, settings }
 
-class ShellPage extends StatefulWidget {
-  const ShellPage({super.key, this.initialTab = AppTab.ble});
+class ShellPage extends StatelessWidget {
+  const ShellPage({
+    required this.shell,
+    super.key,
+  });
 
-  /// Tab shown on first build.
-  final AppTab initialTab;
-
-  @override
-  State<ShellPage> createState() => _ShellPageState();
-}
-
-class _ShellPageState extends State<ShellPage> {
-  late AppTab _tab = widget.initialTab;
+  final StatefulNavigationShell shell;
 
   @override
   Widget build(BuildContext context) {
@@ -29,25 +22,20 @@ class _ShellPageState extends State<ShellPage> {
       body: Stack(
         children: [
           Positioned.fill(
-            bottom: 0,
-            // IndexedStack keeps all tabs mounted so the BluetoothBloc (and
-            // any active BLE connection) survives tab switches.
-            child: IndexedStack(
-              index: _tab.index,
-              children: [
-                BluetoothPage(isActive: _tab == AppTab.ble),
-                const SmsPage(),
-                const SettingsPage(),
-              ],
-            ),
+            // StatefulShellRoute.indexedStack keeps every branch mounted, so
+            // the BluetoothBloc (and any active BLE connection) survives tab
+            // switches. The shell itself is the widget that renders them.
+            child: shell,
           ),
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
+            // AppTab is declared in the same order as the router's branches,
+            // so its index doubles as the shell's branch index.
             child: _BottomTabBar(
-              tab: _tab,
-              onTab: (t) => setState(() => _tab = t),
+              tab: AppTab.values[shell.currentIndex],
+              onTab: (t) => shell.goBranch(t.index),
             ),
           ),
         ],

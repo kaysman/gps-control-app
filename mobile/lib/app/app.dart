@@ -1,24 +1,24 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gps_control/app/router.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/data/sim/sim_repository.dart';
 import 'package:gps_control/data/sms/sms_repository.dart';
 import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:gps_control/features/sim/cubit/sim_cubit.dart';
 import 'package:gps_control/l10n/l10n.dart';
-import 'package:gps_control/shell/shell_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Root widget. Receives the repositories it should run against, so swapping
 /// real hardware for canned data is a decision made once, in `main`.
 class App extends StatelessWidget {
   /// Creates an [App].
   const App({
-    super.key,
     required this.trackers,
     required this.sms,
     required this.sims,
-    this.initialTab = AppTab.ble,
-    this.initialLocale = const Locale('tr'),
+    super.key,
   });
 
   /// Source of lock data over Bluetooth.
@@ -30,12 +30,6 @@ class App extends StatelessWidget {
   /// Source of the device's SIM list.
   final SimRepository sims;
 
-  /// Tab the app opens on.
-  final AppTab initialTab;
-
-  /// Language the app starts in.
-  final Locale initialLocale;
-
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -46,12 +40,20 @@ class App extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => LocaleCubit(initial: initialLocale)),
-          BlocProvider(create: (ctx) => SimCubit(ctx.read<SimRepository>())..load()),
+          BlocProvider(create: (_) => LocaleCubit()),
+          BlocProvider(
+            create: (ctx) {
+              final cubit = SimCubit(ctx.read<SimRepository>());
+              // The first load races the UI on purpose: the SIM chip
+              // fills in when the platform answers.
+              unawaited(cubit.load());
+              return cubit;
+            },
+          ),
         ],
         child: BlocBuilder<LocaleCubit, Locale>(
           builder: (context, locale) {
-            return MaterialApp(
+            return MaterialApp.router(
               onGenerateTitle: (ctx) => ctx.l10n.appTitle,
               debugShowCheckedModeBanner: false,
               locale: locale,
@@ -66,7 +68,7 @@ class App extends StatelessWidget {
                   surface: kPaper,
                 ),
               ),
-              home: ShellPage(initialTab: initialTab),
+              routerConfig: goRouter,
             );
           },
         ),

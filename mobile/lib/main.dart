@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gps_control/app/app.dart';
 import 'package:gps_control/data/sim/fake_sim_repository.dart';
 import 'package:gps_control/data/sim/platform_sim_repository.dart';
@@ -10,9 +12,6 @@ import 'package:gps_control/data/sms/telephony_sms_repository.dart';
 import 'package:gps_control/data/tracker/ble_tracker_repository.dart';
 import 'package:gps_control/data/tracker/fake_tracker_repository.dart';
 import 'package:gps_control/data/tracker/tracker_repository.dart';
-import 'package:gps_control/shell/shell_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 /// Run against canned data instead of hardware — no BLE, no SMS, no SIM, no
 /// permission prompts:
@@ -25,24 +24,13 @@ import 'package:flutter/services.dart';
 /// downstream is handed a repository and cannot tell the difference.
 const _demo = bool.fromEnvironment('DEMO');
 
-/// Demo-only conveniences: which tab to open on (`ble` | `sms` | `settings`)
-/// and which language to start in (`tr` | `en`).
-const _demoTab = String.fromEnvironment('DEMO_TAB', defaultValue: 'ble');
-const _demoLocale = String.fromEnvironment('DEMO_LOCALE', defaultValue: 'tr');
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  final TrackerRepository trackers = _demo
-      ? FakeTrackerRepository()
-      : BleTrackerRepository();
-  final SmsRepository sms = _demo
-      ? FakeSmsRepository()
-      : TelephonySmsRepository();
-  final SimRepository sims = _demo
-      ? FakeSimRepository()
-      : PlatformSimRepository();
+  final trackers = _trackerRepository();
+  final sms = _smsRepository();
+  final sims = _simRepository();
 
   // Grant permissions and register the SMS receiver early so background
   // messages can reach onBackgroundSms even before the SMS tab is opened.
@@ -56,14 +44,17 @@ void main() async {
       trackers: trackers,
       sms: sms,
       sims: sims,
-      initialTab: _tabNamed(_demoTab),
-      initialLocale: Locale(_demoLocale),
     ),
   );
 }
 
-AppTab _tabNamed(String name) => switch (name) {
-  'sms' => AppTab.sms,
-  'settings' => AppTab.settings,
-  _ => AppTab.ble,
-};
+// The composition root. Return types are the interfaces on purpose: nothing
+// downstream is allowed to know which implementation it was handed.
+TrackerRepository _trackerRepository() =>
+    _demo ? FakeTrackerRepository() : BleTrackerRepository();
+
+SmsRepository _smsRepository() =>
+    _demo ? FakeSmsRepository() : TelephonySmsRepository();
+
+SimRepository _simRepository() =>
+    _demo ? FakeSimRepository() : PlatformSimRepository();
