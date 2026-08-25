@@ -7,13 +7,11 @@ import 'package:gps_control/mock/mock_data.dart';
 class SmsComposeDock extends StatefulWidget {
   const SmsComposeDock({
     required this.cmd,
-    required this.recipientCount,
     required this.onCancel,
     required this.onSend,
     super.key,
   });
   final SmsCommand cmd;
-  final int recipientCount;
   final VoidCallback onCancel;
   final ValueChanged<Object?> onSend;
 
@@ -55,7 +53,7 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
       child: Container(
         decoration: const BoxDecoration(
           color: kWhite,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(kR30)),
         ),
         padding: EdgeInsets.fromLTRB(14, 16, 14, 16 + bottomPad),
         child: Column(
@@ -70,7 +68,7 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: kBone,
+                    color: kMist,
                     borderRadius: BorderRadius.circular(999),
                   ),
                   child: Text(
@@ -79,7 +77,7 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
                       fontFamily: kSans,
                       fontSize: 9.5,
                       fontWeight: FontWeight.w700,
-                      color: kNavy,
+                      color: kInk,
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -91,7 +89,7 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
                     fontFamily: kSans,
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
-                    color: kNavy,
+                    color: kInk,
                   ),
                 ),
                 const Spacer(),
@@ -113,12 +111,12 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: cmd.danger ? kBad.withValues(alpha: 0.06) : kPaper,
-                  borderRadius: BorderRadius.circular(8),
+                  color: cmd.danger ? kBad.withValues(alpha: 0.06) : kCanvas,
+                  borderRadius: BorderRadius.circular(kR14),
                 ),
                 child: Text(
                   cmd.danger
-                      ? l10n.composeDangerWarning(widget.recipientCount)
+                      ? l10n.composeDangerWarning
                       : (sub.isEmpty ? l10n.composeNoParams : sub),
                   style: TextStyle(
                     fontFamily: kSans,
@@ -133,21 +131,21 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
               child: Container(
                 padding: const EdgeInsets.all(13),
                 decoration: BoxDecoration(
-                  color: cmd.danger ? kBad : kOrange,
-                  borderRadius: BorderRadius.circular(10),
+                  color: cmd.danger ? kBad : kGreen,
+                  borderRadius: BorderRadius.circular(kR14),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.send, size: 14, color: kNavy),
+                    const Icon(Icons.send, size: 14, color: kInk),
                     const SizedBox(width: 8),
                     Text(
-                      l10n.composeSendTo(widget.recipientCount),
+                      l10n.composeSend,
                       style: TextStyle(
                         fontFamily: kSans,
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: cmd.danger ? kWhite : kNavy,
+                        color: cmd.danger ? kWhite : kInk,
                         letterSpacing: 0.2,
                       ),
                     ),
@@ -185,8 +183,8 @@ class _SmsInputWidget extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: kPaper,
-          borderRadius: BorderRadius.circular(8),
+          color: kCanvas,
+          borderRadius: BorderRadius.circular(kR14),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -197,13 +195,13 @@ class _SmsInputWidget extends StatelessWidget {
                 fontFamily: kSans,
                 fontSize: 13.5,
                 fontWeight: FontWeight.w600,
-                color: kNavy,
+                color: kInk,
               ),
             ),
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: kRule),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(kR14),
               ),
               child: Row(
                 children: [
@@ -230,8 +228,8 @@ class _SmsInputWidget extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: kPaper,
-          borderRadius: BorderRadius.circular(8),
+          color: kCanvas,
+          borderRadius: BorderRadius.circular(kR14),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -242,13 +240,13 @@ class _SmsInputWidget extends StatelessWidget {
                 fontFamily: kSans,
                 fontSize: 13.5,
                 fontWeight: FontWeight.w600,
-                color: kNavy,
+                color: kInk,
               ),
             ),
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: kRule),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(kR14),
               ),
               child: Row(
                 children: options
@@ -270,8 +268,8 @@ class _SmsInputWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: kPaper,
-        borderRadius: BorderRadius.circular(8),
+        color: kCanvas,
+        borderRadius: BorderRadius.circular(kR14),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -301,7 +299,7 @@ class _SmsInputWidget extends StatelessWidget {
                     fontFamily: kMono,
                     fontSize: isPin ? 18 : 14,
                     fontWeight: FontWeight.w700,
-                    color: kNavy,
+                    color: kInk,
                     letterSpacing: isPin ? 6 : 0,
                   ),
                   decoration: InputDecoration(
@@ -361,7 +359,7 @@ class _SmsToggleBtn extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
         decoration: BoxDecoration(
-          color: active ? kNavy : kWhite,
+          color: active ? kInk : kWhite,
           borderRadius: BorderRadius.circular(7),
         ),
         child: Text(
@@ -370,7 +368,7 @@ class _SmsToggleBtn extends StatelessWidget {
             fontFamily: kSans,
             fontSize: 13,
             fontWeight: FontWeight.w700,
-            color: active ? kWhite : kNavy,
+            color: active ? kWhite : kInk,
           ),
         ),
       ),

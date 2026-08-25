@@ -9,7 +9,7 @@ class AppLocalizationsTr extends AppLocalizations {
   AppLocalizationsTr([String locale = 'tr']) : super(locale);
 
   @override
-  String get appTitle => 'Bariox Kontrol';
+  String get appTitle => 'GPS Control';
 
   @override
   String get tabBluetooth => 'Bluetooth';
@@ -19,12 +19,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get tabSettings => 'Ayarlar';
-
-  @override
-  String get bluetoothTitle => 'Bluetooth';
-
-  @override
-  String get bluetoothConnected => 'Bağlı';
 
   @override
   String bluetoothOffTitle(String state) {
@@ -130,29 +124,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get bleToastStatusRefreshed => 'Durum yenilendi';
 
   @override
-  String get smsHeader => 'SMS';
-
-  @override
-  String smsRecipientCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count takip cihazı',
-      one: '$count takip cihazı',
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get smsToLabel => 'Kime:';
-
-  @override
-  String get smsAddRecipient => '+ Ekle';
-
-  @override
-  String smsOverflowCount(int count) {
-    return '+$count';
-  }
 
   @override
   String get smsEmptyTitle => 'Henüz mesaj yok';
@@ -169,17 +141,6 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String smsBubbleYouTo(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count cihaza',
-      one: '$count cihaza',
-    );
-    return 'Sen · $_temp0';
-  }
-
-  @override
   String smsDateToday(String hour, String minute) {
     return 'BUGÜN $hour:$minute';
   }
@@ -193,34 +154,6 @@ class AppLocalizationsTr extends AppLocalizations {
     String minute,
   ) {
     return '$day/$month/$year $hour:$minute';
-  }
-
-  @override
-  String get trackerPickerTitle => 'Takip cihazı ekle';
-
-  @override
-  String trackerPickerDone(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count cihaz',
-      one: '$count cihaz',
-    );
-    return 'Tamam · $_temp0';
-  }
-
-  @override
-  String get allRecipientsHeading => 'KİME';
-
-  @override
-  String allRecipientsCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count cihaz',
-      one: '$count cihaz',
-    );
-    return '$_temp0';
   }
 
   @override
@@ -254,29 +187,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get composeTagCommand => 'KOMUT';
 
   @override
-  String composeDangerWarning(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count cihazdaki',
-      one: '$count cihazdaki',
-    );
-    return 'Emin misiniz? Bu, $_temp0 her şeyi siler.';
-  }
+  String get composeDangerWarning =>
+      'Emin misiniz? Bu cihazdaki her şeyi siler.';
 
   @override
   String get composeNoParams => 'Parametre gerekmez.';
-
-  @override
-  String composeSendTo(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count cihaza gönder',
-      one: '$count cihaza gönder',
-    );
-    return '$_temp0';
-  }
 
   @override
   String get composeToggleOn => 'Açık';
@@ -411,13 +326,38 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsSectionApp => 'UYGULAMA';
 
   @override
+  String get settingsSectionDevice => 'CİHAZ';
+
+  @override
   String get settingsSectionSims => 'SIM KARTLAR';
 
   @override
   String get settingsRowLanguage => 'Dil';
 
   @override
-  String get settingsFooter => 'Bariox Kontrol · v1.0';
+  String get settingsRowBrand => 'Cihaz markası';
+
+  @override
+  String get settingsRowSim => 'Etkin SIM';
+
+  @override
+  String get brandPickerTitle => 'Cihaz markası';
+
+  @override
+  String get brandPickerSubtitle =>
+      'Uygulamanın konuştuğu takip cihazı ailesi.';
+
+  @override
+  String get brandBariox => 'Bariox';
+
+  @override
+  String get brandBarioxSub => 'BLE ve SMS · tüm komut seti';
+
+  @override
+  String get brandTeltonika => 'Teltonika';
+
+  @override
+  String get brandTeltonikaSub => 'Yalnızca SMS · FMB serisi';
 
   @override
   String get simsNone => 'SIM kart bulunamadı';
@@ -426,9 +366,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get simsRefresh => 'Yenile';
 
   @override
-  String simSlotLabel(int slot) {
-    return 'Yuva $slot';
-  }
+  String get simRowNone => 'Yok';
+
+  @override
+  String get simPickerTitle => 'Etkin SIM';
+
+  @override
+  String get simPickerSubtitle => 'Giden komutlar bu SIM üzerinden gönderilir.';
 
   @override
   String simSubtitle(int slot, String country) {
@@ -441,10 +385,38 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get smsThreadsTitle => 'Mesajlar';
+
+  @override
+  String get smsThreadYou => 'Sen';
+
+  @override
+  String get smsThreadEmpty => 'Henüz mesaj yok';
+
+  @override
+  String get smsSearchHint => 'Cihaz ara';
+
+  @override
+  String get smsSearchEmpty => 'Eşleşen cihaz yok';
+
+  @override
   String get smsNoSimChip => 'SIM yok';
 
   @override
+  String get smsPasswordTitle => 'Cihaz şifresi';
+
+  @override
+  String get smsPasswordSubtitle =>
+      'Bu cihaza giden her komutla birlikte gönderilir.';
+
+  @override
+  String get composeSend => 'Gönder';
+
+  @override
   String get languagePickerTitle => 'Dil';
+
+  @override
+  String get languagePickerSubtitle => 'Uygulamanın tamamında geçerlidir.';
 
   @override
   String get languageTurkish => 'Türkçe';

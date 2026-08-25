@@ -27,7 +27,7 @@ class BleCommandList extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: kWhite,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(kR22),
         border: Border.all(color: kRule),
       ),
       child: Column(
@@ -96,10 +96,10 @@ class _BleRow extends StatelessWidget {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: kBone,
-                borderRadius: BorderRadius.circular(10),
+                color: kMist,
+                borderRadius: BorderRadius.circular(kR14),
               ),
-              child: Icon(iconData, size: 18, color: kNavy),
+              child: Icon(iconData, size: 18, color: kInk),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -112,7 +112,7 @@ class _BleRow extends StatelessWidget {
                       fontFamily: kSans,
                       fontSize: 14.5,
                       fontWeight: FontWeight.w700,
-                      color: kNavy,
+                      color: kInk,
                     ),
                   ),
                   Text(
@@ -134,7 +134,7 @@ class _BleRow extends StatelessWidget {
                 height: 16,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  color: kNavy,
+                  color: kInk,
                 ),
               ),
           ],

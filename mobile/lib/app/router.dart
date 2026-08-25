@@ -1,7 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:gps_control/features/bluetooth/view/bluetooth_page.dart';
 import 'package:gps_control/features/settings/view/settings_page.dart';
-import 'package:gps_control/features/sms/view/sms_page.dart';
+import 'package:gps_control/features/sms/view/sms_chat_page.dart';
+import 'package:gps_control/features/sms/view/sms_threads_page.dart';
 import 'package:gps_control/shell/shell_page.dart';
 
 final GoRouter goRouter = GoRouter(
@@ -22,7 +23,10 @@ final GoRouter goRouter = GoRouter(
         ),
         StatefulShellBranch(
           routes: [
-            GoRoute(path: '/sms', builder: (context, state) => const SmsPage()),
+            GoRoute(
+              path: '/sms',
+              builder: (context, state) => const SmsThreadsPage(),
+            ),
           ],
         ),
         StatefulShellBranch(
@@ -34,6 +38,13 @@ final GoRouter goRouter = GoRouter(
           ],
         ),
       ],
+    ),
+    // Outside the shell on purpose: a chat takes the whole screen, so the
+    // floating tab bar does not sit on top of its compose bar.
+    GoRoute(
+      path: '/sms/:trackerId',
+      builder: (context, state) =>
+          SmsChatPage(trackerId: state.pathParameters['trackerId']!),
     ),
   ],
 );

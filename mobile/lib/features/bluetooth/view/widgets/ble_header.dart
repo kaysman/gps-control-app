@@ -26,7 +26,7 @@ class BleHeader extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               child: const Padding(
                 padding: EdgeInsets.fromLTRB(8, 6, 10, 6),
-                child: Icon(Icons.chevron_left, size: 26, color: kNavy),
+                child: Icon(Icons.chevron_left, size: 26, color: kInk),
               ),
             ),
           Flexible(
@@ -37,7 +37,7 @@ class BleHeader extends StatelessWidget {
                 fontFamily: kSans,
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
-                color: kNavy,
+                color: kInk,
                 letterSpacing: -0.5,
               ),
             ),

@@ -31,8 +31,8 @@ class SmsCommandPickerSheet extends StatelessWidget {
       maxChildSize: 0.94,
       builder: (_, ctrl) => Container(
         decoration: const BoxDecoration(
-          color: kPaper,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          color: kCanvas,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(kR30)),
         ),
         child: ListView(
           controller: ctrl,
@@ -58,22 +58,12 @@ class SmsCommandPickerSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        l10n.commandPickerHeading,
-                        style: const TextStyle(
-                          fontFamily: kMono,
-                          fontSize: 10.5,
-                          color: kMute,
-                          letterSpacing: 1.4,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
                         l10n.commandPickerTitle,
                         style: const TextStyle(
                           fontFamily: kSans,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
-                          color: kNavy,
+                          color: kInk,
                         ),
                       ),
                     ],
@@ -84,10 +74,10 @@ class SmsCommandPickerSheet extends StatelessWidget {
                       width: 32,
                       height: 32,
                       decoration: const BoxDecoration(
-                        color: kBone,
+                        color: kMist,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.close, size: 16, color: kNavy),
+                      child: const Icon(Icons.close, size: 16, color: kInk),
                     ),
                   ),
                 ],
@@ -120,7 +110,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                             style: const TextStyle(
                               fontFamily: kSans,
                               fontSize: 11,
-                              color: kOrangeD,
+                              color: kGreenDeep,
                             ),
                           ),
                         ],
@@ -131,7 +121,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 18),
                     decoration: BoxDecoration(
                       color: kWhite,
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(kR22),
                       border: Border.all(color: kRule),
                     ),
                     child: Column(
@@ -139,9 +129,9 @@ class SmsCommandPickerSheet extends StatelessWidget {
                         final i = e.key;
                         final cmd = e.value;
                         final iconBg = group == CmdGroup.read
-                            ? kBone
+                            ? kMist
                             : group == CmdGroup.set
-                            ? kOrange.withValues(alpha: 0.14)
+                            ? kGreenWash
                             : cmd.danger
                             ? kBad.withValues(alpha: 0.10)
                             : kOk.withValues(alpha: 0.10);
@@ -167,7 +157,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                   height: 28,
                                   decoration: BoxDecoration(
                                     color: iconBg,
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(kR14),
                                   ),
                                   child: Center(
                                     child: Text(
@@ -179,7 +169,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w800,
-                                        color: cmd.danger ? kBad : kNavy,
+                                        color: cmd.danger ? kBad : kInk,
                                       ),
                                     ),
                                   ),
@@ -196,7 +186,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                           fontFamily: kSans,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
-                                          color: cmd.danger ? kBad : kNavy,
+                                          color: cmd.danger ? kBad : kInk,
                                         ),
                                       ),
                                       if (sub.isNotEmpty)
@@ -218,7 +208,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                       vertical: 2,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: kOrange.withValues(alpha: 0.10),
+                                      color: kGreenWash,
                                       borderRadius: BorderRadius.circular(999),
                                     ),
                                     child: Text(
@@ -227,7 +217,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                         fontFamily: kSans,
                                         fontSize: 9.5,
                                         fontWeight: FontWeight.w700,
-                                        color: kOrangeD,
+                                        color: kGreenDeep,
                                         letterSpacing: 0.5,
                                       ),
                                     ),

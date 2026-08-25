@@ -41,8 +41,8 @@ class DialCard extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 400),
       decoration: BoxDecoration(
-        color: locked ? kNavyInk : kNavy,
-        borderRadius: BorderRadius.circular(22),
+        color: locked ? kInkDeep : kInk,
+        borderRadius: BorderRadius.circular(kR22),
       ),
       padding: const EdgeInsets.fromLTRB(18, 20, 18, 20),
       child: Stack(
@@ -99,7 +99,7 @@ class DialCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 14),
                 decoration: const BoxDecoration(
                   border: Border(
-                    top: BorderSide(color: Color(0x141C3D5E)),
+                    top: BorderSide(color: kRule),
                   ),
                 ),
                 child: Row(
@@ -158,13 +158,13 @@ class _StatusPill extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
       decoration: BoxDecoration(
         color: locked
-            ? kNavy.withValues(alpha: 0.6)
-            : kOrange.withValues(alpha: 0.12),
+            ? kInk.withValues(alpha: 0.6)
+            : kLime.withValues(alpha: 0.14),
         borderRadius: BorderRadius.circular(999),
         border: Border.all(
           color: locked
               ? kWhite.withValues(alpha: 0.15)
-              : kOrange.withValues(alpha: 0.30),
+              : kLime.withValues(alpha: 0.35),
         ),
       ),
       child: Text(
@@ -176,7 +176,7 @@ class _StatusPill extends StatelessWidget {
           fontFamily: kSans,
           fontSize: 11,
           fontWeight: FontWeight.w600,
-          color: locked ? kMute2 : kOrangeD,
+          color: locked ? kMute2 : kLime,
         ),
       ),
     );
@@ -225,7 +225,7 @@ class _StatCell extends StatelessWidget {
                 fontFamily: kSans,
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
-                color: warn ? kOrange : kWhite,
+                color: warn ? kAmber : kWhite,
               ),
             ),
           ],
@@ -245,12 +245,12 @@ class _Toast extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: kOrange,
-        borderRadius: BorderRadius.circular(12),
+        color: kLime,
+        borderRadius: BorderRadius.circular(kR14),
       ),
       child: Row(
         children: [
-          const Icon(Icons.check, size: 16, color: kNavy),
+          const Icon(Icons.check, size: 16, color: kInk),
           const SizedBox(width: 8),
           Text(
             message,
@@ -258,7 +258,7 @@ class _Toast extends StatelessWidget {
               fontFamily: kSans,
               fontSize: 13.5,
               fontWeight: FontWeight.w700,
-              color: kNavy,
+              color: kInk,
             ),
           ),
         ],
@@ -278,7 +278,7 @@ class _ErrorToast extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         color: kBad.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(kR14),
         border: Border.all(color: kBad.withValues(alpha: 0.3)),
       ),
       child: Row(

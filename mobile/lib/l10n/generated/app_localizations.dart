@@ -100,301 +100,259 @@ abstract class AppLocalizations {
 
   /// No description provided for @appTitle.
   ///
-  /// In tr, this message translates to:
-  /// **'Bariox Kontrol'**
+  /// In en, this message translates to:
+  /// **'GPS Control'**
   String get appTitle;
 
   /// No description provided for @tabBluetooth.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'Bluetooth'**
   String get tabBluetooth;
 
   /// No description provided for @tabSms.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'SMS'**
   String get tabSms;
 
   /// No description provided for @tabSettings.
   ///
-  /// In tr, this message translates to:
-  /// **'Ayarlar'**
+  /// In en, this message translates to:
+  /// **'Settings'**
   String get tabSettings;
-
-  /// No description provided for @bluetoothTitle.
-  ///
-  /// In tr, this message translates to:
-  /// **'Bluetooth'**
-  String get bluetoothTitle;
-
-  /// No description provided for @bluetoothConnected.
-  ///
-  /// In tr, this message translates to:
-  /// **'Bağlı'**
-  String get bluetoothConnected;
 
   /// No description provided for @bluetoothOffTitle.
   ///
-  /// In tr, this message translates to:
-  /// **'Bluetooth {state}'**
+  /// In en, this message translates to:
+  /// **'Bluetooth is {state}'**
   String bluetoothOffTitle(String state);
 
   /// No description provided for @bluetoothOffMessage.
   ///
-  /// In tr, this message translates to:
-  /// **'Bir takip cihazına bağlanmak için Bluetooth\'u açın.'**
+  /// In en, this message translates to:
+  /// **'Turn Bluetooth on to connect to a tracker.'**
   String get bluetoothOffMessage;
 
   /// No description provided for @bluetoothScanCountdown.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'{seconds}s'**
   String bluetoothScanCountdown(int seconds);
 
   /// No description provided for @bluetoothTapToScan.
   ///
-  /// In tr, this message translates to:
-  /// **'Taramak için dokunun'**
+  /// In en, this message translates to:
+  /// **'Tap to scan'**
   String get bluetoothTapToScan;
 
   /// No description provided for @bluetoothRssiDbm.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'{rssi} dBm'**
   String bluetoothRssiDbm(int rssi);
 
   /// No description provided for @bleStatusSealed.
   ///
-  /// In tr, this message translates to:
-  /// **'Mühürlü'**
+  /// In en, this message translates to:
+  /// **'Sealed'**
   String get bleStatusSealed;
 
   /// No description provided for @bleStatusOpen.
   ///
-  /// In tr, this message translates to:
-  /// **'Açık'**
+  /// In en, this message translates to:
+  /// **'Open'**
   String get bleStatusOpen;
 
   /// No description provided for @bleStatusFetching.
   ///
-  /// In tr, this message translates to:
-  /// **'Alınıyor…'**
+  /// In en, this message translates to:
+  /// **'Fetching…'**
   String get bleStatusFetching;
 
   /// No description provided for @bleStatBattery.
   ///
-  /// In tr, this message translates to:
-  /// **'PİL'**
+  /// In en, this message translates to:
+  /// **'BATTERY'**
   String get bleStatBattery;
 
   /// No description provided for @bleStatCover.
   ///
-  /// In tr, this message translates to:
-  /// **'KAPAK'**
+  /// In en, this message translates to:
+  /// **'COVER'**
   String get bleStatCover;
 
   /// No description provided for @bleStatUpdated.
   ///
-  /// In tr, this message translates to:
-  /// **'GÜNCELLEME'**
+  /// In en, this message translates to:
+  /// **'UPDATED'**
   String get bleStatUpdated;
 
   /// No description provided for @bleStatCoverOpen.
   ///
-  /// In tr, this message translates to:
-  /// **'Açık'**
+  /// In en, this message translates to:
+  /// **'Open'**
   String get bleStatCoverOpen;
 
   /// No description provided for @bleStatCoverClosed.
   ///
-  /// In tr, this message translates to:
-  /// **'Kapalı'**
+  /// In en, this message translates to:
+  /// **'Closed'**
   String get bleStatCoverClosed;
 
   /// No description provided for @bleStatUpdatedJustNow.
   ///
-  /// In tr, this message translates to:
-  /// **'az önce'**
+  /// In en, this message translates to:
+  /// **'just now'**
   String get bleStatUpdatedJustNow;
 
   /// No description provided for @bleStatPending.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'—'**
   String get bleStatPending;
 
   /// No description provided for @bleStatBusy.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'…'**
   String get bleStatBusy;
 
   /// No description provided for @bleSending.
   ///
-  /// In tr, this message translates to:
-  /// **'Gönderiliyor…'**
+  /// In en, this message translates to:
+  /// **'Sending…'**
   String get bleSending;
 
   /// No description provided for @bleTapToRefresh.
   ///
-  /// In tr, this message translates to:
-  /// **'Yenilemek için dokunun'**
+  /// In en, this message translates to:
+  /// **'Tap to refresh'**
   String get bleTapToRefresh;
 
   /// No description provided for @bleTapToUnlock.
   ///
-  /// In tr, this message translates to:
-  /// **'Açmak için dokunun'**
+  /// In en, this message translates to:
+  /// **'Tap to unlock'**
   String get bleTapToUnlock;
 
   /// No description provided for @bleTapToLock.
   ///
-  /// In tr, this message translates to:
-  /// **'Kilitlemek için dokunun'**
+  /// In en, this message translates to:
+  /// **'Tap to lock'**
   String get bleTapToLock;
 
   /// No description provided for @bleCommandsHeader.
   ///
-  /// In tr, this message translates to:
-  /// **'BLUETOOTH KOMUTLARI'**
+  /// In en, this message translates to:
+  /// **'BLUETOOTH COMMANDS'**
   String get bleCommandsHeader;
 
   /// No description provided for @bleCmdUnlock.
   ///
-  /// In tr, this message translates to:
-  /// **'Kilidi aç'**
+  /// In en, this message translates to:
+  /// **'Unlock'**
   String get bleCmdUnlock;
 
   /// No description provided for @bleCmdUnlockSub.
   ///
-  /// In tr, this message translates to:
-  /// **'Ana kilidi aç'**
+  /// In en, this message translates to:
+  /// **'Open the master lock'**
   String get bleCmdUnlockSub;
 
   /// No description provided for @bleCmdLock.
   ///
-  /// In tr, this message translates to:
-  /// **'Kilitle'**
+  /// In en, this message translates to:
+  /// **'Lock'**
   String get bleCmdLock;
 
   /// No description provided for @bleCmdLockSub.
   ///
-  /// In tr, this message translates to:
-  /// **'Ana kilidi mühürle'**
+  /// In en, this message translates to:
+  /// **'Seal the master lock'**
   String get bleCmdLockSub;
 
   /// No description provided for @bleCmdRefresh.
   ///
-  /// In tr, this message translates to:
-  /// **'Durumu yenile'**
+  /// In en, this message translates to:
+  /// **'Refresh status'**
   String get bleCmdRefresh;
 
   /// No description provided for @bleCmdRefreshSub.
   ///
-  /// In tr, this message translates to:
-  /// **'Pil, kapak ve kilit durumunu al'**
+  /// In en, this message translates to:
+  /// **'Get battery, cover & lock state'**
   String get bleCmdRefreshSub;
 
   /// No description provided for @bleCmdDisconnect.
   ///
-  /// In tr, this message translates to:
-  /// **'Bağlantıyı kes'**
+  /// In en, this message translates to:
+  /// **'Disconnect'**
   String get bleCmdDisconnect;
 
   /// No description provided for @bleCmdDisconnectSub.
   ///
-  /// In tr, this message translates to:
-  /// **'BLE bağlantısını kapat'**
+  /// In en, this message translates to:
+  /// **'Close BLE connection'**
   String get bleCmdDisconnectSub;
 
   /// No description provided for @bleToastUnlocked.
   ///
-  /// In tr, this message translates to:
-  /// **'Kilit açıldı'**
+  /// In en, this message translates to:
+  /// **'Unlocked'**
   String get bleToastUnlocked;
 
   /// No description provided for @bleToastLocked.
   ///
-  /// In tr, this message translates to:
-  /// **'Kilitlendi'**
+  /// In en, this message translates to:
+  /// **'Locked'**
   String get bleToastLocked;
 
   /// No description provided for @bleToastStatusRefreshed.
   ///
-  /// In tr, this message translates to:
-  /// **'Durum yenilendi'**
+  /// In en, this message translates to:
+  /// **'Status refreshed'**
   String get bleToastStatusRefreshed;
-
-  /// No description provided for @smsHeader.
-  ///
-  /// In tr, this message translates to:
-  /// **'SMS'**
-  String get smsHeader;
-
-  /// No description provided for @smsRecipientCount.
-  ///
-  /// In tr, this message translates to:
-  /// **'{count, plural, =1{{count} takip cihazı} other{{count} takip cihazı}}'**
-  String smsRecipientCount(int count);
 
   /// No description provided for @smsToLabel.
   ///
-  /// In tr, this message translates to:
-  /// **'Kime:'**
+  /// In en, this message translates to:
+  /// **'To:'**
   String get smsToLabel;
-
-  /// No description provided for @smsAddRecipient.
-  ///
-  /// In tr, this message translates to:
-  /// **'+ Ekle'**
-  String get smsAddRecipient;
-
-  /// No description provided for @smsOverflowCount.
-  ///
-  /// In tr, this message translates to:
-  /// **'+{count}'**
-  String smsOverflowCount(int count);
 
   /// No description provided for @smsEmptyTitle.
   ///
-  /// In tr, this message translates to:
-  /// **'Henüz mesaj yok'**
+  /// In en, this message translates to:
+  /// **'No messages yet'**
   String get smsEmptyTitle;
 
   /// No description provided for @smsEmptySub.
   ///
-  /// In tr, this message translates to:
-  /// **'Başlamak için aşağıdan bir komut seçin'**
+  /// In en, this message translates to:
+  /// **'Pick a command below to start'**
   String get smsEmptySub;
 
   /// No description provided for @smsPickCommand.
   ///
-  /// In tr, this message translates to:
-  /// **'Göndermek için bir komut seçin'**
+  /// In en, this message translates to:
+  /// **'Pick a command to send'**
   String get smsPickCommand;
 
   /// No description provided for @smsSendFailed.
   ///
-  /// In tr, this message translates to:
-  /// **'{tracker} cihazına gönderilemedi'**
+  /// In en, this message translates to:
+  /// **'Failed to send to {tracker}'**
   String smsSendFailed(String tracker);
-
-  /// No description provided for @smsBubbleYouTo.
-  ///
-  /// In tr, this message translates to:
-  /// **'Sen · {count, plural, =1{{count} cihaza} other{{count} cihaza}}'**
-  String smsBubbleYouTo(int count);
 
   /// No description provided for @smsDateToday.
   ///
-  /// In tr, this message translates to:
-  /// **'BUGÜN {hour}:{minute}'**
+  /// In en, this message translates to:
+  /// **'TODAY {hour}:{minute}'**
   String smsDateToday(String hour, String minute);
 
   /// No description provided for @smsDateFull.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **'{day}/{month}/{year} {hour}:{minute}'**
   String smsDateFull(
     String day,
@@ -404,442 +362,526 @@ abstract class AppLocalizations {
     String minute,
   );
 
-  /// No description provided for @trackerPickerTitle.
-  ///
-  /// In tr, this message translates to:
-  /// **'Takip cihazı ekle'**
-  String get trackerPickerTitle;
-
-  /// No description provided for @trackerPickerDone.
-  ///
-  /// In tr, this message translates to:
-  /// **'Tamam · {count, plural, =1{{count} cihaz} other{{count} cihaz}}'**
-  String trackerPickerDone(int count);
-
-  /// No description provided for @allRecipientsHeading.
-  ///
-  /// In tr, this message translates to:
-  /// **'KİME'**
-  String get allRecipientsHeading;
-
-  /// No description provided for @allRecipientsCount.
-  ///
-  /// In tr, this message translates to:
-  /// **'{count, plural, =1{{count} cihaz} other{{count} cihaz}}'**
-  String allRecipientsCount(int count);
-
   /// No description provided for @commandPickerHeading.
   ///
-  /// In tr, this message translates to:
-  /// **'KOMUT'**
+  /// In en, this message translates to:
+  /// **'COMMAND'**
   String get commandPickerHeading;
 
   /// No description provided for @commandPickerTitle.
   ///
-  /// In tr, this message translates to:
-  /// **'Birini seçin'**
+  /// In en, this message translates to:
+  /// **'Pick one'**
   String get commandPickerTitle;
 
   /// No description provided for @commandGroupRead.
   ///
-  /// In tr, this message translates to:
-  /// **'OKU'**
+  /// In en, this message translates to:
+  /// **'READ'**
   String get commandGroupRead;
 
   /// No description provided for @commandGroupSet.
   ///
-  /// In tr, this message translates to:
-  /// **'AYARLA'**
+  /// In en, this message translates to:
+  /// **'SET'**
   String get commandGroupSet;
 
   /// No description provided for @commandGroupAction.
   ///
-  /// In tr, this message translates to:
-  /// **'EYLEM'**
+  /// In en, this message translates to:
+  /// **'ACTION'**
   String get commandGroupAction;
 
   /// No description provided for @commandGroupSetNeedsInput.
   ///
-  /// In tr, this message translates to:
-  /// **'· giriş gerekli'**
+  /// In en, this message translates to:
+  /// **'· needs input'**
   String get commandGroupSetNeedsInput;
 
   /// No description provided for @commandPickerInputBadge.
   ///
-  /// In tr, this message translates to:
-  /// **'giriş'**
+  /// In en, this message translates to:
+  /// **'input'**
   String get commandPickerInputBadge;
 
   /// No description provided for @composeTagSet.
   ///
-  /// In tr, this message translates to:
-  /// **'AYARLA'**
+  /// In en, this message translates to:
+  /// **'SET'**
   String get composeTagSet;
 
   /// No description provided for @composeTagAction.
   ///
-  /// In tr, this message translates to:
-  /// **'EYLEM'**
+  /// In en, this message translates to:
+  /// **'ACTION'**
   String get composeTagAction;
 
   /// No description provided for @composeTagCommand.
   ///
-  /// In tr, this message translates to:
-  /// **'KOMUT'**
+  /// In en, this message translates to:
+  /// **'COMMAND'**
   String get composeTagCommand;
 
   /// No description provided for @composeDangerWarning.
   ///
-  /// In tr, this message translates to:
-  /// **'Emin misiniz? Bu, {count, plural, =1{{count} cihazdaki} other{{count} cihazdaki}} her şeyi siler.'**
-  String composeDangerWarning(int count);
+  /// In en, this message translates to:
+  /// **'Are you sure? This erases everything on this tracker.'**
+  String get composeDangerWarning;
 
   /// No description provided for @composeNoParams.
   ///
-  /// In tr, this message translates to:
-  /// **'Parametre gerekmez.'**
+  /// In en, this message translates to:
+  /// **'No parameters required.'**
   String get composeNoParams;
-
-  /// No description provided for @composeSendTo.
-  ///
-  /// In tr, this message translates to:
-  /// **'{count, plural, =1{{count} cihaza gönder} other{{count} cihaza gönder}}'**
-  String composeSendTo(int count);
 
   /// No description provided for @composeToggleOn.
   ///
-  /// In tr, this message translates to:
-  /// **'Açık'**
+  /// In en, this message translates to:
+  /// **'On'**
   String get composeToggleOn;
 
   /// No description provided for @composeToggleOff.
   ///
-  /// In tr, this message translates to:
-  /// **'Kapalı'**
+  /// In en, this message translates to:
+  /// **'Off'**
   String get composeToggleOff;
 
   /// No description provided for @smsCmdBatteryName.
   ///
-  /// In tr, this message translates to:
-  /// **'Pili al'**
+  /// In en, this message translates to:
+  /// **'Get battery'**
   String get smsCmdBatteryName;
 
   /// No description provided for @smsCmdBatterySub.
   ///
-  /// In tr, this message translates to:
-  /// **'Pil seviyesi ve şarj'**
+  /// In en, this message translates to:
+  /// **'Battery level & charging'**
   String get smsCmdBatterySub;
 
   /// No description provided for @smsCmdStatusName.
   ///
-  /// In tr, this message translates to:
-  /// **'Kilit durumunu al'**
+  /// In en, this message translates to:
+  /// **'Get lock status'**
   String get smsCmdStatusName;
 
   /// No description provided for @smsCmdStatusSub.
   ///
-  /// In tr, this message translates to:
-  /// **'Mühürlü · kapak · motor'**
+  /// In en, this message translates to:
+  /// **'Sealed · cover · motor'**
   String get smsCmdStatusSub;
 
   /// No description provided for @smsCmdPositionName.
   ///
-  /// In tr, this message translates to:
-  /// **'Konumu al'**
+  /// In en, this message translates to:
+  /// **'Get position'**
   String get smsCmdPositionName;
 
   /// No description provided for @smsCmdPositionSub.
   ///
-  /// In tr, this message translates to:
-  /// **'GPS koordinatları · hız'**
+  /// In en, this message translates to:
+  /// **'GPS coordinates · speed'**
   String get smsCmdPositionSub;
 
   /// No description provided for @smsCmdRfidName.
   ///
-  /// In tr, this message translates to:
-  /// **'RFID kartları listele'**
+  /// In en, this message translates to:
+  /// **'List RFID cards'**
   String get smsCmdRfidName;
 
   /// No description provided for @smsCmdRfidSub.
   ///
-  /// In tr, this message translates to:
-  /// **'Tüm yetkili kartlar'**
+  /// In en, this message translates to:
+  /// **'All authorized cards'**
   String get smsCmdRfidSub;
 
   /// No description provided for @smsCmdSubsName.
   ///
-  /// In tr, this message translates to:
-  /// **'Alt kilitleri listele'**
+  /// In en, this message translates to:
+  /// **'List sub-locks'**
   String get smsCmdSubsName;
 
   /// No description provided for @smsCmdSubsSub.
   ///
-  /// In tr, this message translates to:
-  /// **'Eşli alt kilitler ve durum'**
+  /// In en, this message translates to:
+  /// **'Paired sub-locks & state'**
   String get smsCmdSubsSub;
 
   /// No description provided for @smsCmdFwName.
   ///
-  /// In tr, this message translates to:
-  /// **'Firmware sürümünü al'**
+  /// In en, this message translates to:
+  /// **'Get firmware version'**
   String get smsCmdFwName;
 
   /// No description provided for @smsCmdFwSub.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **''**
   String get smsCmdFwSub;
 
   /// No description provided for @smsCmdSleepName.
   ///
-  /// In tr, this message translates to:
-  /// **'Uyku modunu ayarla'**
+  /// In en, this message translates to:
+  /// **'Set sleep mode'**
   String get smsCmdSleepName;
 
   /// No description provided for @smsCmdSleepInputLabel.
   ///
-  /// In tr, this message translates to:
-  /// **'Uyku modu'**
+  /// In en, this message translates to:
+  /// **'Sleep mode'**
   String get smsCmdSleepInputLabel;
 
   /// No description provided for @smsCmdIntervalName.
   ///
-  /// In tr, this message translates to:
-  /// **'Konum aralığını ayarla'**
+  /// In en, this message translates to:
+  /// **'Set position interval'**
   String get smsCmdIntervalName;
 
   /// No description provided for @smsCmdIntervalInputLabel.
   ///
-  /// In tr, this message translates to:
-  /// **'Konumu her'**
+  /// In en, this message translates to:
+  /// **'Send position every'**
   String get smsCmdIntervalInputLabel;
 
   /// No description provided for @smsCmdAutolockName.
   ///
-  /// In tr, this message translates to:
-  /// **'Otomatik kilit süresini ayarla'**
+  /// In en, this message translates to:
+  /// **'Set auto-lock time'**
   String get smsCmdAutolockName;
 
   /// No description provided for @smsCmdAutolockInputLabel.
   ///
-  /// In tr, this message translates to:
-  /// **'Şu süreden sonra kilitle'**
+  /// In en, this message translates to:
+  /// **'Auto-lock after'**
   String get smsCmdAutolockInputLabel;
 
   /// No description provided for @smsCmdAddrfidName.
   ///
-  /// In tr, this message translates to:
-  /// **'RFID kart ekle'**
+  /// In en, this message translates to:
+  /// **'Add RFID card'**
   String get smsCmdAddrfidName;
 
   /// No description provided for @smsCmdAddrfidInputLabel.
   ///
-  /// In tr, this message translates to:
-  /// **'Kart numarası'**
+  /// In en, this message translates to:
+  /// **'Card number'**
   String get smsCmdAddrfidInputLabel;
 
   /// No description provided for @smsCmdAddphoneName.
   ///
-  /// In tr, this message translates to:
-  /// **'Yetkili telefon ekle'**
+  /// In en, this message translates to:
+  /// **'Add authorized phone'**
   String get smsCmdAddphoneName;
 
   /// No description provided for @smsCmdAddphoneInputLabel.
   ///
-  /// In tr, this message translates to:
-  /// **'Telefon numarası'**
+  /// In en, this message translates to:
+  /// **'Phone number'**
   String get smsCmdAddphoneInputLabel;
 
   /// No description provided for @smsCmdPwdName.
   ///
-  /// In tr, this message translates to:
-  /// **'Açma şifresini değiştir'**
+  /// In en, this message translates to:
+  /// **'Change unlock password'**
   String get smsCmdPwdName;
 
   /// No description provided for @smsCmdPwdInputLabel.
   ///
-  /// In tr, this message translates to:
-  /// **'Yeni 6 haneli şifre'**
+  /// In en, this message translates to:
+  /// **'New 6-digit password'**
   String get smsCmdPwdInputLabel;
 
   /// No description provided for @smsCmdSensorName.
   ///
-  /// In tr, this message translates to:
-  /// **'Sensör hassasiyetini ayarla'**
+  /// In en, this message translates to:
+  /// **'Set sensor sensitivity'**
   String get smsCmdSensorName;
 
   /// No description provided for @smsCmdSensorInputLabel.
   ///
-  /// In tr, this message translates to:
-  /// **'Hassasiyet'**
+  /// In en, this message translates to:
+  /// **'Sensitivity'**
   String get smsCmdSensorInputLabel;
 
   /// No description provided for @smsCmdUnlockName.
   ///
-  /// In tr, this message translates to:
-  /// **'Kilidi aç'**
+  /// In en, this message translates to:
+  /// **'Unlock'**
   String get smsCmdUnlockName;
 
   /// No description provided for @smsCmdUnlockSub.
   ///
-  /// In tr, this message translates to:
-  /// **'Ana kilidi aç'**
+  /// In en, this message translates to:
+  /// **'Open the master lock'**
   String get smsCmdUnlockSub;
 
   /// No description provided for @smsCmdLockName.
   ///
-  /// In tr, this message translates to:
-  /// **'Kilitle'**
+  /// In en, this message translates to:
+  /// **'Lock'**
   String get smsCmdLockName;
 
   /// No description provided for @smsCmdLockSub.
   ///
-  /// In tr, this message translates to:
-  /// **'Ana kilidi mühürle'**
+  /// In en, this message translates to:
+  /// **'Seal the master lock'**
   String get smsCmdLockSub;
 
   /// No description provided for @smsCmdRebootName.
   ///
-  /// In tr, this message translates to:
-  /// **'Cihazı yeniden başlat'**
+  /// In en, this message translates to:
+  /// **'Restart device'**
   String get smsCmdRebootName;
 
   /// No description provided for @smsCmdRebootSub.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **''**
   String get smsCmdRebootSub;
 
   /// No description provided for @smsCmdClearName.
   ///
-  /// In tr, this message translates to:
-  /// **'Konum önbelleğini temizle'**
+  /// In en, this message translates to:
+  /// **'Clear position cache'**
   String get smsCmdClearName;
 
   /// No description provided for @smsCmdClearSub.
   ///
-  /// In tr, this message translates to:
+  /// In en, this message translates to:
   /// **''**
   String get smsCmdClearSub;
 
   /// No description provided for @smsCmdResetName.
   ///
-  /// In tr, this message translates to:
-  /// **'Fabrika ayarlarına dön'**
+  /// In en, this message translates to:
+  /// **'Factory reset'**
   String get smsCmdResetName;
 
   /// No description provided for @smsCmdResetSub.
   ///
-  /// In tr, this message translates to:
-  /// **'Her şeyi siler'**
+  /// In en, this message translates to:
+  /// **'Erases everything'**
   String get smsCmdResetSub;
 
   /// No description provided for @smsUnitSeconds.
   ///
-  /// In tr, this message translates to:
-  /// **'saniye'**
+  /// In en, this message translates to:
+  /// **'seconds'**
   String get smsUnitSeconds;
 
   /// No description provided for @sensorLow.
   ///
-  /// In tr, this message translates to:
-  /// **'Düşük'**
+  /// In en, this message translates to:
+  /// **'Low'**
   String get sensorLow;
 
   /// No description provided for @sensorMedium.
   ///
-  /// In tr, this message translates to:
-  /// **'Orta'**
+  /// In en, this message translates to:
+  /// **'Medium'**
   String get sensorMedium;
 
   /// No description provided for @sensorHigh.
   ///
-  /// In tr, this message translates to:
-  /// **'Yüksek'**
+  /// In en, this message translates to:
+  /// **'High'**
   String get sensorHigh;
 
   /// No description provided for @settingsTitle.
   ///
-  /// In tr, this message translates to:
-  /// **'Ayarlar'**
+  /// In en, this message translates to:
+  /// **'Settings'**
   String get settingsTitle;
 
   /// No description provided for @settingsSectionApp.
   ///
-  /// In tr, this message translates to:
-  /// **'UYGULAMA'**
+  /// In en, this message translates to:
+  /// **'APP'**
   String get settingsSectionApp;
+
+  /// No description provided for @settingsSectionDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'DEVICE'**
+  String get settingsSectionDevice;
 
   /// No description provided for @settingsSectionSims.
   ///
-  /// In tr, this message translates to:
-  /// **'SIM KARTLAR'**
+  /// In en, this message translates to:
+  /// **'SIM CARDS'**
   String get settingsSectionSims;
 
   /// No description provided for @settingsRowLanguage.
   ///
-  /// In tr, this message translates to:
-  /// **'Dil'**
+  /// In en, this message translates to:
+  /// **'Language'**
   String get settingsRowLanguage;
 
-  /// No description provided for @settingsFooter.
+  /// No description provided for @settingsRowBrand.
   ///
-  /// In tr, this message translates to:
-  /// **'Bariox Kontrol · v1.0'**
-  String get settingsFooter;
+  /// In en, this message translates to:
+  /// **'Tracker brand'**
+  String get settingsRowBrand;
+
+  /// No description provided for @settingsRowSim.
+  ///
+  /// In en, this message translates to:
+  /// **'Active SIM'**
+  String get settingsRowSim;
+
+  /// No description provided for @brandPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracker brand'**
+  String get brandPickerTitle;
+
+  /// No description provided for @brandPickerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Which family of trackers this app talks to.'**
+  String get brandPickerSubtitle;
+
+  /// No description provided for @brandBariox.
+  ///
+  /// In en, this message translates to:
+  /// **'Bariox'**
+  String get brandBariox;
+
+  /// No description provided for @brandBarioxSub.
+  ///
+  /// In en, this message translates to:
+  /// **'BLE and SMS · full command set'**
+  String get brandBarioxSub;
+
+  /// No description provided for @brandTeltonika.
+  ///
+  /// In en, this message translates to:
+  /// **'Teltonika'**
+  String get brandTeltonika;
+
+  /// No description provided for @brandTeltonikaSub.
+  ///
+  /// In en, this message translates to:
+  /// **'SMS only · FMB series'**
+  String get brandTeltonikaSub;
 
   /// No description provided for @simsNone.
   ///
-  /// In tr, this message translates to:
-  /// **'SIM kart bulunamadı'**
+  /// In en, this message translates to:
+  /// **'No SIM cards detected'**
   String get simsNone;
 
   /// No description provided for @simsRefresh.
   ///
-  /// In tr, this message translates to:
-  /// **'Yenile'**
+  /// In en, this message translates to:
+  /// **'Refresh'**
   String get simsRefresh;
 
-  /// No description provided for @simSlotLabel.
+  /// No description provided for @simRowNone.
   ///
-  /// In tr, this message translates to:
-  /// **'Yuva {slot}'**
-  String simSlotLabel(int slot);
+  /// In en, this message translates to:
+  /// **'None'**
+  String get simRowNone;
+
+  /// No description provided for @simPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Active SIM'**
+  String get simPickerTitle;
+
+  /// No description provided for @simPickerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Outgoing commands are sent from this SIM.'**
+  String get simPickerSubtitle;
 
   /// No description provided for @simSubtitle.
   ///
-  /// In tr, this message translates to:
-  /// **'Yuva {slot} · {country}'**
+  /// In en, this message translates to:
+  /// **'Slot {slot} · {country}'**
   String simSubtitle(int slot, String country);
 
   /// No description provided for @smsActiveSimChip.
   ///
-  /// In tr, this message translates to:
-  /// **'{carrier} (Yuva {slot})'**
+  /// In en, this message translates to:
+  /// **'{carrier} (Slot {slot})'**
   String smsActiveSimChip(String carrier, int slot);
+
+  /// No description provided for @smsThreadsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get smsThreadsTitle;
+
+  /// No description provided for @smsThreadYou.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get smsThreadYou;
+
+  /// No description provided for @smsThreadEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages yet'**
+  String get smsThreadEmpty;
+
+  /// No description provided for @smsSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search trackers'**
+  String get smsSearchHint;
+
+  /// No description provided for @smsSearchEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No tracker matches that'**
+  String get smsSearchEmpty;
 
   /// No description provided for @smsNoSimChip.
   ///
-  /// In tr, this message translates to:
-  /// **'SIM yok'**
+  /// In en, this message translates to:
+  /// **'No SIM'**
   String get smsNoSimChip;
+
+  /// No description provided for @smsPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracker password'**
+  String get smsPasswordTitle;
+
+  /// No description provided for @smsPasswordSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent with every command to this tracker.'**
+  String get smsPasswordSubtitle;
+
+  /// No description provided for @composeSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get composeSend;
 
   /// No description provided for @languagePickerTitle.
   ///
-  /// In tr, this message translates to:
-  /// **'Dil'**
+  /// In en, this message translates to:
+  /// **'Language'**
   String get languagePickerTitle;
+
+  /// No description provided for @languagePickerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Applies everywhere in the app.'**
+  String get languagePickerSubtitle;
 
   /// No description provided for @languageTurkish.
   ///
-  /// In tr, this message translates to:
-  /// **'Türkçe'**
+  /// In en, this message translates to:
+  /// **'Turkish'**
   String get languageTurkish;
 
   /// No description provided for @languageEnglish.
   ///
-  /// In tr, this message translates to:
-  /// **'İngilizce'**
+  /// In en, this message translates to:
+  /// **'English'**
   String get languageEnglish;
 }
 

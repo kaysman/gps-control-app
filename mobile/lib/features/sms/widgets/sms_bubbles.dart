@@ -65,7 +65,7 @@ class SmsSentBubble extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  l10n.smsBubbleYouTo(msg.recipientShorts.length),
+                  l10n.smsThreadYou,
                   style: const TextStyle(
                     fontFamily: kMono,
                     fontSize: 10.5,
@@ -80,7 +80,7 @@ class SmsSentBubble extends StatelessWidget {
                     vertical: 10,
                   ),
                   decoration: const BoxDecoration(
-                    color: kNavy,
+                    color: kInk,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16),
@@ -107,7 +107,7 @@ class SmsSentBubble extends StatelessWidget {
                               fontFamily: kSans,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: kOrange,
+                              color: kLime,
                             ),
                           ),
                       ],
@@ -184,7 +184,7 @@ class SmsReceivedBubble extends StatelessWidget {
                       fontFamily: kSans,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: kNavy,
+                      color: kInk,
                     ),
                   ),
                 ),
@@ -223,7 +223,7 @@ class SmsDateChip extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 14),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
         decoration: BoxDecoration(
-          color: kBone,
+          color: kMist,
           borderRadius: BorderRadius.circular(999),
         ),
         child: Text(
@@ -277,7 +277,7 @@ class SmsRecipientChip extends StatelessWidget {
               fontFamily: kSans,
               fontSize: 12.5,
               fontWeight: FontWeight.w600,
-              color: kNavy,
+              color: kInk,
             ),
           ),
           const SizedBox(width: 4),

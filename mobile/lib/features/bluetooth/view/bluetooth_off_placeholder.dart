@@ -26,7 +26,7 @@ class BluetoothOffPlaceholder extends StatelessWidget {
               fontFamily: kSans,
               fontSize: 17,
               fontWeight: FontWeight.w700,
-              color: kNavy,
+              color: kInk,
             ),
           ),
           const SizedBox(height: 6),

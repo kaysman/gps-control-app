@@ -24,7 +24,7 @@ class DialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locked = isLocked ?? true;
-    final bg = busy ? kOrange : (locked ? kWhite : kOrange);
+    final bg = busy ? kLime : (locked ? kWhite : kLime);
     final l10n = context.l10n;
     return GestureDetector(
       onTap: onTap,
@@ -39,7 +39,7 @@ class DialButton extends StatelessWidget {
             BoxShadow(
               color: locked
                   ? Colors.black.withValues(alpha: 0.30)
-                  : kOrange.withValues(alpha: 0.50),
+                  : kLime.withValues(alpha: 0.50),
               blurRadius: 36,
               offset: const Offset(0, 12),
             ),
@@ -55,14 +55,14 @@ class DialButton extends StatelessWidget {
                 const SizedBox(height: 6),
                 _DialLabel(text: l10n.bleSending, large: false),
               ] else if (isLocked == null) ...[
-                const Icon(Icons.sync, size: 28, color: kNavy),
+                const Icon(Icons.sync, size: 28, color: kInk),
                 const SizedBox(height: 6),
                 _DialLabel(text: l10n.bleTapToRefresh),
               ] else ...[
                 Icon(
                   locked ? Icons.lock_outline : Icons.lock_open_outlined,
                   size: 28,
-                  color: kNavy,
+                  color: kInk,
                 ),
                 const SizedBox(height: 6),
                 _DialLabel(
@@ -92,7 +92,7 @@ class _DialLabel extends StatelessWidget {
         fontFamily: kSans,
         fontWeight: FontWeight.w700,
         fontSize: large ? 15 : 13,
-        color: kNavy,
+        color: kInk,
         letterSpacing: 0.3,
         height: 1.15,
       ),
@@ -116,7 +116,7 @@ class _BusyRing extends StatelessWidget {
           height: 24,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(color: kNavy, width: 2.5),
+            border: Border.all(color: kInk, width: 2.5),
           ),
           child: const ClipOval(
             child: Align(
@@ -167,7 +167,7 @@ class DialPainter extends CustomPainter {
 
     final sweepAngle = progress * math.pi * 2;
     final arcPaint = Paint()
-      ..color = kOrange
+      ..color = kLime
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3
       ..strokeCap = StrokeCap.round;

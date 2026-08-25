@@ -1,27 +1,16 @@
 {
   "@@locale": "tr",
-  "appTitle": "Bariox Kontrol",
+  "appTitle": "GPS Control",
 
   "tabBluetooth": "Bluetooth",
   "tabSms": "SMS",
   "tabSettings": "Ayarlar",
 
-  "bluetoothTitle": "Bluetooth",
-  "bluetoothConnected": "Bağlı",
   "bluetoothOffTitle": "Bluetooth {state}",
-  "@bluetoothOffTitle": {
-    "placeholders": { "state": { "type": "String" } }
-  },
   "bluetoothOffMessage": "Bir takip cihazına bağlanmak için Bluetooth'u açın.",
   "bluetoothScanCountdown": "{seconds}s",
-  "@bluetoothScanCountdown": {
-    "placeholders": { "seconds": { "type": "int" } }
-  },
   "bluetoothTapToScan": "Taramak için dokunun",
   "bluetoothRssiDbm": "{rssi} dBm",
-  "@bluetoothRssiDbm": {
-    "placeholders": { "rssi": { "type": "int" } }
-  },
 
   "bleStatusSealed": "Mühürlü",
   "bleStatusOpen": "Açık",
@@ -54,56 +43,14 @@
   "bleToastLocked": "Kilitlendi",
   "bleToastStatusRefreshed": "Durum yenilendi",
 
-  "smsHeader": "SMS",
-  "smsRecipientCount": "{count, plural, =1{{count} takip cihazı} other{{count} takip cihazı}}",
-  "@smsRecipientCount": {
-    "placeholders": { "count": { "type": "int" } }
-  },
   "smsToLabel": "Kime:",
-  "smsAddRecipient": "+ Ekle",
-  "smsOverflowCount": "+{count}",
-  "@smsOverflowCount": {
-    "placeholders": { "count": { "type": "int" } }
-  },
   "smsEmptyTitle": "Henüz mesaj yok",
   "smsEmptySub": "Başlamak için aşağıdan bir komut seçin",
   "smsPickCommand": "Göndermek için bir komut seçin",
   "smsSendFailed": "{tracker} cihazına gönderilemedi",
-  "@smsSendFailed": {
-    "placeholders": { "tracker": { "type": "String" } }
-  },
-  "smsBubbleYouTo": "Sen · {count, plural, =1{{count} cihaza} other{{count} cihaza}}",
-  "@smsBubbleYouTo": {
-    "placeholders": { "count": { "type": "int" } }
-  },
   "smsDateToday": "BUGÜN {hour}:{minute}",
-  "@smsDateToday": {
-    "placeholders": {
-      "hour": { "type": "String" },
-      "minute": { "type": "String" }
-    }
-  },
   "smsDateFull": "{day}/{month}/{year} {hour}:{minute}",
-  "@smsDateFull": {
-    "placeholders": {
-      "day": { "type": "String" },
-      "month": { "type": "String" },
-      "year": { "type": "String" },
-      "hour": { "type": "String" },
-      "minute": { "type": "String" }
-    }
-  },
 
-  "trackerPickerTitle": "Takip cihazı ekle",
-  "trackerPickerDone": "Tamam · {count, plural, =1{{count} cihaz} other{{count} cihaz}}",
-  "@trackerPickerDone": {
-    "placeholders": { "count": { "type": "int" } }
-  },
-  "allRecipientsHeading": "KİME",
-  "allRecipientsCount": "{count, plural, =1{{count} cihaz} other{{count} cihaz}}",
-  "@allRecipientsCount": {
-    "placeholders": { "count": { "type": "int" } }
-  },
 
   "commandPickerHeading": "KOMUT",
   "commandPickerTitle": "Birini seçin",
@@ -116,15 +63,8 @@
   "composeTagSet": "AYARLA",
   "composeTagAction": "EYLEM",
   "composeTagCommand": "KOMUT",
-  "composeDangerWarning": "Emin misiniz? Bu, {count, plural, =1{{count} cihazdaki} other{{count} cihazdaki}} her şeyi siler.",
-  "@composeDangerWarning": {
-    "placeholders": { "count": { "type": "int" } }
-  },
+  "composeDangerWarning": "Emin misiniz? Bu cihazdaki her şeyi siler.",
   "composeNoParams": "Parametre gerekmez.",
-  "composeSendTo": "{count, plural, =1{{count} cihaza gönder} other{{count} cihaza gönder}}",
-  "@composeSendTo": {
-    "placeholders": { "count": { "type": "int" } }
-  },
   "composeToggleOn": "Açık",
   "composeToggleOff": "Kapalı",
 
@@ -173,33 +113,39 @@
 
   "settingsTitle": "Ayarlar",
   "settingsSectionApp": "UYGULAMA",
+  "settingsSectionDevice": "CİHAZ",
   "settingsSectionSims": "SIM KARTLAR",
   "settingsRowLanguage": "Dil",
-  "settingsFooter": "Bariox Kontrol · v1.0",
+  "settingsRowBrand": "Cihaz markası",
+  "settingsRowSim": "Etkin SIM",
+
+  "brandPickerTitle": "Cihaz markası",
+  "brandPickerSubtitle": "Uygulamanın konuştuğu takip cihazı ailesi.",
+  "brandBariox": "Bariox",
+  "brandBarioxSub": "BLE ve SMS · tüm komut seti",
+  "brandTeltonika": "Teltonika",
+  "brandTeltonikaSub": "Yalnızca SMS · FMB serisi",
 
   "simsNone": "SIM kart bulunamadı",
   "simsRefresh": "Yenile",
-  "simSlotLabel": "Yuva {slot}",
-  "@simSlotLabel": {
-    "placeholders": { "slot": { "type": "int" } }
-  },
+  "simRowNone": "Yok",
+  "simPickerTitle": "Etkin SIM",
+  "simPickerSubtitle": "Giden komutlar bu SIM üzerinden gönderilir.",
   "simSubtitle": "Yuva {slot} · {country}",
-  "@simSubtitle": {
-    "placeholders": {
-      "slot": { "type": "int" },
-      "country": { "type": "String" }
-    }
-  },
   "smsActiveSimChip": "{carrier} (Yuva {slot})",
-  "@smsActiveSimChip": {
-    "placeholders": {
-      "carrier": { "type": "String" },
-      "slot": { "type": "int" }
-    }
-  },
+
+  "smsThreadsTitle": "Mesajlar",
+  "smsThreadYou": "Sen",
+  "smsThreadEmpty": "Henüz mesaj yok",
+  "smsSearchHint": "Cihaz ara",
+  "smsSearchEmpty": "Eşleşen cihaz yok",
   "smsNoSimChip": "SIM yok",
+  "smsPasswordTitle": "Cihaz şifresi",
+  "smsPasswordSubtitle": "Bu cihaza giden her komutla birlikte gönderilir.",
+  "composeSend": "Gönder",
 
   "languagePickerTitle": "Dil",
+  "languagePickerSubtitle": "Uygulamanın tamamında geçerlidir.",
   "languageTurkish": "Türkçe",
   "languageEnglish": "İngilizce"
 }

@@ -1,18 +1,25 @@
 {
   "@@locale": "en",
-  "appTitle": "Bariox Control",
+  "appTitle": "GPS Control",
 
   "tabBluetooth": "Bluetooth",
   "tabSms": "SMS",
   "tabSettings": "Settings",
 
-  "bluetoothTitle": "Bluetooth",
-  "bluetoothConnected": "Connected",
   "bluetoothOffTitle": "Bluetooth is {state}",
+  "@bluetoothOffTitle": {
+    "placeholders": { "state": { "type": "String" } }
+  },
   "bluetoothOffMessage": "Turn Bluetooth on to connect to a tracker.",
   "bluetoothScanCountdown": "{seconds}s",
+  "@bluetoothScanCountdown": {
+    "placeholders": { "seconds": { "type": "int" } }
+  },
   "bluetoothTapToScan": "Tap to scan",
   "bluetoothRssiDbm": "{rssi} dBm",
+  "@bluetoothRssiDbm": {
+    "placeholders": { "rssi": { "type": "int" } }
+  },
 
   "bleStatusSealed": "Sealed",
   "bleStatusOpen": "Open",
@@ -45,23 +52,32 @@
   "bleToastLocked": "Locked",
   "bleToastStatusRefreshed": "Status refreshed",
 
-  "smsHeader": "SMS",
-  "smsRecipientCount": "{count, plural, =1{{count} tracker} other{{count} trackers}}",
   "smsToLabel": "To:",
-  "smsAddRecipient": "+ Add",
-  "smsOverflowCount": "+{count}",
   "smsEmptyTitle": "No messages yet",
   "smsEmptySub": "Pick a command below to start",
   "smsPickCommand": "Pick a command to send",
   "smsSendFailed": "Failed to send to {tracker}",
-  "smsBubbleYouTo": "You · to {count, plural, =1{{count} tracker} other{{count} trackers}}",
+  "@smsSendFailed": {
+    "placeholders": { "tracker": { "type": "String" } }
+  },
   "smsDateToday": "TODAY {hour}:{minute}",
+  "@smsDateToday": {
+    "placeholders": {
+      "hour": { "type": "String" },
+      "minute": { "type": "String" }
+    }
+  },
   "smsDateFull": "{day}/{month}/{year} {hour}:{minute}",
+  "@smsDateFull": {
+    "placeholders": {
+      "day": { "type": "String" },
+      "month": { "type": "String" },
+      "year": { "type": "String" },
+      "hour": { "type": "String" },
+      "minute": { "type": "String" }
+    }
+  },
 
-  "trackerPickerTitle": "Add trackers",
-  "trackerPickerDone": "Done · {count, plural, =1{{count} tracker} other{{count} trackers}}",
-  "allRecipientsHeading": "TO",
-  "allRecipientsCount": "{count, plural, =1{{count} tracker} other{{count} trackers}}",
 
   "commandPickerHeading": "COMMAND",
   "commandPickerTitle": "Pick one",
@@ -74,9 +90,8 @@
   "composeTagSet": "SET",
   "composeTagAction": "ACTION",
   "composeTagCommand": "COMMAND",
-  "composeDangerWarning": "Are you sure? This erases everything on {count, plural, =1{{count} tracker} other{{count} trackers}}.",
+  "composeDangerWarning": "Are you sure? This erases everything on this tracker.",
   "composeNoParams": "No parameters required.",
-  "composeSendTo": "{count, plural, =1{Send to {count} tracker} other{Send to {count} trackers}}",
   "composeToggleOn": "On",
   "composeToggleOff": "Off",
 
@@ -125,18 +140,51 @@
 
   "settingsTitle": "Settings",
   "settingsSectionApp": "APP",
+  "settingsSectionDevice": "DEVICE",
   "settingsSectionSims": "SIM CARDS",
   "settingsRowLanguage": "Language",
-  "settingsFooter": "Bariox Control · v1.0",
+  "settingsRowBrand": "Tracker brand",
+  "settingsRowSim": "Active SIM",
+
+  "brandPickerTitle": "Tracker brand",
+  "brandPickerSubtitle": "Which family of trackers this app talks to.",
+  "brandBariox": "Bariox",
+  "brandBarioxSub": "BLE and SMS · full command set",
+  "brandTeltonika": "Teltonika",
+  "brandTeltonikaSub": "SMS only · FMB series",
 
   "simsNone": "No SIM cards detected",
   "simsRefresh": "Refresh",
-  "simSlotLabel": "Slot {slot}",
+  "simRowNone": "None",
+  "simPickerTitle": "Active SIM",
+  "simPickerSubtitle": "Outgoing commands are sent from this SIM.",
   "simSubtitle": "Slot {slot} · {country}",
+  "@simSubtitle": {
+    "placeholders": {
+      "slot": { "type": "int" },
+      "country": { "type": "String" }
+    }
+  },
   "smsActiveSimChip": "{carrier} (Slot {slot})",
+  "@smsActiveSimChip": {
+    "placeholders": {
+      "carrier": { "type": "String" },
+      "slot": { "type": "int" }
+    }
+  },
+
+  "smsThreadsTitle": "Messages",
+  "smsThreadYou": "You",
+  "smsThreadEmpty": "No messages yet",
+  "smsSearchHint": "Search trackers",
+  "smsSearchEmpty": "No tracker matches that",
   "smsNoSimChip": "No SIM",
+  "smsPasswordTitle": "Tracker password",
+  "smsPasswordSubtitle": "Sent with every command to this tracker.",
+  "composeSend": "Send",
 
   "languagePickerTitle": "Language",
+  "languagePickerSubtitle": "Applies everywhere in the app.",
   "languageTurkish": "Turkish",
   "languageEnglish": "English"
 }

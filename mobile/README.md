@@ -3,8 +3,8 @@
 Flutter app for configuring GPS trackers over **BLE** (when you are standing next
 to the device) and over **SMS** (when you are not).
 
-Bundle id `com.ikayapps.gps_control` · Flutter 3.41 / Dart 3.11 · Turkish and
-English.
+Bundle id `com.ikayapps.gps_control` · Flutter 3.41 / Dart 3.11 · English
+(default) and Turkish.
 
 ## Running
 
@@ -30,9 +30,9 @@ mobile/
   lib/
     app/           MaterialApp.router, go_router config, design tokens
     data/          repository interfaces + real and fake implementations
-    features/      bluetooth (bloc), sms, sim (cubit), settings
+    features/      bluetooth (bloc), sms (threads + chat), sim, settings
     shell/         StatefulShellRoute host + bottom tab bar
-    l10n/          tr (template) and en
+    l10n/          en (template) and tr
   packages/
     bariox_tracker         BLE transport and frame codecs
     sms_tracker_commands   SMS command builder and status parser
@@ -65,7 +65,39 @@ stays visible.
 
 **Navigation is declarative.** `StatefulShellRoute.indexedStack` keeps all three
 branches mounted, so the `BluetoothBloc` and any live BLE connection survive tab
-switches.
+switches. One consequence bites: the shell stacks its tab bar *over* the branch
+navigator, so a modal sheet pushed onto that navigator opens underneath the bar.
+Settings pickers go through `showPickerSheet`, which pushes onto the root
+navigator instead.
+
+**One palette, three radii, no warm neutrals.** `lib/app/tokens.dart` is the
+whole design system: deep forest ink (`kInk`), a fresh green pair (`kGreen` for
+fills that carry ink text, `kGreenDeep` for text and white-on-green), a lime pop
+that is only ever used on ink surfaces (`kLime`), and a cool mist canvas
+(`kCanvas`). The old champagne paper and orange accent are gone — including from
+the chat, where the canvas is mist and the composer is an ink pill. Radii come
+from `kR14` / `kR22` / `kR30` and nothing else; every card shares the one
+`kShadow` value.
+
+**The SMS tab is a thread list; a chat is a pushed screen.** `/sms` lists the
+fleet with each thread's newest message; `/sms/:trackerId` is that tracker's
+chat, routed *outside* the shell so it gets the whole screen instead of sharing
+it with the floating tab bar. One chat talks to exactly one tracker — the "To:"
+line is fixed, and there is no recipient picker (see the TODO on `SmsChatPage`).
+
+**One conversation, two views.** `ConversationCubit` holds the whole
+conversation above the routes, so a reply arriving while a chat is open also
+moves that row's preview in the list, and a command sent from a chat shows up
+in the list without reloading anything. Threading is a read-time concern —
+`sms_thread.dart` splits the flat history per tracker, matching replies on the
+last nine digits of the sender so a country code or a space does not lose a
+message.
+
+**Every setting is a bottom sheet.** Language, tracker brand and active SIM are
+all one-of-N choices, so they share one row widget and one sheet widget
+(`features/settings/widgets/`) rather than each growing its own control. Only
+Bariox has a command implementation — `TrackerBrand.teltonika` is offered and
+flagged `BETA`, since the protocol lives in a package that does not exist yet.
 
 ## Checks
 

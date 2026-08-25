@@ -1,13 +1,19 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gps_control/app/tokens.dart';
-import 'package:gps_control/data/sim/sim_repository.dart';
+import 'package:gps_control/app/widgets/picker_sheet.dart';
+import 'package:gps_control/features/settings/cubit/brand_cubit.dart';
+import 'package:gps_control/features/settings/widgets/brand_sheet.dart';
+import 'package:gps_control/features/settings/widgets/language_sheet.dart';
+import 'package:gps_control/features/settings/widgets/settings_section.dart';
+import 'package:gps_control/features/settings/widgets/sim_sheet.dart';
 import 'package:gps_control/features/sim/cubit/sim_cubit.dart';
 import 'package:gps_control/l10n/l10n.dart';
 
+/// Settings tab. Every row here is a one-of-N choice, so every row opens the
+/// same kind of bottom sheet rather than inventing a control per setting.
 class SettingsPage extends StatelessWidget {
+  /// Creates the settings page.
   const SettingsPage({super.key});
 
   @override
@@ -15,413 +21,88 @@ class SettingsPage extends StatelessWidget {
     final topPad = MediaQuery.of(context).padding.top;
     final l10n = context.l10n;
     final locale = context.watch<LocaleCubit>().state;
+    final brand = context.watch<BrandCubit>().state;
+    final sims = context.watch<SimCubit>().state;
 
     return SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(0, topPad, 0, 110),
+      padding: EdgeInsets.fromLTRB(0, topPad, 0, 130),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(18, 10, 18, 14),
-            child: Text(
-              l10n.settingsTitle,
-              style: const TextStyle(
-                fontFamily: kSans,
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-                color: kNavy,
-                letterSpacing: -0.5,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(22, 6, 22, 6),
-            child: Text(
-              l10n.settingsSectionApp,
-              style: const TextStyle(
-                fontFamily: kSans,
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
-                color: kMute,
-                letterSpacing: 1.2,
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(18, 0, 18, 14),
-            decoration: BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: kRule),
-            ),
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () => _openLanguagePicker(context),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 13,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        l10n.settingsRowLanguage,
-                        style: const TextStyle(
-                          fontFamily: kSans,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: kNavy,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      _languageLabel(l10n, locale),
-                      style: const TextStyle(
-                        fontFamily: kSans,
-                        fontSize: 12.5,
-                        color: kMute,
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                    const Icon(Icons.chevron_right, size: 18, color: kMute2),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          const _SimsSection(),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 24),
-              child: Text(
-                l10n.settingsFooter,
-                style: const TextStyle(
-                  fontFamily: kMono,
-                  fontSize: 11,
-                  color: kMute,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _openLanguagePicker(BuildContext context) {
-    final cubit = context.read<LocaleCubit>();
-    unawaited(
-      showModalBottomSheet<void>(
-        context: context,
-        backgroundColor: Colors.transparent,
-        builder: (_) => _LanguagePickerSheet(
-          current: cubit.state,
-          onPick: (locale) {
-            cubit.setLocale(locale);
-            Navigator.pop(context);
-          },
-        ),
-      ),
-    );
-  }
-}
-
-String _languageLabel(AppLocalizations l10n, Locale locale) =>
-    switch (locale.languageCode) {
-      'tr' => l10n.languageTurkish,
-      _ => l10n.languageEnglish,
-    };
-
-class _LanguagePickerSheet extends StatelessWidget {
-  const _LanguagePickerSheet({required this.current, required this.onPick});
-
-  final Locale current;
-  final ValueChanged<Locale> onPick;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final bottomPad = MediaQuery.of(context).padding.bottom;
-    return Container(
-      decoration: const BoxDecoration(
-        color: kPaper,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      padding: EdgeInsets.fromLTRB(0, 0, 0, bottomPad),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Center(
-            child: Container(
-              margin: const EdgeInsets.only(top: 8),
-              width: 36,
-              height: 4,
-              decoration: BoxDecoration(
-                color: kRuleS,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(22, 12, 22, 8),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                l10n.languagePickerTitle,
-                style: const TextStyle(
-                  fontFamily: kSans,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: kNavy,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(18, 0, 18, 14),
-            decoration: BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: kRule),
-            ),
-            child: Column(
-              children: [
-                _LanguageRow(
-                  label: l10n.languageTurkish,
-                  selected: current.languageCode == 'tr',
-                  onTap: () => onPick(const Locale('tr')),
-                ),
-                const Divider(height: 1, color: kRule),
-                _LanguageRow(
-                  label: l10n.languageEnglish,
-                  selected: current.languageCode == 'en',
-                  onTap: () => onPick(const Locale('en')),
-                  last: true,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LanguageRow extends StatelessWidget {
-  const _LanguageRow({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-    this.last = false,
-  });
-
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-  final bool last;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(
-                  fontFamily: kSans,
-                  fontSize: 14.5,
-                  fontWeight: FontWeight.w600,
-                  color: kNavy,
-                ),
-              ),
-            ),
-            if (selected) const Icon(Icons.check, size: 18, color: kOrange),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _SimsSection extends StatelessWidget {
-  const _SimsSection();
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final state = context.watch<SimCubit>().state;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(22, 6, 22, 6),
-          child: Row(
+          _Header(title: l10n.settingsTitle),
+          SettingsSection(
+            title: l10n.settingsSectionApp,
             children: [
-              Expanded(
-                child: Text(
-                  l10n.settingsSectionSims,
-                  style: const TextStyle(
-                    fontFamily: kSans,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    color: kMute,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => context.read<SimCubit>().load(),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 2,
-                  ),
-                  child: Text(
-                    l10n.simsRefresh,
-                    style: const TextStyle(
-                      fontFamily: kSans,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                      color: kOrangeD,
-                      letterSpacing: 0.8,
-                    ),
-                  ),
+              SettingsRow(
+                icon: Icons.translate,
+                label: l10n.settingsRowLanguage,
+                value: LanguageSheet.labelFor(l10n, locale),
+                onTap: () => openPickerSheet(
+                  context: context,
+                  builder: (_) => const LanguageSheet(),
                 ),
               ),
             ],
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(18, 0, 18, 14),
-          decoration: BoxDecoration(
-            color: kWhite,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: kRule),
-          ),
-          child: state.sims.isEmpty
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 16,
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.sim_card_alert_outlined,
-                        size: 18,
-                        color: kMute2,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          l10n.simsNone,
-                          style: const TextStyle(
-                            fontFamily: kSans,
-                            fontSize: 13.5,
-                            color: kMute,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : Column(
-                  children: [
-                    for (var i = 0; i < state.sims.length; i++)
-                      _SimRow(
-                        sim: state.sims[i],
-                        selected:
-                            state.sims[i].subscriptionId ==
-                            state.selectedSubscriptionId,
-                        last: i == state.sims.length - 1,
-                        onTap: () => context.read<SimCubit>().select(
-                          state.sims[i].subscriptionId,
-                        ),
-                      ),
-                  ],
+          SettingsSection(
+            title: l10n.settingsSectionDevice,
+            children: [
+              SettingsRow(
+                icon: Icons.memory,
+                label: l10n.settingsRowBrand,
+                value: BrandSheet.labelFor(l10n, brand),
+                // TODO(brand): only Bariox is implemented. Surface the gap
+                // here again once there is something to say about it.
+                onTap: () => openPickerSheet(
+                  context: context,
+                  builder: (_) => const BrandSheet(),
                 ),
-        ),
-      ],
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: l10n.settingsSectionSims,
+            children: [
+              SettingsRow(
+                icon: Icons.sim_card_outlined,
+                label: l10n.settingsRowSim,
+                value: SimSheet.rowValue(l10n, sims),
+                onTap: () => openPickerSheet(
+                  context: context,
+                  builder: (_) => const SimSheet(),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
 
-class _SimRow extends StatelessWidget {
-  const _SimRow({
-    required this.sim,
-    required this.selected,
-    required this.last,
-    required this.onTap,
-  });
+/// Oversized display header. The title carries the page on its own — no
+/// eyebrow, no subtitle explaining what "Settings" means.
+class _Header extends StatelessWidget {
+  const _Header({required this.title});
 
-  final SimCard sim;
-  final bool selected;
-  final bool last;
-  final VoidCallback onTap;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final country = sim.countryIso.isNotEmpty
-        ? sim.countryIso.toUpperCase()
-        : '—';
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: last ? BorderSide.none : const BorderSide(color: kRule),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(22, 14, 22, 18),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontFamily: kSans,
+            fontSize: 36,
+            fontWeight: FontWeight.w800,
+            color: kInk,
+            letterSpacing: -1.4,
+            height: 1,
           ),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
-        child: Row(
-          children: [
-            const Icon(Icons.sim_card_outlined, size: 18, color: kNavy),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    sim.label,
-                    style: const TextStyle(
-                      fontFamily: kSans,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: kNavy,
-                    ),
-                  ),
-                  Text(
-                    l10n.simSubtitle(sim.slotIndex + 1, country),
-                    style: const TextStyle(
-                      fontFamily: kSans,
-                      fontSize: 11.5,
-                      color: kMute,
-                    ),
-                  ),
-                  if (sim.number.isNotEmpty)
-                    Text(
-                      sim.number,
-                      style: const TextStyle(
-                        fontFamily: kMono,
-                        fontSize: 11,
-                        color: kMute2,
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            if (selected) const Icon(Icons.check, size: 18, color: kOrange),
-          ],
         ),
       ),
     );

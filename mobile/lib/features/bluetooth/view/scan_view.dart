@@ -66,7 +66,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
               final radarR = math.min(cx - 24, (h - topArea - bottomArea) / 2);
 
               return ColoredBox(
-                color: kNavyInk,
+                color: kInkDeep,
                 child: Stack(
                   children: [
                     // Animated rings + sweep
@@ -100,7 +100,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                       top: topPad + 14,
                       left: 20,
                       child: Text(
-                        l10n.bluetoothTitle,
+                        l10n.appTitle,
                         style: const TextStyle(
                           fontFamily: kSans,
                           fontSize: 24,
@@ -128,7 +128,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                                 style: const TextStyle(
                                   fontFamily: kSans,
                                   fontSize: 12,
-                                  color: kOrange,
+                                  color: kBadOnInk,
                                 ),
                               ),
                             )
@@ -238,14 +238,14 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
           height: r * 2,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isScanning ? kOrange : kNavy,
+            color: isScanning ? kLime : kInk,
             border: Border.all(
-              color: isScanning ? kOrange : kWhite.withValues(alpha: 0.18),
+              color: isScanning ? kLime : kWhite.withValues(alpha: 0.18),
               width: 2,
             ),
             boxShadow: [
               BoxShadow(
-                color: kOrange.withValues(alpha: isScanning ? 0.45 : 0.18),
+                color: kLime.withValues(alpha: isScanning ? 0.45 : 0.18),
                 blurRadius: isScanning ? 28 : 14,
                 spreadRadius: isScanning ? 4 : 0,
               ),
@@ -256,7 +256,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
             children: [
               Icon(
                 Icons.bluetooth,
-                color: isScanning ? kNavy : kWhite,
+                color: isScanning ? kInk : kWhite,
                 size: 26,
               ),
               if (isConnecting) ...[
@@ -266,7 +266,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                   height: 14,
                   child: CircularProgressIndicator(
                     strokeWidth: 1.8,
-                    color: kOrange,
+                    color: kLime,
                   ),
                 ),
               ],
@@ -335,12 +335,12 @@ class _RadarPainter extends CustomPainter {
       ..shader = SweepGradient(
         startAngle: sweepAngle - sectorAngle,
         endAngle: sweepAngle,
-        colors: const [Colors.transparent, Color(0x18E8952E)],
+        colors: [Colors.transparent, kLime.withValues(alpha: 0.09)],
       ).createShader(rect);
     canvas.drawCircle(center, maxRadius, sweepPaint);
 
     final linePaint = Paint()
-      ..color = const Color(0x55E8952E)
+      ..color = kLime.withValues(alpha: 0.33)
       ..strokeWidth = 1.2;
     canvas.drawLine(
       center,
@@ -391,12 +391,12 @@ class _DeviceNode extends StatelessWidget {
           width: 76,
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           decoration: BoxDecoration(
-            color: const Color(0xFF162D45),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: kOrange.withValues(alpha: 0.35)),
+            color: kInk,
+            borderRadius: BorderRadius.circular(kR22),
+            border: Border.all(color: kLime.withValues(alpha: 0.35)),
             boxShadow: [
               BoxShadow(
-                color: kOrange.withValues(alpha: 0.15),
+                color: kLime.withValues(alpha: 0.15),
                 blurRadius: 14,
               ),
             ],
@@ -409,15 +409,15 @@ class _DeviceNode extends StatelessWidget {
                 height: 34,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: kNavyInk,
+                  color: kInkDeep,
                   border: Border.all(
-                    color: kOrange.withValues(alpha: 0.5),
+                    color: kLime.withValues(alpha: 0.5),
                   ),
                 ),
                 child: const Icon(
                   Icons.lock_outline,
                   size: 15,
-                  color: kOrange,
+                  color: kLime,
                 ),
               ),
               const SizedBox(height: 5),
