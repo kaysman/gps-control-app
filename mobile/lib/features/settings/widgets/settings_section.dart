@@ -33,7 +33,7 @@ class SettingsSection extends StatelessWidget {
                 child: Text(
                   title,
                   style: const TextStyle(
-                    fontFamily: kMono,
+                    fontFamily: kTech,
                     fontSize: 10.5,
                     fontWeight: FontWeight.w700,
                     color: kMute,

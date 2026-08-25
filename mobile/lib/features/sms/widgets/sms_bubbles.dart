@@ -67,7 +67,7 @@ class SmsSentBubble extends StatelessWidget {
                 Text(
                   l10n.smsThreadYou,
                   style: const TextStyle(
-                    fontFamily: kMono,
+                    fontFamily: kTech,
                     fontSize: 10.5,
                     color: kMute,
                     letterSpacing: 0.6,
@@ -118,7 +118,7 @@ class SmsSentBubble extends StatelessWidget {
                 Text(
                   msg.smsText,
                   style: const TextStyle(
-                    fontFamily: kMono,
+                    fontFamily: kTech,
                     fontSize: 9.5,
                     color: kMute2,
                   ),
@@ -156,7 +156,7 @@ class SmsReceivedBubble extends StatelessWidget {
                 Text(
                   msg.from,
                   style: const TextStyle(
-                    fontFamily: kMono,
+                    fontFamily: kTech,
                     fontSize: 10.5,
                     color: kMute,
                     letterSpacing: 0.6,
@@ -229,7 +229,7 @@ class SmsDateChip extends StatelessWidget {
         child: Text(
           label,
           style: const TextStyle(
-            fontFamily: kMono,
+            fontFamily: kTech,
             fontSize: 10.5,
             color: kMute,
             letterSpacing: 1.4,

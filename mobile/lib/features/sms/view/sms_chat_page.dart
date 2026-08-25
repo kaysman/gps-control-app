@@ -252,25 +252,6 @@ class _ChatHeader extends StatelessWidget {
               child: Icon(Icons.chevron_left, size: 28, color: kInk),
             ),
           ),
-          Container(
-            width: 40,
-            height: 40,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Color(tracker.tone).withValues(alpha: 0.14),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Text(
-              tracker.short.split('-').last,
-              style: TextStyle(
-                fontFamily: kMono,
-                fontSize: 11.5,
-                fontWeight: FontWeight.w700,
-                color: Color(tracker.tone),
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -290,7 +271,7 @@ class _ChatHeader extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                    fontFamily: kMono,
+                    fontFamily: kTech,
                     fontSize: 11,
                     color: kMute,
                   ),

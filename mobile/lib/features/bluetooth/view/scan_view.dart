@@ -139,9 +139,10 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                               ),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                fontFamily: kMono,
+                                fontFamily: kTech,
                                 fontSize: 11,
                                 color: kMute2,
+                                fontFeatures: kTabular,
                               ),
                             )
                           else if (!isConnecting)
@@ -427,7 +428,7 @@ class _DeviceNode extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontFamily: kMono,
+                  fontFamily: kTech,
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
                   color: kWhite,

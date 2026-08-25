@@ -101,7 +101,7 @@ class _SmsThreadsPageState extends State<SmsThreadsPage> {
                       for (var i = 0; i < visible.length; i++) ...[
                         if (i > 0)
                           const Padding(
-                            padding: EdgeInsets.only(left: 70),
+                            padding: EdgeInsets.only(left: 14),
                             child: Divider(height: 1, color: kRule),
                           ),
                         _ThreadRow(
@@ -228,8 +228,6 @@ class _ThreadRow extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
         child: Row(
           children: [
-            _Avatar(tracker: tracker),
-            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,7 +248,7 @@ class _ThreadRow extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontFamily: last is ReceivedChatMessage ? kMono : kSans,
+                      fontFamily: last is ReceivedChatMessage ? kTech : kSans,
                       fontSize: 12,
                       color: last == null ? kMute2 : kMute,
                     ),
@@ -263,7 +261,7 @@ class _ThreadRow extends StatelessWidget {
               Text(
                 _clock(last!.timestamp),
                 style: const TextStyle(
-                  fontFamily: kMono,
+                  fontFamily: kTech,
                   fontSize: 10.5,
                   color: kMute2,
                 ),
@@ -287,35 +285,5 @@ class _ThreadRow extends StatelessWidget {
     final h = t.hour.toString().padLeft(2, '0');
     final m = t.minute.toString().padLeft(2, '0');
     return '$h:$m';
-  }
-}
-
-/// Fleet colour plus the serial's tail — enough to tell rows apart at a
-/// glance without inventing avatars the trackers do not have.
-class _Avatar extends StatelessWidget {
-  const _Avatar({required this.tracker});
-
-  final MockTracker tracker;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 44,
-      height: 44,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Color(tracker.tone).withValues(alpha: 0.14),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Text(
-        tracker.short.split('-').last,
-        style: TextStyle(
-          fontFamily: kMono,
-          fontSize: 12,
-          fontWeight: FontWeight.w700,
-          color: Color(tracker.tone),
-        ),
-      ),
-    );
   }
 }

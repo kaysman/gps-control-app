@@ -70,6 +70,12 @@ navigator, so a modal sheet pushed onto that navigator opens underneath the bar.
 Settings pickers go through `showPickerSheet`, which pushes onto the root
 navigator instead.
 
+**Two families, one rule.** Manrope carries all prose; Roboto carries anything
+that is really data — all-caps section labels, serials, phone numbers,
+timestamps, wire text — with `kTabular` on the figures that change in place so
+a ticking countdown or a clock column does not reflow. Both are bundled under
+`assets/fonts` with their licences; nothing is fetched at runtime.
+
 **One palette, three radii, no warm neutrals.** `lib/app/tokens.dart` is the
 whole design system: deep forest ink (`kInk`), a fresh green pair (`kGreen` for
 fills that carry ink text, `kGreenDeep` for text and white-on-green), a lime pop

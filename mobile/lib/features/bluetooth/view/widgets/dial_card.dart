@@ -212,7 +212,7 @@ class _StatCell extends StatelessWidget {
             Text(
               label,
               style: const TextStyle(
-                fontFamily: kMono,
+                fontFamily: kTech,
                 fontSize: 10,
                 color: kMute2,
                 letterSpacing: 1.2,
@@ -222,10 +222,11 @@ class _StatCell extends StatelessWidget {
             Text(
               value,
               style: TextStyle(
-                fontFamily: kSans,
+                fontFamily: kTech,
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
                 color: warn ? kAmber : kWhite,
+                fontFeatures: kTabular,
               ),
             ),
           ],

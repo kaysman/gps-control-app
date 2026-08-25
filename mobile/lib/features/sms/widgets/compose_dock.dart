@@ -296,7 +296,7 @@ class _SmsInputWidget extends StatelessWidget {
                   controller: TextEditingController(text: input.defaultStr),
                   textAlign: isPin ? TextAlign.center : TextAlign.start,
                   style: TextStyle(
-                    fontFamily: kMono,
+                    fontFamily: kTech,
                     fontSize: isPin ? 18 : 14,
                     fontWeight: FontWeight.w700,
                     color: kInk,

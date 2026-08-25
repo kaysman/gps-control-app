@@ -244,7 +244,7 @@ class PickerRow extends StatelessWidget {
                     Text(
                       mono!,
                       style: const TextStyle(
-                        fontFamily: kMono,
+                        fontFamily: kTech,
                         fontSize: 11,
                         color: kMute2,
                       ),

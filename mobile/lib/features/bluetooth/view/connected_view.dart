@@ -140,7 +140,7 @@ class _ConnectedViewState extends State<ConnectedView>
                         child: Text(
                           context.l10n.bleCommandsHeader,
                           style: const TextStyle(
-                            fontFamily: kMono,
+                            fontFamily: kTech,
                             fontSize: 10.5,
                             fontWeight: FontWeight.w700,
                             color: kMute,

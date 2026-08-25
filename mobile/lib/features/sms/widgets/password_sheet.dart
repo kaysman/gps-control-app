@@ -63,7 +63,7 @@ class _PasswordSheetState extends State<_PasswordSheet> {
             onChanged: (v) =>
                 context.read<TrackerPasswordCubit>().set(widget.tracker.id, v),
             style: const TextStyle(
-              fontFamily: kMono,
+              fontFamily: kTech,
               fontSize: 17,
               fontWeight: FontWeight.w700,
               color: kInk,
@@ -73,7 +73,7 @@ class _PasswordSheetState extends State<_PasswordSheet> {
               counterText: '',
               hintText: TrackerPasswordCubit.fallback,
               hintStyle: const TextStyle(
-                fontFamily: kMono,
+                fontFamily: kTech,
                 fontSize: 17,
                 color: kMute2,
                 letterSpacing: 3,
