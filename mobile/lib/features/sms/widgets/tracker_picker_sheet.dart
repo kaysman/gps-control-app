@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/l10n/l10n.dart';
 import 'package:gps_control/mock/mock_data.dart';
-import 'package:flutter/material.dart';
 
 class SmsTrackerPickerSheet extends StatefulWidget {
   const SmsTrackerPickerSheet({
-    super.key,
     required this.selected,
     required this.passwords,
     required this.onChanged,
+    super.key,
   });
   final Set<String> selected;
   final Map<String, String> passwords;
@@ -34,7 +34,9 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
 
   @override
   void dispose() {
-    for (final c in _pwCtrl.values) c.dispose();
+    for (final c in _pwCtrl.values) {
+      c.dispose();
+    }
     super.dispose();
   }
 
@@ -75,7 +77,7 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                     children: [
                       Text(
                         context.l10n.trackerPickerTitle,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: kSans,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
@@ -120,7 +122,7 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                           border: Border(
                             bottom: i == smsTrackers.length - 1
                                 ? BorderSide.none
-                                : BorderSide(color: kRule),
+                                : const BorderSide(color: kRule),
                           ),
                         ),
                         child: Column(
@@ -169,7 +171,7 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                                     children: [
                                       Text(
                                         t.short,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: kSans,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
@@ -178,7 +180,7 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                                       ),
                                       Text(
                                         t.name,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: kSans,
                                           fontSize: 11.5,
                                           color: kMute,
@@ -186,7 +188,7 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                                       ),
                                       Text(
                                         t.phone,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: kSans,
                                           fontSize: 11.5,
                                           color: kMute,
@@ -228,7 +230,7 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
                   child: Center(
                     child: Text(
                       context.l10n.trackerPickerDone(_sel.length),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: kSans,
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
@@ -248,9 +250,9 @@ class _SmsTrackerPickerSheetState extends State<SmsTrackerPickerSheet> {
 
 class SmsAllRecipientsSheet extends StatelessWidget {
   const SmsAllRecipientsSheet({
-    super.key,
     required this.recipients,
     required this.onRemove,
+    super.key,
   });
   final List<MockTracker> recipients;
   final ValueChanged<String> onRemove;
@@ -287,7 +289,7 @@ class SmsAllRecipientsSheet extends StatelessWidget {
                   children: [
                     Text(
                       context.l10n.allRecipientsHeading,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: kMono,
                         fontSize: 10.5,
                         color: kMute,
@@ -297,7 +299,7 @@ class SmsAllRecipientsSheet extends StatelessWidget {
                     ),
                     Text(
                       context.l10n.allRecipientsCount(recipients.length),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: kSans,
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -342,7 +344,7 @@ class SmsAllRecipientsSheet extends StatelessWidget {
                     border: Border(
                       bottom: i == recipients.length - 1
                           ? BorderSide.none
-                          : BorderSide(color: kRule),
+                          : const BorderSide(color: kRule),
                     ),
                   ),
                   child: Row(
@@ -362,7 +364,7 @@ class SmsAllRecipientsSheet extends StatelessWidget {
                           children: [
                             Text(
                               t.short,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: kSans,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
@@ -371,7 +373,7 @@ class SmsAllRecipientsSheet extends StatelessWidget {
                             ),
                             Text(
                               t.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: kSans,
                                 fontSize: 11.5,
                                 color: kMute,
@@ -442,8 +444,9 @@ class _PasswordRowState extends State<_PasswordRow> {
 
   @override
   void dispose() {
-    _focus.removeListener(_onFocusChanged);
-    _focus.dispose();
+    _focus
+      ..removeListener(_onFocusChanged)
+      ..dispose();
     super.dispose();
   }
 
@@ -458,7 +461,7 @@ class _PasswordRowState extends State<_PasswordRow> {
           autofocus: true,
           keyboardType: TextInputType.number,
           maxLength: 6,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: kMono,
             fontSize: 14,
             fontWeight: FontWeight.w700,
@@ -468,7 +471,7 @@ class _PasswordRowState extends State<_PasswordRow> {
           decoration: InputDecoration(
             isDense: true,
             hintText: '000000',
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               fontFamily: kMono,
               fontSize: 13,
               color: kMute2,
@@ -487,11 +490,11 @@ class _PasswordRowState extends State<_PasswordRow> {
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: kRule),
+              borderSide: const BorderSide(color: kRule),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: kRule),
+              borderSide: const BorderSide(color: kRule),
             ),
             focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -514,7 +517,11 @@ class _PasswordRowState extends State<_PasswordRow> {
               : '000000';
           return Text(
             value,
-            style: TextStyle(fontFamily: kSans, fontSize: 11.5, color: kMute),
+            style: const TextStyle(
+              fontFamily: kSans,
+              fontSize: 11.5,
+              color: kMute,
+            ),
           );
         },
       ),

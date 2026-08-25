@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:bariox_tracker/bariox_tracker.dart';
+import 'package:gps_control/data/tracker/tracker_repository.dart';
 
 /// [TrackerRepository] that answers from canned data instead of hardware, so
 /// the app can be demoed and screenshotted without a lock on the desk.

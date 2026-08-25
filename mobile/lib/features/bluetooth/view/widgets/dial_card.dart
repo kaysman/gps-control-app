@@ -1,16 +1,15 @@
-import 'package:gps_control/app/tokens.dart';
-import 'package:gps_control/features/bluetooth/view/widgets/dial_button.dart';
-import 'package:gps_control/l10n/l10n.dart';
-import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:bariox_tracker/bariox_tracker.dart';
 import 'package:flutter/material.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/data/tracker/tracker_repository.dart';
+import 'package:gps_control/features/bluetooth/view/widgets/dial_button.dart';
+import 'package:gps_control/l10n/l10n.dart';
 
 /// The hero card on the connected screen: tracker name, lock status pill,
 /// dial + central tap target, battery/cover/updated stats, and an optional
 /// toast or error banner.
 class DialCard extends StatelessWidget {
   const DialCard({
-    super.key,
     required this.tracker,
     required this.status,
     required this.isLocked,
@@ -21,6 +20,7 @@ class DialCard extends StatelessWidget {
     required this.toast,
     required this.commandError,
     required this.onToggle,
+    super.key,
   });
 
   final ScannedTracker tracker;
@@ -55,7 +55,7 @@ class DialCard extends StatelessWidget {
                 children: [
                   Text(
                     tracker.label,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 17,
                       fontWeight: FontWeight.w700,
@@ -211,7 +211,7 @@ class _StatCell extends StatelessWidget {
           children: [
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: kMono,
                 fontSize: 10,
                 color: kMute2,
@@ -254,7 +254,7 @@ class _Toast extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             message,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: kSans,
               fontSize: 13.5,
               fontWeight: FontWeight.w700,
@@ -283,12 +283,12 @@ class _ErrorToast extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.error_outline, size: 16, color: kBad),
+          const Icon(Icons.error_outline, size: 16, color: kBad),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
               message,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: kSans,
                 fontSize: 12,
                 fontWeight: FontWeight.w600,

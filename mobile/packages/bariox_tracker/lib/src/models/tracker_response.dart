@@ -32,8 +32,9 @@ class TrackerResponse {
     if (data.length < 6) return null;
     final sb = StringBuffer();
     for (var i = 0; i < 6; i++) {
-      sb.write(((data[i] >> 4) & 0x0F).toString());
-      sb.write((data[i] & 0x0F).toString());
+      sb
+        ..write(((data[i] >> 4) & 0x0F).toString())
+        ..write((data[i] & 0x0F).toString());
     }
     return sb.toString();
   }

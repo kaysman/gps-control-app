@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:gps_control/features/bluetooth/bloc/bluetooth_bloc.dart';
 import 'package:gps_control/l10n/l10n.dart';
-import 'package:gps_control/data/tracker/tracker_repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Radar-style screen while no tracker is connected: animated rings + sweep,
 /// scanned devices arranged around the centre hub, tap-to-scan button.
@@ -65,7 +65,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
               final radarCy = topArea + (h - topArea - bottomArea) / 2;
               final radarR = math.min(cx - 24, (h - topArea - bottomArea) / 2);
 
-              return Container(
+              return ColoredBox(
                 color: kNavyInk,
                 child: Stack(
                   children: [
@@ -101,7 +101,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                       left: 20,
                       child: Text(
                         l10n.bluetoothTitle,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: kSans,
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
@@ -125,7 +125,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                               child: Text(
                                 state.connectionError!,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: kSans,
                                   fontSize: 12,
                                   color: kOrange,
@@ -138,7 +138,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                                 state.scanSecondsLeft,
                               ),
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: kMono,
                                 fontSize: 11,
                                 color: kMute2,
@@ -148,7 +148,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                             Text(
                               l10n.bluetoothTapToScan,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: kSans,
                                 fontSize: 12,
                                 color: kMute2,
@@ -261,7 +261,7 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
               ),
               if (isConnecting) ...[
                 const SizedBox(height: 4),
-                SizedBox(
+                const SizedBox(
                   width: 14,
                   height: 14,
                   child: CircularProgressIndicator(
@@ -426,7 +426,7 @@ class _DeviceNode extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: kMono,
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
@@ -436,7 +436,11 @@ class _DeviceNode extends StatelessWidget {
               Text(
                 context.l10n.bluetoothRssiDbm(tracker.rssi),
                 textAlign: TextAlign.center,
-                style: TextStyle(fontFamily: kSans, fontSize: 9, color: kMute2),
+                style: const TextStyle(
+                  fontFamily: kSans,
+                  fontSize: 9,
+                  color: kMute2,
+                ),
               ),
             ],
           ),

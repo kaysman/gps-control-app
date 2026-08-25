@@ -1,9 +1,11 @@
-import 'package:gps_control/app/tokens.dart';
-import 'package:gps_control/features/sim/cubit/sim_cubit.dart';
-import 'package:gps_control/l10n/l10n.dart';
-import 'package:gps_control/data/sim/sim_repository.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/data/sim/sim_repository.dart';
+import 'package:gps_control/features/sim/cubit/sim_cubit.dart';
+import 'package:gps_control/l10n/l10n.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -23,7 +25,7 @@ class SettingsPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(18, 10, 18, 14),
             child: Text(
               l10n.settingsTitle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: kSans,
                 fontSize: 24,
                 fontWeight: FontWeight.w700,
@@ -36,7 +38,7 @@ class SettingsPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(22, 6, 22, 6),
             child: Text(
               l10n.settingsSectionApp,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: kSans,
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
@@ -65,7 +67,7 @@ class SettingsPage extends StatelessWidget {
                     Expanded(
                       child: Text(
                         l10n.settingsRowLanguage,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: kSans,
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -75,14 +77,14 @@ class SettingsPage extends StatelessWidget {
                     ),
                     Text(
                       _languageLabel(l10n, locale),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: kSans,
                         fontSize: 12.5,
                         color: kMute,
                       ),
                     ),
                     const SizedBox(width: 6),
-                    Icon(Icons.chevron_right, size: 18, color: kMute2),
+                    const Icon(Icons.chevron_right, size: 18, color: kMute2),
                   ],
                 ),
               ),
@@ -94,7 +96,11 @@ class SettingsPage extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 24),
               child: Text(
                 l10n.settingsFooter,
-                style: TextStyle(fontFamily: kMono, fontSize: 11, color: kMute),
+                style: const TextStyle(
+                  fontFamily: kMono,
+                  fontSize: 11,
+                  color: kMute,
+                ),
               ),
             ),
           ),
@@ -105,15 +111,17 @@ class SettingsPage extends StatelessWidget {
 
   void _openLanguagePicker(BuildContext context) {
     final cubit = context.read<LocaleCubit>();
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (_) => _LanguagePickerSheet(
-        current: cubit.state,
-        onPick: (locale) {
-          cubit.setLocale(locale);
-          Navigator.pop(context);
-        },
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: (_) => _LanguagePickerSheet(
+          current: cubit.state,
+          onPick: (locale) {
+            cubit.setLocale(locale);
+            Navigator.pop(context);
+          },
+        ),
       ),
     );
   }
@@ -161,7 +169,7 @@ class _LanguagePickerSheet extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 l10n.languagePickerTitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: kSans,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -184,7 +192,7 @@ class _LanguagePickerSheet extends StatelessWidget {
                   selected: current.languageCode == 'tr',
                   onTap: () => onPick(const Locale('tr')),
                 ),
-                Divider(height: 1, color: kRule),
+                const Divider(height: 1, color: kRule),
                 _LanguageRow(
                   label: l10n.languageEnglish,
                   selected: current.languageCode == 'en',
@@ -225,7 +233,7 @@ class _LanguageRow extends StatelessWidget {
             Expanded(
               child: Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: kSans,
                   fontSize: 14.5,
                   fontWeight: FontWeight.w600,
@@ -233,7 +241,7 @@ class _LanguageRow extends StatelessWidget {
                 ),
               ),
             ),
-            if (selected) Icon(Icons.check, size: 18, color: kOrange),
+            if (selected) const Icon(Icons.check, size: 18, color: kOrange),
           ],
         ),
       ),
@@ -259,7 +267,7 @@ class _SimsSection extends StatelessWidget {
               Expanded(
                 child: Text(
                   l10n.settingsSectionSims,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: kSans,
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
@@ -278,7 +286,7 @@ class _SimsSection extends StatelessWidget {
                   ),
                   child: Text(
                     l10n.simsRefresh,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
@@ -306,7 +314,7 @@ class _SimsSection extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.sim_card_alert_outlined,
                         size: 18,
                         color: kMute2,
@@ -315,7 +323,7 @@ class _SimsSection extends StatelessWidget {
                       Expanded(
                         child: Text(
                           l10n.simsNone,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: kSans,
                             fontSize: 13.5,
                             color: kMute,
@@ -371,13 +379,13 @@ class _SimRow extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: Border(
-            bottom: last ? BorderSide.none : BorderSide(color: kRule),
+            bottom: last ? BorderSide.none : const BorderSide(color: kRule),
           ),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
         child: Row(
           children: [
-            Icon(Icons.sim_card_outlined, size: 18, color: kNavy),
+            const Icon(Icons.sim_card_outlined, size: 18, color: kNavy),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -385,7 +393,7 @@ class _SimRow extends StatelessWidget {
                 children: [
                   Text(
                     sim.label,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -394,7 +402,7 @@ class _SimRow extends StatelessWidget {
                   ),
                   Text(
                     l10n.simSubtitle(sim.slotIndex + 1, country),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 11.5,
                       color: kMute,
@@ -403,7 +411,7 @@ class _SimRow extends StatelessWidget {
                   if (sim.number.isNotEmpty)
                     Text(
                       sim.number,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: kMono,
                         fontSize: 11,
                         color: kMute2,
@@ -412,7 +420,7 @@ class _SimRow extends StatelessWidget {
                 ],
               ),
             ),
-            if (selected) Icon(Icons.check, size: 18, color: kOrange),
+            if (selected) const Icon(Icons.check, size: 18, color: kOrange),
           ],
         ),
       ),

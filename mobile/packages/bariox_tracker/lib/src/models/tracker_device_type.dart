@@ -4,7 +4,8 @@ enum TrackerDeviceType {
   subLockA1i(0x01),
 
   /// Sub-lock model A1m.
-  subLockA1m(0x04);
+  subLockA1m(0x04)
+  ;
 
   const TrackerDeviceType(this.value);
 

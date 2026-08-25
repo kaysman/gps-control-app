@@ -1,3 +1,5 @@
+// Frames are built from runtime-computed byte lists throughout these tests;
+// requiring const constructors would force needless indirection.
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:typed_data';
@@ -60,13 +62,11 @@ void main() {
         second: 59,
       );
       // 25→0x25, 12→0x12, 10→0x10, 08→0x08, 17→0x17, 59→0x59
-      expect(time.toBytes(),
-          equals([0x25, 0x12, 0x10, 0x08, 0x17, 0x59]));
+      expect(time.toBytes(), equals([0x25, 0x12, 0x10, 0x08, 0x17, 0x59]));
     });
 
     test('fromBytes decodes BCD correctly', () {
-      final bytes =
-          Uint8List.fromList([0x25, 0x12, 0x10, 0x08, 0x17, 0x59]);
+      final bytes = Uint8List.fromList([0x25, 0x12, 0x10, 0x08, 0x17, 0x59]);
       final time = TrackerTime.fromBytes(bytes);
       expect(time.year, 25);
       expect(time.month, 12);
@@ -122,7 +122,9 @@ void main() {
       final deviceId = BarioxTracker.deviceIdBytes('000123456789');
       final password = BarioxTracker.passwordBytes('000000');
       final frame = FrameBuilder.buildLock(
-          deviceId: deviceId, password: password);
+        deviceId: deviceId,
+        password: password,
+      );
       // Data starts at byte 5; control byte is at offset 12 within data
       expect(frame[5 + 12], 0x00);
     });
@@ -131,7 +133,9 @@ void main() {
       final deviceId = BarioxTracker.deviceIdBytes('000123456789');
       final password = BarioxTracker.passwordBytes('000000');
       final frame = FrameBuilder.buildUnlock(
-          deviceId: deviceId, password: password);
+        deviceId: deviceId,
+        password: password,
+      );
       expect(frame[5 + 12], 0x01);
     });
 
@@ -140,13 +144,13 @@ void main() {
       final password = BarioxTracker.passwordBytes('000000');
       // 8 + 13 (data length for CMD 0x01) = 21
       expect(
-          FrameBuilder.buildLock(deviceId: deviceId, password: password)
-              .length,
-          21);
+        FrameBuilder.buildLock(deviceId: deviceId, password: password).length,
+        21,
+      );
       expect(
-          FrameBuilder.buildUnlock(deviceId: deviceId, password: password)
-              .length,
-          21);
+        FrameBuilder.buildUnlock(deviceId: deviceId, password: password).length,
+        21,
+      );
     });
   });
 
@@ -158,14 +162,13 @@ void main() {
 
     test('returns false when checksum byte is corrupted', () {
       final frame = FrameBuilder.build(0x02, Uint8List.fromList([0xAB, 0xCD]));
-      final corrupted = Uint8List.fromList(frame)
-        ..[frame.length - 3] ^= 0xFF;
+      final corrupted = Uint8List.fromList(frame)..[frame.length - 3] ^= 0xFF;
       expect(FrameParser.verifyChecksum(corrupted), isFalse);
     });
   });
 
   group('FrameParser.parseBroadcast', () {
-    Uint8List _makeBroadcast({
+    Uint8List makeBroadcast({
       int deviceTypeByte = 0x01,
       List<int> deviceId = const [0x00, 0x01, 0x23, 0x45, 0x67, 0x89],
       int hwVersion = 0x0A,
@@ -175,19 +178,18 @@ void main() {
       int tempByte = 0x28, // 0x28 - 40 = 0°C
       int chargingByte = 0x00,
       int sealByte = 0x00,
-    }) =>
-        Uint8List.fromList([
-          0x48, 0x4C,       // header
-          0x38, 0xAF,       // manufacturer
-          deviceTypeByte,
-          ...deviceId,
-          hwVersion,
-          swHigh, swLow,
-          battery,
-          tempByte,
-          chargingByte,
-          sealByte,
-        ]);
+    }) => Uint8List.fromList([
+      0x48, 0x4C, // header
+      0x38, 0xAF, // manufacturer
+      deviceTypeByte,
+      ...deviceId,
+      hwVersion,
+      swHigh, swLow,
+      battery,
+      tempByte,
+      chargingByte,
+      sealByte,
+    ]);
 
     test('returns null for wrong header', () {
       final bytes = Uint8List.fromList(List.filled(18, 0x00));
@@ -199,62 +201,58 @@ void main() {
     });
 
     test('parses device type A1i', () {
-      final packet = FrameParser.parseBroadcast(_makeBroadcast())!;
+      final packet = FrameParser.parseBroadcast(makeBroadcast())!;
       expect(packet.deviceType, TrackerDeviceType.subLockA1i);
     });
 
     test('parses device ID', () {
-      final packet = FrameParser.parseBroadcast(_makeBroadcast())!;
+      final packet = FrameParser.parseBroadcast(makeBroadcast())!;
       expect(packet.deviceId, '000123456789');
     });
 
     test('parses hardware version 0x0A as "1.0"', () {
-      final packet = FrameParser.parseBroadcast(_makeBroadcast())!;
+      final packet = FrameParser.parseBroadcast(makeBroadcast())!;
       expect(packet.hardwareVersion, '1.0');
     });
 
     test('parses software version', () {
-      final packet = FrameParser.parseBroadcast(_makeBroadcast())!;
+      final packet = FrameParser.parseBroadcast(makeBroadcast())!;
       expect(packet.softwareVersion, 0x2711); // 10001
     });
 
     test('parses battery level', () {
-      final packet =
-          FrameParser.parseBroadcast(_makeBroadcast(battery: 75))!;
+      final packet = FrameParser.parseBroadcast(makeBroadcast(battery: 75))!;
       expect(packet.batteryLevel, 75);
     });
 
     test('temperature offset: 0x28 → 0°C', () {
-      final packet =
-          FrameParser.parseBroadcast(_makeBroadcast(tempByte: 0x28))!;
+      final packet = FrameParser.parseBroadcast(makeBroadcast())!;
       expect(packet.temperature, 0);
     });
 
     test('temperature 0xFF → null', () {
-      final packet =
-          FrameParser.parseBroadcast(_makeBroadcast(tempByte: 0xFF))!;
+      final packet = FrameParser.parseBroadcast(makeBroadcast(tempByte: 0xFF))!;
       expect(packet.temperature, isNull);
     });
 
     test('parses charging bits', () {
       // bit0=charging, bit1=full, bit2=fault, bit3=battery fault
-      final packet =
-          FrameParser.parseBroadcast(_makeBroadcast(chargingByte: 0x03))!;
+      final packet = FrameParser.parseBroadcast(
+        makeBroadcast(chargingByte: 0x03),
+      )!;
       expect(packet.isCharging, isTrue);
       expect(packet.isFullyCharged, isTrue);
       expect(packet.hasChargingFault, isFalse);
     });
 
     test('parses seal bits: isUnlocked', () {
-      final packet =
-          FrameParser.parseBroadcast(_makeBroadcast(sealByte: 0x01))!;
+      final packet = FrameParser.parseBroadcast(makeBroadcast(sealByte: 0x01))!;
       expect(packet.isUnlocked, isTrue);
       expect(packet.hasChainIssue, isFalse);
     });
 
     test('parses seal bits: isRearCoverOpen and isLockStuck', () {
-      final packet =
-          FrameParser.parseBroadcast(_makeBroadcast(sealByte: 0x30))!;
+      final packet = FrameParser.parseBroadcast(makeBroadcast(sealByte: 0x30))!;
       expect(packet.isRearCoverOpen, isTrue);
       expect(packet.isLockStuck, isTrue);
     });
@@ -262,7 +260,7 @@ void main() {
 
   group('FrameParser.parseResponse', () {
     /// Builds a synthetic response frame from raw field values.
-    Uint8List _makeResponse({
+    Uint8List makeResponse({
       required int cmd,
       required int responseCode,
       required List<int> data,
@@ -274,7 +272,11 @@ void main() {
       final lenLow = dataLen & 0xFF;
 
       final frameData = [
-        0xAA, 0xBB, cmd, lenHigh, lenLow,
+        0xAA,
+        0xBB,
+        cmd,
+        lenHigh,
+        lenLow,
         ...payload,
       ];
       var checksum = 0;
@@ -288,29 +290,37 @@ void main() {
 
     test('returns null for wrong header', () {
       expect(
-          FrameParser.parseResponse(Uint8List.fromList([0x00, 0x00, 0x01])),
-          isNull);
+        FrameParser.parseResponse(Uint8List.fromList([0x00, 0x00, 0x01])),
+        isNull,
+      );
     });
 
     test('returns null for bad trailer', () {
-      final frame = _makeResponse(
-          cmd: 0x01, responseCode: 0x00, data: deviceIdBytes);
-      final bad = Uint8List.fromList(frame)
-        ..[frame.length - 1] = 0xFF;
+      final frame = makeResponse(
+        cmd: 0x01,
+        responseCode: 0x00,
+        data: deviceIdBytes,
+      );
+      final bad = Uint8List.fromList(frame)..[frame.length - 1] = 0xFF;
       expect(FrameParser.parseResponse(bad), isNull);
     });
 
     test('returns null on checksum mismatch', () {
-      final frame = _makeResponse(
-          cmd: 0x01, responseCode: 0x00, data: deviceIdBytes);
-      final bad = Uint8List.fromList(frame)
-        ..[frame.length - 3] ^= 0xFF;
+      final frame = makeResponse(
+        cmd: 0x01,
+        responseCode: 0x00,
+        data: deviceIdBytes,
+      );
+      final bad = Uint8List.fromList(frame)..[frame.length - 3] ^= 0xFF;
       expect(FrameParser.parseResponse(bad), isNull);
     });
 
     test('parses successful lock response', () {
-      final frame = _makeResponse(
-          cmd: 0x01, responseCode: 0x00, data: deviceIdBytes);
+      final frame = makeResponse(
+        cmd: 0x01,
+        responseCode: 0x00,
+        data: deviceIdBytes,
+      );
       final response = FrameParser.parseResponse(frame)!;
       expect(response.command, TrackerCommand.switchLock);
       expect(response.responseCode, TrackerResponseCode.success);
@@ -318,24 +328,33 @@ void main() {
     });
 
     test('parses wrong-password response', () {
-      final frame = _makeResponse(
-          cmd: 0x01, responseCode: 0x06, data: deviceIdBytes);
+      final frame = makeResponse(
+        cmd: 0x01,
+        responseCode: 0x06,
+        data: deviceIdBytes,
+      );
       final response = FrameParser.parseResponse(frame)!;
       expect(response.responseCode, TrackerResponseCode.wrongPassword);
       expect(response.isSuccess, isFalse);
     });
 
     test('deviceId accessor decodes first 6 bytes of data', () {
-      final frame = _makeResponse(
-          cmd: 0x01, responseCode: 0x00, data: deviceIdBytes);
+      final frame = makeResponse(
+        cmd: 0x01,
+        responseCode: 0x00,
+        data: deviceIdBytes,
+      );
       final response = FrameParser.parseResponse(frame)!;
       expect(response.deviceId, '000123456789');
     });
 
     test('time accessor decodes CMD 0x0C response', () {
       final timeBytes = [0x25, 0x12, 0x10, 0x08, 0x17, 0x59];
-      final frame = _makeResponse(
-          cmd: 0x0C, responseCode: 0x00, data: [...deviceIdBytes, ...timeBytes]);
+      final frame = makeResponse(
+        cmd: 0x0C,
+        responseCode: 0x00,
+        data: [...deviceIdBytes, ...timeBytes],
+      );
       final response = FrameParser.parseResponse(frame)!;
       final time = response.time!;
       expect(time.year, 25);
@@ -374,8 +393,11 @@ void main() {
         tracker.queryTimeFrame(deviceId),
         tracker.readSoftwareVersionFrame(deviceId),
       ]) {
-        expect(FrameParser.verifyChecksum(frame), isTrue,
-            reason: 'checksum failed for CMD 0x${frame[2].toRadixString(16)}');
+        expect(
+          FrameParser.verifyChecksum(frame),
+          isTrue,
+          reason: 'checksum failed for CMD 0x${frame[2].toRadixString(16)}',
+        );
       }
     });
 
@@ -399,13 +421,17 @@ void main() {
   group('TrackerResponseCode', () {
     test('fromValue returns correct enum member', () {
       expect(TrackerResponseCode.fromValue(0x00), TrackerResponseCode.success);
-      expect(TrackerResponseCode.fromValue(0x06),
-          TrackerResponseCode.wrongPassword);
+      expect(
+        TrackerResponseCode.fromValue(0x06),
+        TrackerResponseCode.wrongPassword,
+      );
     });
 
     test('fromValue falls back to operationFailed for unknown code', () {
-      expect(TrackerResponseCode.fromValue(0xFF),
-          TrackerResponseCode.operationFailed);
+      expect(
+        TrackerResponseCode.fromValue(0xFF),
+        TrackerResponseCode.operationFailed,
+      );
     });
 
     test('isSuccess is true only for success', () {
@@ -416,10 +442,11 @@ void main() {
 
   group('TrackerCommand', () {
     test('fromValue returns correct command', () {
+      expect(TrackerCommand.fromValue(0x01), TrackerCommand.switchLock);
       expect(
-          TrackerCommand.fromValue(0x01), TrackerCommand.switchLock);
-      expect(
-          TrackerCommand.fromValue(0x14), TrackerCommand.readSoftwareVersion);
+        TrackerCommand.fromValue(0x14),
+        TrackerCommand.readSoftwareVersion,
+      );
     });
 
     test('fromValue returns null for unknown byte', () {

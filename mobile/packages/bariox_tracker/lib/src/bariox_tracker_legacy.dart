@@ -13,7 +13,7 @@ import 'package:bariox_tracker/src/protocol/legacy_frame_parser.dart';
 class BarioxTrackerLegacy {
   /// Creates a [BarioxTrackerLegacy] with the given factory [password].
   const BarioxTrackerLegacy({String password = defaultPassword})
-      : _password = password;
+    : _password = password;
 
   /// Factory default password (`888888`).
   static const String defaultPassword = '888888';
@@ -32,16 +32,16 @@ class BarioxTrackerLegacy {
   /// the field for cmd 0x01, so omitting it (and using the SDK's hardcoded
   /// constant) works on every unit.
   Uint8List unlockFrame({Uint8List? deviceId}) => LegacyFrameBuilder.unlock(
-        password: passwordBytes(_password),
-        deviceId: deviceId,
-      );
+    password: passwordBytes(_password),
+    deviceId: deviceId,
+  );
 
   /// Builds the `lock` frame (cmd=0x01 sub=0x05). See [unlockFrame] for the
   /// device-id semantics.
   Uint8List lockFrame({Uint8List? deviceId}) => LegacyFrameBuilder.lock(
-        password: passwordBytes(_password),
-        deviceId: deviceId,
-      );
+    password: passwordBytes(_password),
+    deviceId: deviceId,
+  );
 
   // ── Parsers ───────────────────────────────────────────────────────────────
 

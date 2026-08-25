@@ -1,11 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/features/sms/sms_command_labels.dart';
 import 'package:gps_control/l10n/l10n.dart';
 import 'package:gps_control/mock/mock_data.dart';
-import 'package:flutter/material.dart';
 
 class SmsCommandPickerSheet extends StatelessWidget {
-  const SmsCommandPickerSheet({super.key, required this.onPick});
+  const SmsCommandPickerSheet({required this.onPick, super.key});
   final ValueChanged<SmsCommand> onPick;
 
   @override
@@ -30,9 +30,9 @@ class SmsCommandPickerSheet extends StatelessWidget {
       initialChildSize: 0.78,
       maxChildSize: 0.94,
       builder: (_, ctrl) => Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: kPaper,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         child: ListView(
           controller: ctrl,
@@ -59,7 +59,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                     children: [
                       Text(
                         l10n.commandPickerHeading,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: kMono,
                           fontSize: 10.5,
                           color: kMute,
@@ -69,7 +69,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                       ),
                       Text(
                         l10n.commandPickerTitle,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: kSans,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
@@ -105,7 +105,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                       children: [
                         Text(
                           labels[group]!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: kSans,
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
@@ -117,7 +117,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                           const SizedBox(width: 6),
                           Text(
                             l10n.commandGroupSetNeedsInput,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: kSans,
                               fontSize: 11,
                               color: kOrangeD,
@@ -157,7 +157,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                               border: Border(
                                 bottom: i == list.length - 1
                                     ? BorderSide.none
-                                    : BorderSide(color: kRule),
+                                    : const BorderSide(color: kRule),
                               ),
                             ),
                             child: Row(
@@ -202,7 +202,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                       if (sub.isNotEmpty)
                                         Text(
                                           sub,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontFamily: kSans,
                                             fontSize: 11.5,
                                             color: kMute,
@@ -223,7 +223,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                     ),
                                     child: Text(
                                       l10n.commandPickerInputBadge,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: kSans,
                                         fontSize: 9.5,
                                         fontWeight: FontWeight.w700,
@@ -234,7 +234,7 @@ class SmsCommandPickerSheet extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 6),
                                 ],
-                                Icon(
+                                const Icon(
                                   Icons.chevron_right,
                                   size: 18,
                                   color: kMute2,

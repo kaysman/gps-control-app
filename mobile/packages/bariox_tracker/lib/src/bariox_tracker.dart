@@ -30,7 +30,7 @@ class BarioxTracker {
   ///
   /// [password] must be exactly 6 ASCII characters; defaults to "888888".
   const BarioxTracker({String password = defaultPassword})
-      : _password = password;
+    : _password = password;
 
   /// Factory default password.
   static const String defaultPassword = '888888';
@@ -41,15 +41,15 @@ class BarioxTracker {
 
   /// Returns a **lock** request frame for [deviceId].
   Uint8List lockFrame(Uint8List deviceId) => FrameBuilder.buildLock(
-        deviceId: deviceId,
-        password: passwordBytes(_password),
-      );
+    deviceId: deviceId,
+    password: passwordBytes(_password),
+  );
 
   /// Returns an **unlock** request frame for [deviceId].
   Uint8List unlockFrame(Uint8List deviceId) => FrameBuilder.buildUnlock(
-        deviceId: deviceId,
-        password: passwordBytes(_password),
-      );
+    deviceId: deviceId,
+    password: passwordBytes(_password),
+  );
 
   /// Returns a **query lock status** frame for [deviceId] (CMD 0x02).
   Uint8List queryLockStatusFrame(Uint8List deviceId) =>
@@ -92,11 +92,10 @@ class BarioxTracker {
       );
 
   /// Returns a **query time** frame for [deviceId] (CMD 0x0C).
-  Uint8List queryTimeFrame(Uint8List deviceId) =>
-      FrameBuilder.buildQueryTime(
-        deviceId: deviceId,
-        password: passwordBytes(_password),
-      );
+  Uint8List queryTimeFrame(Uint8List deviceId) => FrameBuilder.buildQueryTime(
+    deviceId: deviceId,
+    password: passwordBytes(_password),
+  );
 
   /// Returns a **read software version** frame for [deviceId] (CMD 0x14).
   Uint8List readSoftwareVersionFrame(Uint8List deviceId) =>
@@ -109,12 +108,11 @@ class BarioxTracker {
   Uint8List changePasswordFrame(
     Uint8List deviceId,
     String newPassword,
-  ) =>
-      FrameBuilder.buildChangePassword(
-        deviceId: deviceId,
-        password: passwordBytes(_password),
-        newPassword: passwordBytes(newPassword),
-      );
+  ) => FrameBuilder.buildChangePassword(
+    deviceId: deviceId,
+    password: passwordBytes(_password),
+    newPassword: passwordBytes(newPassword),
+  );
 
   // ── Parsers ───────────────────────────────────────────────────────────────
 
@@ -156,8 +154,9 @@ class BarioxTracker {
     assert(bytes.length == 6, 'deviceId must be 6 bytes');
     final sb = StringBuffer();
     for (final b in bytes) {
-      sb.write(((b >> 4) & 0x0F).toString());
-      sb.write((b & 0x0F).toString());
+      sb
+        ..write(((b >> 4) & 0x0F).toString())
+        ..write((b & 0x0F).toString());
     }
     return sb.toString();
   }

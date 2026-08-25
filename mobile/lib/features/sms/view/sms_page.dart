@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/app/widgets/beta_badge.dart';
 import 'package:gps_control/data/sms/sms_repository.dart';
@@ -11,9 +13,6 @@ import 'package:gps_control/features/sms/widgets/tracker_picker_sheet.dart';
 import 'package:gps_control/l10n/l10n.dart';
 import 'package:gps_control/mock/mock_data.dart';
 import 'package:gps_control/models/chat_message.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 String _buildSmsText(SmsCommand cmd, String pw, Object? value) {
   final p = pw.isEmpty ? '000000' : pw;
@@ -58,7 +57,7 @@ class _SmsPageState extends State<SmsPage> {
   static const _maxVisible = 5;
 
   final _trackerPasswords = <String, String>{};
-  String _password = '000000';
+  final String _password = '000000';
 
   final _messages = <ChatMessage>[];
   final _scrollCtrl = ScrollController();
@@ -112,10 +111,12 @@ class _SmsPageState extends State<SmsPage> {
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollCtrl.hasClients) {
-        _scrollCtrl.animateTo(
-          _scrollCtrl.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOut,
+        unawaited(
+          _scrollCtrl.animateTo(
+            _scrollCtrl.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+          ),
         );
       }
     });
@@ -123,7 +124,7 @@ class _SmsPageState extends State<SmsPage> {
 
   @override
   void dispose() {
-    _smsSub?.cancel();
+    _smsSub?.cancel().ignore();
     _scrollCtrl.dispose();
     super.dispose();
   }
@@ -131,69 +132,77 @@ class _SmsPageState extends State<SmsPage> {
   void _removeRecipient(String id) => setState(() => _recipients.remove(id));
 
   void _openTrackerPicker() {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.8,
-      ),
-      builder: (_) => SmsTrackerPickerSheet(
-        selected: Set.of(_recipients),
-        passwords: Map.of(_trackerPasswords),
-        onChanged: (sel, passwords) => setState(() {
-          _recipients
-            ..clear()
-            ..addAll(sel);
-          _trackerPasswords
-            ..clear()
-            ..addAll(passwords);
-        }),
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.8,
+        ),
+        builder: (_) => SmsTrackerPickerSheet(
+          selected: Set.of(_recipients),
+          passwords: Map.of(_trackerPasswords),
+          onChanged: (sel, passwords) => setState(() {
+            _recipients
+              ..clear()
+              ..addAll(sel);
+            _trackerPasswords
+              ..clear()
+              ..addAll(passwords);
+          }),
+        ),
       ),
     );
   }
 
   void _openAllRecipients() {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => SmsAllRecipientsSheet(
-        recipients: _recipients
-            .map((id) => smsTrackers.firstWhere((t) => t.id == id))
-            .toList(),
-        onRemove: (id) => setState(() => _recipients.remove(id)),
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (_) => SmsAllRecipientsSheet(
+          recipients: _recipients
+              .map((id) => smsTrackers.firstWhere((t) => t.id == id))
+              .toList(),
+          onRemove: (id) => setState(() => _recipients.remove(id)),
+        ),
       ),
     );
   }
 
   void _openCommandPicker() {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => SmsCommandPickerSheet(
-        onPick: (cmd) {
-          Navigator.pop(context);
-          _showCompose(cmd);
-        },
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (_) => SmsCommandPickerSheet(
+          onPick: (cmd) {
+            Navigator.pop(context);
+            _showCompose(cmd);
+          },
+        ),
       ),
     );
   }
 
   void _showCompose(SmsCommand cmd) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => SmsComposeDock(
-        cmd: cmd,
-        recipientCount: _recipients.length,
-        onCancel: () => Navigator.pop(context),
-        onSend: (value) {
-          Navigator.pop(context);
-          _sendCommand(cmd, value);
-        },
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (_) => SmsComposeDock(
+          cmd: cmd,
+          recipientCount: _recipients.length,
+          onCancel: () => Navigator.pop(context),
+          onSend: (value) {
+            Navigator.pop(context);
+            _sendCommand(cmd, value);
+          },
+        ),
       ),
     );
   }
@@ -206,7 +215,8 @@ class _SmsPageState extends State<SmsPage> {
         context.read<SimCubit>().state.selectedSubscriptionId ?? -1;
 
     debugPrint(
-      '[SmsPage] _sendCommand: cmd=${cmd.id} value=$value subId=$subscriptionId '
+      '[SmsPage] _sendCommand: cmd=${cmd.id} value=$value '
+      'subId=$subscriptionId '
       'recipients=${recDevs.map((t) => '${t.short}(${t.id})').join(',')}',
     );
 
@@ -284,11 +294,10 @@ class _SmsPageState extends State<SmsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         l10n.smsHeader,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: kSans,
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
@@ -318,7 +327,7 @@ class _SmsPageState extends State<SmsPage> {
                   const SizedBox(width: 6),
                   Text(
                     l10n.smsRecipientCount(recDevs.length),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -334,7 +343,7 @@ class _SmsPageState extends State<SmsPage> {
         // Recipients bar
         Container(
           padding: const EdgeInsets.fromLTRB(18, 0, 18, 12),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: kWhite,
             border: Border(bottom: BorderSide(color: kRule)),
           ),
@@ -345,7 +354,7 @@ class _SmsPageState extends State<SmsPage> {
                 padding: const EdgeInsets.only(top: 6),
                 child: Text(
                   l10n.smsToLabel,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: kSans,
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -383,7 +392,7 @@ class _SmsPageState extends State<SmsPage> {
                             l10n.smsOverflowCount(
                               recDevs.length - _maxVisible,
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: kSans,
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
@@ -406,7 +415,7 @@ class _SmsPageState extends State<SmsPage> {
                         ),
                         child: Text(
                           l10n.smsAddRecipient,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: kSans,
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
@@ -436,11 +445,11 @@ class _SmsPageState extends State<SmsPage> {
                         i == 0 ||
                         _messages[i - 1].timestamp.day != msg.timestamp.day;
                     return switch (msg) {
-                      SentChatMessage m => SmsSentBubble(
+                      final SentChatMessage m => SmsSentBubble(
                         msg: m,
                         showDate: showDate,
                       ),
-                      ReceivedChatMessage m => SmsReceivedBubble(
+                      final ReceivedChatMessage m => SmsReceivedBubble(
                         msg: m,
                         showDate: showDate,
                       ),
@@ -452,7 +461,7 @@ class _SmsPageState extends State<SmsPage> {
         // Compose bar
         Container(
           padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: kWhite,
             border: Border(top: BorderSide(color: kRule)),
           ),
@@ -468,7 +477,7 @@ class _SmsPageState extends State<SmsPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     '+',
                     style: TextStyle(
                       fontFamily: kSans,
@@ -480,7 +489,7 @@ class _SmsPageState extends State<SmsPage> {
                   const SizedBox(width: 10),
                   Text(
                     l10n.smsPickCommand,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -519,11 +528,11 @@ class _ActiveSimChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.sim_card_outlined, size: 12, color: kMute),
+          const Icon(Icons.sim_card_outlined, size: 12, color: kMute),
           const SizedBox(width: 4),
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: kMono,
               fontSize: 11,
               fontWeight: FontWeight.w600,

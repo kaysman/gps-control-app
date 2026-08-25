@@ -33,9 +33,9 @@ class TrackerConnection {
     required BluetoothDevice device,
     required BluetoothCharacteristic rxChar,
     required BluetoothCharacteristic txChar,
-  })  : _device = device,
-        _rxChar = rxChar,
-        _txChar = txChar;
+  }) : _device = device,
+       _rxChar = rxChar,
+       _txChar = txChar;
 
   final BluetoothDevice _device;
   final BluetoothCharacteristic _rxChar;
@@ -53,7 +53,7 @@ class TrackerConnection {
   static Future<TrackerConnection> connect(BluetoothDevice device) async {
     debugPrint('[TrackerConn] connecting to ${device.remoteId}');
     await device.connect(
-      license: License.free,
+      license: License.nonprofit,
       timeout: const Duration(seconds: 15),
     );
     debugPrint('[TrackerConn] connected — requesting MTU 512');
@@ -66,8 +66,10 @@ class TrackerConnection {
     }
 
     final services = await device.discoverServices();
-    debugPrint('[TrackerConn] discovered ${services.length} service(s): '
-        '${services.map((s) => s.serviceUuid).join(', ')}');
+    debugPrint(
+      '[TrackerConn] discovered ${services.length} service(s): '
+      '${services.map((s) => s.serviceUuid).join(', ')}',
+    );
 
     final nus = services.firstWhereOrNull(
       (s) => s.serviceUuid == Guid(NusConstants.serviceUuid),
@@ -97,8 +99,8 @@ class TrackerConnection {
   /// notifications (rare with MTU 512 and our small frames) are NOT
   /// reassembled here; do that in the caller if you need to.
   Stream<Uint8List> get notifications => _txChar.onValueReceived.map(
-        (bytes) => Uint8List.fromList(bytes),
-      );
+    Uint8List.fromList,
+  );
 
   /// Writes [frame] to the NUS RX characteristic. Uses write-with-response
   /// by default so transmission is acknowledged at the ATT layer.

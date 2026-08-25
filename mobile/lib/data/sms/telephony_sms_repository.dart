@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:another_telephony/telephony.dart';
+import 'package:flutter/foundation.dart';
 import 'package:gps_control/data/sms/sms_repository.dart';
 import 'package:gps_control/models/chat_message.dart';
-import 'package:flutter/foundation.dart';
 
 /// Background handler — runs in a separate Dart isolate when the app is
 /// killed/backgrounded. Cannot touch Flutter UI state; foreground reception
@@ -28,8 +28,11 @@ void onBackgroundSms(SmsMessage message) {}
 ///
 /// So: only ever one permission request in flight, and never touch a
 /// permission-gated telephony call before the grant has landed.
+// Constructed by the composition root in main.dart; the lint does not see
+// through the interface-typed factory that hands it out.
+// ignore: unreachable_from_main
 class TelephonySmsRepository implements SmsRepository {
-  final _telephony = Telephony.instance;
+  final Telephony _telephony = Telephony.instance;
   final _incoming = StreamController<IncomingSms>.broadcast();
   bool _listening = false;
   bool _granted = false;
@@ -60,11 +63,9 @@ class TelephonySmsRepository implements SmsRepository {
 
     final request = _prepare();
     _pending = request;
-    request
-        .then((granted) {
-          if (!granted) _pending = null;
-        })
-        .ignore();
+    request.then((granted) {
+      if (!granted) _pending = null;
+    }).ignore();
     return request;
   }
 
@@ -123,7 +124,6 @@ class TelephonySmsRepository implements SmsRepository {
         );
       },
       onBackgroundMessage: onBackgroundSms,
-      listenInBackground: true,
     );
   }
 }

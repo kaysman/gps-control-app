@@ -1,13 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/features/bluetooth/bloc/bluetooth_bloc.dart';
 import 'package:gps_control/features/bluetooth/view/widgets/ble_command_list.dart';
 import 'package:gps_control/features/bluetooth/view/widgets/ble_header.dart';
 import 'package:gps_control/features/bluetooth/view/widgets/dial_card.dart';
 import 'package:gps_control/l10n/l10n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Screen shown once a tracker is connected over BLE: header with tracker
 /// name, dial card with lock state, and the command list.
@@ -139,7 +139,7 @@ class _ConnectedViewState extends State<ConnectedView>
                         padding: const EdgeInsets.fromLTRB(22, 0, 22, 6),
                         child: Text(
                           context.l10n.bleCommandsHeader,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: kMono,
                             fontSize: 10.5,
                             fontWeight: FontWeight.w700,

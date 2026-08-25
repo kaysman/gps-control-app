@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:bariox_tracker/bariox_tracker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:gps_control/data/tracker/tracker_repository.dart';
 
 /// [TrackerRepository] backed by real hardware: `flutter_blue_plus` for the
 /// transport and `bariox_tracker` for the frame format.
@@ -211,8 +211,7 @@ class BleTrackerRepository implements TrackerRepository {
         BluetoothAdapterState.turningOn => BluetoothAdapterStatus.off,
         BluetoothAdapterState.unauthorized =>
           BluetoothAdapterStatus.unauthorized,
-        BluetoothAdapterState.unavailable =>
-          BluetoothAdapterStatus.unavailable,
+        BluetoothAdapterState.unavailable => BluetoothAdapterStatus.unavailable,
         BluetoothAdapterState.unknown => BluetoothAdapterStatus.unknown,
       };
 }

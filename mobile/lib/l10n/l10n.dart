@@ -1,5 +1,5 @@
-import 'package:gps_control/l10n/generated/app_localizations.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gps_control/l10n/generated/app_localizations.dart';
 
 export 'package:gps_control/l10n/generated/app_localizations.dart';
 export 'package:gps_control/l10n/locale_cubit.dart';

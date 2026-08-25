@@ -41,8 +41,7 @@ class FrameParser {
     final softwareVersion = (bytes[12] << 8) | bytes[13];
 
     final tempByte = bytes[15];
-    final temperature =
-        tempByte == _invalidTemperature ? null : tempByte - 40;
+    final temperature = tempByte == _invalidTemperature ? null : tempByte - 40;
 
     final chargingByte = bytes[16];
     final sealByte = bytes[17];
@@ -70,8 +69,9 @@ class FrameParser {
   /// Parses a response frame received from the device after a command.
   ///
   /// Frame layout (decoded by [FramedProtocol.standard]):
-  /// ```
-  /// [0xAA][0xBB][CMD][LEN_H][LEN_L][RESP_CODE][DATA...][XOR_CHECKSUM][0x0D][0x0A]
+  /// ```text
+  /// [0xAA][0xBB][CMD][LEN_H][LEN_L][RESP_CODE][DATA...]
+  ///   [XOR_CHECKSUM][0x0D][0x0A]
   /// ```
   /// LEN includes both the response-code byte and the data bytes. The first
   /// byte of [Frame.payload] is the response code; the rest is data.
@@ -101,8 +101,9 @@ class FrameParser {
   static String _bcdBytesToString(Uint8List bytes) {
     final sb = StringBuffer();
     for (final b in bytes) {
-      sb.write(((b >> 4) & 0x0F).toString());
-      sb.write((b & 0x0F).toString());
+      sb
+        ..write(((b >> 4) & 0x0F).toString())
+        ..write((b & 0x0F).toString());
     }
     return sb.toString();
   }

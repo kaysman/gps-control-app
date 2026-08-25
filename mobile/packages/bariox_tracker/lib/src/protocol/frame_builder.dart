@@ -7,7 +7,7 @@ import 'package:ble_framed_protocol/ble_framed_protocol.dart';
 /// Builds Bariox BLE request frames.
 ///
 /// Frame layout (handled by [FramedProtocol.standard]):
-/// ```
+/// ```text
 /// [0xAA][0xBB][CMD][LEN_H][LEN_L][DATA...][XOR_CHECKSUM][0x0D][0x0A]
 /// ```
 class FrameBuilder {
@@ -21,15 +21,13 @@ class FrameBuilder {
   static Uint8List buildLock({
     required Uint8List deviceId,
     required Uint8List password,
-  }) =>
-      _buildSwitchLock(deviceId: deviceId, password: password, unlock: false);
+  }) => _buildSwitchLock(deviceId: deviceId, password: password, unlock: false);
 
   /// Builds an **unlock** command frame (CMD 0x01, control byte 0x01).
   static Uint8List buildUnlock({
     required Uint8List deviceId,
     required Uint8List password,
-  }) =>
-      _buildSwitchLock(deviceId: deviceId, password: password, unlock: true);
+  }) => _buildSwitchLock(deviceId: deviceId, password: password, unlock: true);
 
   static Uint8List _buildSwitchLock({
     required Uint8List deviceId,

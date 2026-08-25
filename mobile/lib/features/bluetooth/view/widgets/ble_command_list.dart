@@ -1,17 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/l10n/l10n.dart';
-import 'package:flutter/material.dart';
 
 /// Stacked list of BLE actions: unlock, lock, refresh, disconnect.
 class BleCommandList extends StatelessWidget {
   const BleCommandList({
-    super.key,
     required this.isLocked,
     required this.refreshBusy,
     required this.onUnlock,
     required this.onLock,
     required this.onRefresh,
     required this.onDisconnect,
+    super.key,
   });
 
   final bool? isLocked;
@@ -38,14 +38,14 @@ class BleCommandList extends StatelessWidget {
             iconData: Icons.lock_open_outlined,
             onTap: onUnlock,
           ),
-          Divider(height: 1, color: kRule),
+          const Divider(height: 1, color: kRule),
           _BleRow(
             label: l10n.bleCmdLock,
             sub: l10n.bleCmdLockSub,
             iconData: Icons.lock_outlined,
             onTap: onLock,
           ),
-          Divider(height: 1, color: kRule),
+          const Divider(height: 1, color: kRule),
           _BleRow(
             label: l10n.bleCmdRefresh,
             sub: l10n.bleCmdRefreshSub,
@@ -53,7 +53,7 @@ class BleCommandList extends StatelessWidget {
             busy: refreshBusy,
             onTap: onRefresh,
           ),
-          Divider(height: 1, color: kRule),
+          const Divider(height: 1, color: kRule),
           _BleRow(
             label: l10n.bleCmdDisconnect,
             sub: l10n.bleCmdDisconnectSub,
@@ -108,7 +108,7 @@ class _BleRow extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 14.5,
                       fontWeight: FontWeight.w700,
@@ -117,7 +117,7 @@ class _BleRow extends StatelessWidget {
                   ),
                   Text(
                     sub,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 12,
                       color: kMute,
@@ -127,9 +127,9 @@ class _BleRow extends StatelessWidget {
               ),
             ),
             if (!busy)
-              Icon(Icons.chevron_right, size: 18, color: kMute2)
+              const Icon(Icons.chevron_right, size: 18, color: kMute2)
             else
-              SizedBox(
+              const SizedBox(
                 width: 16,
                 height: 16,
                 child: CircularProgressIndicator(

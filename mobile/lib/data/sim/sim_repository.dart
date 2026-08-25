@@ -38,6 +38,10 @@ class SimCard {
 }
 
 /// The app's source of truth for which SIMs can send commands.
+//
+// One member today, but this is a dependency-injection seam with two
+// implementations (platform channel and fake), not a function in disguise.
+// ignore: one_member_abstracts
 abstract interface class SimRepository {
   /// The SIMs currently active in the device. Empty when none are readable.
   Future<List<SimCard>> getActiveSims();

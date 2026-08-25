@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:gps_control/features/bluetooth/bloc/bluetooth_bloc.dart';
 import 'package:gps_control/features/bluetooth/view/bluetooth_off_placeholder.dart';
 import 'package:gps_control/features/bluetooth/view/connected_view.dart';
 import 'package:gps_control/features/bluetooth/view/scan_view.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Root of the Bluetooth tab. Monitors the system BLE adapter and shows an
 /// explanatory placeholder when Bluetooth is off; otherwise hands off to the
@@ -16,7 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// tab. The body uses this to auto-start scanning each time the tab comes into
 /// view while the connection is idle.
 class BluetoothPage extends StatefulWidget {
-  const BluetoothPage({super.key, required this.isActive});
+  const BluetoothPage({required this.isActive, super.key});
 
   /// Whether this tab is currently visible to the user.
   final bool isActive;

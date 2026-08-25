@@ -1,16 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/features/sms/sms_command_labels.dart';
 import 'package:gps_control/l10n/l10n.dart';
 import 'package:gps_control/mock/mock_data.dart';
-import 'package:flutter/material.dart';
 
 class SmsComposeDock extends StatefulWidget {
   const SmsComposeDock({
-    super.key,
     required this.cmd,
     required this.recipientCount,
     required this.onCancel,
     required this.onSend,
+    super.key,
   });
   final SmsCommand cmd;
   final int recipientCount;
@@ -75,7 +75,7 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
                   ),
                   child: Text(
                     tagLabel,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 9.5,
                       fontWeight: FontWeight.w700,
@@ -87,7 +87,7 @@ class _SmsComposeDockState extends State<SmsComposeDock> {
                 const SizedBox(width: 8),
                 Text(
                   smsCommandName(l10n, cmd.id),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: kSans,
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
@@ -193,7 +193,7 @@ class _SmsInputWidget extends StatelessWidget {
           children: [
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: kSans,
                 fontSize: 13.5,
                 fontWeight: FontWeight.w600,
@@ -238,7 +238,7 @@ class _SmsInputWidget extends StatelessWidget {
           children: [
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: kSans,
                 fontSize: 13.5,
                 fontWeight: FontWeight.w600,
@@ -278,7 +278,11 @@ class _SmsInputWidget extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontFamily: kSans, fontSize: 12, color: kMute),
+            style: const TextStyle(
+              fontFamily: kSans,
+              fontSize: 12,
+              color: kMute,
+            ),
           ),
           const SizedBox(height: 6),
           Row(
@@ -307,11 +311,11 @@ class _SmsInputWidget extends StatelessWidget {
                     fillColor: kWhite,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: kRule),
+                      borderSide: const BorderSide(color: kRule),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),
-                      borderSide: BorderSide(color: kRule),
+                      borderSide: const BorderSide(color: kRule),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 10,
@@ -325,7 +329,7 @@ class _SmsInputWidget extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   unit,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: kSans,
                     fontSize: 12.5,
                     color: kMute,

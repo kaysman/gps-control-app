@@ -1,4 +1,5 @@
 import 'package:gps_control/l10n/l10n.dart';
+import 'package:gps_control/mock/mock_data.dart' show SmsCommand;
 
 /// Resolves the localized display name for an [SmsCommand.id].
 String smsCommandName(AppLocalizations l10n, String id) => switch (id) {

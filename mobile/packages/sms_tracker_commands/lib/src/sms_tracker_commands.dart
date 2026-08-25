@@ -2,8 +2,8 @@ import 'package:sms_tracker_commands/src/sms_command.dart';
 
 /// Builds outgoing SMS commands for the Bariox GPS tracker.
 ///
-/// All commands follow the format `#password,CMD:params` where [password]
-/// is the 6-digit device password (default "000000").
+/// All commands follow the format `#password,CMD:params` where the password
+/// is the 6-digit device password (see [defaultPassword]).
 ///
 /// Confirmed commands come from the vendor "device send SMS data user manual".
 /// Extended parameter keys (alarm thresholds, intervals) follow the observed
@@ -16,9 +16,11 @@ import 'package:sms_tracker_commands/src/sms_command.dart';
 /// // Send cmd.text via Android SMS to the tracker's SIM phone number.
 /// ```
 class SmsTrackerCommands {
+  /// Creates a builder that authenticates every command with [password].
   const SmsTrackerCommands({String password = defaultPassword})
-      : _password = password;
+    : _password = password;
 
+  /// Factory default device password (`000000`).
   static const String defaultPassword = '000000';
 
   final String _password;
@@ -34,8 +36,7 @@ class SmsTrackerCommands {
   SmsCommand setReceivePhone({
     required int slot,
     required String phoneNumber,
-  }) =>
-      _build('STPH:$slot,$phoneNumber');
+  }) => _build('STPH:$slot,$phoneNumber');
 
   /// Sets the country/national dialing code for outbound SMS.
   ///
@@ -102,15 +103,12 @@ class SmsTrackerCommands {
       _build('STSB:${enabled ? 1 : 0}');
 
   /// Sets the send mode for lock wire-cut alarms (0 = SMS, 1 = TCP, 2 = both).
-  SmsCommand setLockCutoffAlarmSendMode(int mode) =>
-      _build('STLM:$mode');
+  SmsCommand setLockCutoffAlarmSendMode(int mode) => _build('STLM:$mode');
 
   /// Sets the send mode for standstill alarms (0 = SMS, 1 = TCP, 2 = both).
-  SmsCommand setStandstillAlarmSendMode(int mode) =>
-      _build('STSN:$mode');
+  SmsCommand setStandstillAlarmSendMode(int mode) => _build('STSN:$mode');
 
   // ── Internal ──────────────────────────────────────────────────────────────
 
-  SmsCommand _build(String body) =>
-      SmsCommand(password: _password, body: body);
+  SmsCommand _build(String body) => SmsCommand(password: _password, body: body);
 }

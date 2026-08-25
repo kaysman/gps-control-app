@@ -3,7 +3,7 @@ import 'dart:typed_data';
 /// Builds Bariox e-lock request frames for the legacy `AA-55-A9` protocol.
 ///
 /// Frame layout:
-/// ```
+/// ```text
 /// [0xAA][0x55][0xA9][CMD][LEN_H][LEN_L][0x01][0x01][PAYLOAD ...][XOR]
 /// ```
 ///
@@ -34,7 +34,12 @@ abstract final class LegacyFrameBuilder {
     assert(cmd >= 0 && cmd <= 0xFF, 'cmd must fit in one byte');
     final extraBytes = extra ?? Uint8List(0);
     final totalLen =
-        headerBytes.length + 1 + 2 + reservedBytes.length + extraBytes.length + 1;
+        headerBytes.length +
+        1 +
+        2 +
+        reservedBytes.length +
+        extraBytes.length +
+        1;
     assert(totalLen <= 0xFFFF, 'frame too large for the 2-byte length field');
 
     final out = Uint8List(totalLen);

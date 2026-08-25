@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/features/sms/sms_command_labels.dart';
 import 'package:gps_control/l10n/l10n.dart';
 import 'package:gps_control/mock/mock_data.dart';
 import 'package:gps_control/models/chat_message.dart';
-import 'package:flutter/material.dart';
 
 class SmsEmptyConversation extends StatelessWidget {
-  const SmsEmptyConversation({super.key, required this.onPickCommand});
+  const SmsEmptyConversation({required this.onPickCommand, super.key});
   final VoidCallback onPickCommand;
 
   @override
@@ -16,11 +16,11 @@ class SmsEmptyConversation extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.chat_bubble_outline, size: 40, color: kMute2),
+          const Icon(Icons.chat_bubble_outline, size: 40, color: kMute2),
           const SizedBox(height: 12),
           Text(
             l10n.smsEmptyTitle,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: kSans,
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -30,7 +30,11 @@ class SmsEmptyConversation extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             l10n.smsEmptySub,
-            style: TextStyle(fontFamily: kSans, fontSize: 12, color: kMute2),
+            style: const TextStyle(
+              fontFamily: kSans,
+              fontSize: 12,
+              color: kMute2,
+            ),
           ),
         ],
       ),
@@ -39,7 +43,7 @@ class SmsEmptyConversation extends StatelessWidget {
 }
 
 class SmsSentBubble extends StatelessWidget {
-  const SmsSentBubble({super.key, required this.msg, required this.showDate});
+  const SmsSentBubble({required this.msg, required this.showDate, super.key});
   final SentChatMessage msg;
   final bool showDate;
 
@@ -62,7 +66,7 @@ class SmsSentBubble extends StatelessWidget {
               children: [
                 Text(
                   l10n.smsBubbleYouTo(msg.recipientShorts.length),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: kMono,
                     fontSize: 10.5,
                     color: kMute,
@@ -89,7 +93,7 @@ class SmsSentBubble extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: commandLabel,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: kSans,
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -99,7 +103,7 @@ class SmsSentBubble extends StatelessWidget {
                         if (valueLabel != null)
                           TextSpan(
                             text: ' → $valueLabel',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: kSans,
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -113,7 +117,7 @@ class SmsSentBubble extends StatelessWidget {
                 const SizedBox(height: 3),
                 Text(
                   msg.smsText,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: kMono,
                     fontSize: 9.5,
                     color: kMute2,
@@ -130,9 +134,9 @@ class SmsSentBubble extends StatelessWidget {
 
 class SmsReceivedBubble extends StatelessWidget {
   const SmsReceivedBubble({
-    super.key,
     required this.msg,
     required this.showDate,
+    super.key,
   });
   final ReceivedChatMessage msg;
   final bool showDate;
@@ -151,7 +155,7 @@ class SmsReceivedBubble extends StatelessWidget {
               children: [
                 Text(
                   msg.from,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: kMono,
                     fontSize: 10.5,
                     color: kMute,
@@ -176,7 +180,7 @@ class SmsReceivedBubble extends StatelessWidget {
                   ),
                   child: Text(
                     msg.body,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: kSans,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -194,7 +198,7 @@ class SmsReceivedBubble extends StatelessWidget {
 }
 
 class SmsDateChip extends StatelessWidget {
-  const SmsDateChip({super.key, required this.timestamp});
+  const SmsDateChip({required this.timestamp, super.key});
   final DateTime timestamp;
 
   @override
@@ -224,7 +228,7 @@ class SmsDateChip extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: kMono,
             fontSize: 10.5,
             color: kMute,
@@ -239,9 +243,9 @@ class SmsDateChip extends StatelessWidget {
 
 class SmsRecipientChip extends StatelessWidget {
   const SmsRecipientChip({
-    super.key,
     required this.tracker,
     required this.onRemove,
+    super.key,
   });
   final MockTracker tracker;
   final VoidCallback onRemove;
@@ -269,7 +273,7 @@ class SmsRecipientChip extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             tracker.short,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: kSans,
               fontSize: 12.5,
               fontWeight: FontWeight.w600,
@@ -283,7 +287,7 @@ class SmsRecipientChip extends StatelessWidget {
               width: 18,
               height: 18,
               color: Colors.transparent,
-              child: Icon(Icons.close, size: 13, color: kMute),
+              child: const Icon(Icons.close, size: 13, color: kMute),
             ),
           ),
         ],

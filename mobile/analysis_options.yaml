@@ -1,1 +1,9 @@
 include: package:very_good_analysis/analysis_options.yaml
+
+linter:
+  rules:
+    # App internals are not a published API surface. Requiring a doc comment on
+    # every widget field and enum member produces restatements of the member
+    # name rather than information. The two local packages under packages/ keep
+    # this rule enabled, because they *are* library surface consumed by name.
+    public_member_api_docs: false

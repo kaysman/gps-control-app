@@ -6,7 +6,7 @@ import 'package:bariox_tracker/src/models/legacy_status.dart';
 /// protocol.
 ///
 /// Successful response frames have the same overall shape as requests:
-/// ```
+/// ```text
 /// [0xAA][0x55][0xA9][CMD][LEN_H][LEN_L][0x01][0x01][DATA ...][XOR]
 /// ```
 abstract final class LegacyFrameParser {
@@ -88,8 +88,9 @@ abstract final class LegacyFrameParser {
   static String _bcdBytesToString(Uint8List bytes) {
     final sb = StringBuffer();
     for (final b in bytes) {
-      sb.write(((b >> 4) & 0x0F).toString());
-      sb.write((b & 0x0F).toString());
+      sb
+        ..write(((b >> 4) & 0x0F).toString())
+        ..write((b & 0x0F).toString());
     }
     return sb.toString();
   }

@@ -53,7 +53,10 @@ class LegacyStatus {
   @override
   String toString() =>
       'LegacyStatus(deviceId: $deviceId, batteryPct: $batteryPct, '
-      'byteARaw: 0x${byteARaw.toRadixString(16).padLeft(2, '0').toUpperCase()}, '
-      'byteBRaw: 0x${byteBRaw.toRadixString(16).padLeft(2, '0').toUpperCase()}, '
+      'byteARaw: 0x${_hex(byteARaw)}, '
+      'byteBRaw: 0x${_hex(byteBRaw)}, '
       'flags: $flags)';
+
+  static String _hex(int b) =>
+      b.toRadixString(16).padLeft(2, '0').toUpperCase();
 }

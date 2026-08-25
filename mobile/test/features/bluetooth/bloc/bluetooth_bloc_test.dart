@@ -1,6 +1,6 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:gps_control/data/tracker/fake_tracker_repository.dart';
 import 'package:gps_control/features/bluetooth/bloc/bluetooth_bloc.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('BluetoothBloc', () {

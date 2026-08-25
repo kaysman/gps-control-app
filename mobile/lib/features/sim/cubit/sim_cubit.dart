@@ -1,6 +1,6 @@
-import 'package:gps_control/data/sim/sim_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gps_control/data/sim/sim_repository.dart';
 
 /// Loading state for the active-SIMs query.
 enum SimLoadStatus { initial, loading, ready, error }
@@ -72,7 +72,7 @@ class SimCubit extends Cubit<SimState> {
           selectedSubscriptionId: nextSelected,
         ),
       );
-    } catch (e) {
+    } on Exception catch (e) {
       emit(state.copyWith(status: SimLoadStatus.error, error: e.toString()));
     }
   }

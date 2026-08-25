@@ -22,7 +22,8 @@ enum TrackerResponseCode {
   wrongPassword(0x06),
 
   /// Device is busy and cannot process the request right now.
-  deviceBusy(0x07);
+  deviceBusy(0x07)
+  ;
 
   const TrackerResponseCode(this.value);
 

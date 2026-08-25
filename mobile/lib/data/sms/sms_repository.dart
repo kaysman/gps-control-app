@@ -1,5 +1,5 @@
-import 'package:gps_control/models/chat_message.dart';
 import 'package:flutter/foundation.dart';
+import 'package:gps_control/models/chat_message.dart';
 
 /// One SMS received from a tracker.
 @immutable

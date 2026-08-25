@@ -4,7 +4,7 @@ sealed class BluetoothEvent {
   const BluetoothEvent();
 }
 
-// ── Public events ─────────────────────────────────────────────────────────────
+// ── Public events ────────────────────────────────────────────────────────────
 
 final class BleScanStarted extends BluetoothEvent {
   const BleScanStarted();
@@ -35,7 +35,7 @@ final class BleStatusRefreshRequested extends BluetoothEvent {
   const BleStatusRefreshRequested();
 }
 
-// ── Internal events ───────────────────────────────────────────────────────────
+// ── Internal events ──────────────────────────────────────────────────────────
 
 final class _BleScanTicked extends BluetoothEvent {
   const _BleScanTicked();

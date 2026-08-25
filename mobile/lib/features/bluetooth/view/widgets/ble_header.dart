@@ -1,5 +1,5 @@
-import 'package:gps_control/app/tokens.dart';
 import 'package:flutter/material.dart';
+import 'package:gps_control/app/tokens.dart';
 
 /// Header strip used on the connected BLE screen. Shows the back chevron when
 /// [onBack] is provided and the [title] (tracker name or "Bluetooth" by
@@ -33,7 +33,7 @@ class BleHeader extends StatelessWidget {
             child: Text(
               title,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: kSans,
                 fontSize: 18,
                 fontWeight: FontWeight.w700,

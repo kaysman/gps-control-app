@@ -19,13 +19,13 @@ class TrackerTime {
 
   /// Creates a [TrackerTime] from a [DateTime].
   factory TrackerTime.fromDateTime(DateTime dt) => TrackerTime(
-        year: dt.year % 100,
-        month: dt.month,
-        day: dt.day,
-        hour: dt.hour,
-        minute: dt.minute,
-        second: dt.second,
-      );
+    year: dt.year % 100,
+    month: dt.month,
+    day: dt.day,
+    hour: dt.hour,
+    minute: dt.minute,
+    second: dt.second,
+  );
 
   /// Decodes a [TrackerTime] from the 6-byte BCD representation used in
   /// protocol frames (YY MM DD hh mm ss).
@@ -61,13 +61,13 @@ class TrackerTime {
 
   /// Encodes this time as the 6-byte BCD array expected by the protocol.
   Uint8List toBytes() => Uint8List.fromList([
-        _toBcd(year),
-        _toBcd(month),
-        _toBcd(day),
-        _toBcd(hour),
-        _toBcd(minute),
-        _toBcd(second),
-      ]);
+    _toBcd(year),
+    _toBcd(month),
+    _toBcd(day),
+    _toBcd(hour),
+    _toBcd(minute),
+    _toBcd(second),
+  ]);
 
   /// Converts to a [DateTime], interpreting [year] as 2000+.
   DateTime toDateTime() =>
@@ -75,6 +75,8 @@ class TrackerTime {
 
   @override
   String toString() =>
-      '20$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')} '
-      '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}:${second.toString().padLeft(2, '0')}';
+      '20$year-${_pad(month)}-${_pad(day)} '
+      '${_pad(hour)}:${_pad(minute)}:${_pad(second)}';
+
+  static String _pad(int v) => v.toString().padLeft(2, '0');
 }

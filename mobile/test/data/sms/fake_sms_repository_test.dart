@@ -1,6 +1,6 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:gps_control/data/sms/fake_sms_repository.dart';
 import 'package:gps_control/models/chat_message.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('FakeSmsRepository', () {

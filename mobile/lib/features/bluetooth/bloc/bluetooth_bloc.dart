@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:bariox_tracker/bariox_tracker.dart';
 import 'package:bloc/bloc.dart';
+import 'package:gps_control/data/tracker/tracker_repository.dart';
 
 part 'bluetooth_event.dart';
 part 'bluetooth_state.dart';

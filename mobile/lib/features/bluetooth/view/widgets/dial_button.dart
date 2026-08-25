@@ -1,18 +1,18 @@
 import 'dart:math' as math;
 
+import 'package:flutter/material.dart';
 import 'package:gps_control/app/tokens.dart';
 import 'package:gps_control/l10n/l10n.dart';
-import 'package:flutter/material.dart';
 
 /// Big circular tap target at the centre of the dial: shows "Tap to unlock"
 /// / "Tap to lock" / "Tap to refresh" depending on [isLocked] and busy state.
 class DialButton extends StatelessWidget {
   const DialButton({
-    super.key,
     required this.isLocked,
     required this.busy,
     required this.spinCtrl,
     required this.onTap,
+    super.key,
   });
 
   /// null = unknown (still fetching status), true = locked, false = unlocked.
@@ -55,7 +55,7 @@ class DialButton extends StatelessWidget {
                 const SizedBox(height: 6),
                 _DialLabel(text: l10n.bleSending, large: false),
               ] else if (isLocked == null) ...[
-                Icon(Icons.sync, size: 28, color: kNavy),
+                const Icon(Icons.sync, size: 28, color: kNavy),
                 const SizedBox(height: 6),
                 _DialLabel(text: l10n.bleTapToRefresh),
               ] else ...[

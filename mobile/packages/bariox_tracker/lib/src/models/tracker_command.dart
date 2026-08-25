@@ -61,7 +61,8 @@ enum TrackerCommand {
   readSoftwareVersion(0x14),
 
   /// Add, read, delete, or clear RFID card numbers (CMD 0x15).
-  configureRfid(0x15);
+  configureRfid(0x15)
+  ;
 
   const TrackerCommand(this.value);
 

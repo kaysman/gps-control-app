@@ -35,7 +35,8 @@ class LegacyResponse {
       .join(' ');
 
   @override
-  String toString() => 'LegacyResponse(cmd: 0x'
+  String toString() =>
+      'LegacyResponse(cmd: 0x'
       '${cmd.toRadixString(16).padLeft(2, '0').toUpperCase()}, '
       '${rawFrame.length}B, status: $status)';
 }

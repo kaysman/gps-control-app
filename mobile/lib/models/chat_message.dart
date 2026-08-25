@@ -7,8 +7,8 @@ final class SentChatMessage extends ChatMessage {
     required this.timestamp,
     required this.recipientShorts,
     required this.commandId,
-    this.commandValue,
     required this.smsText,
+    this.commandValue,
   });
 
   @override

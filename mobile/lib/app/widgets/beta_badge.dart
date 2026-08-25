@@ -1,5 +1,5 @@
-import 'package:gps_control/app/tokens.dart';
 import 'package:flutter/material.dart';
+import 'package:gps_control/app/tokens.dart';
 
 /// Small "BETA" pill used to flag work-in-progress areas of the app.
 class BetaBadge extends StatelessWidget {
