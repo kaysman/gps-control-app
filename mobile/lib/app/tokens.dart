@@ -79,6 +79,19 @@ const kR22 = 22.0;
 const kR30 = 30.0;
 
 // ── Typography ──────────────────────────────────────────────────────────
-// Bundled in assets/fonts (see pubspec.yaml) — no runtime font fetching.
-const kSans = 'Inter';
-const kMono = 'JetBrainsMono';
+// Two families, bundled in assets/fonts (see pubspec.yaml) — no runtime font
+// fetching. Licences ship beside them.
+
+/// Prose: headings, labels, buttons, body. Manrope's semi-rounded geometry is
+/// what gives the display sizes their friendly weight at -1.4 tracking.
+const kSans = 'Manrope';
+
+/// The technical voice: all-caps section labels, serials, phone numbers,
+/// timestamps, and the raw SMS text under a bubble. Roboto rather than a
+/// monospace, because what these have in common is digits, not code — pair it
+/// with [kTabular] wherever a number changes in place.
+const kTech = 'Roboto';
+
+/// Fixed-width digits. Without this a ticking countdown or a right-aligned
+/// clock column reflows on every change.
+const kTabular = [FontFeature.tabularFigures()];
