@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    # The Flutter project is not at the repository root.
+    working-directory: mobile
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.41.2
+          channel: stable
+          cache: true
+
+      # A pub workspace: this resolves the app and both path packages at once.
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      # --fatal-infos on purpose: the ruleset is very_good_analysis and the tree
+      # is clean, so any new info is a regression rather than background noise.
+      - name: Analyze
+        run: flutter analyze --fatal-infos
+
+      - name: Test app
+        run: flutter test
+
+      - name: Test bariox_tracker
+        working-directory: mobile/packages/bariox_tracker
+        run: flutter test
+
+      - name: Test sms_tracker_commands
+        working-directory: mobile/packages/sms_tracker_commands
+        run: dart test
