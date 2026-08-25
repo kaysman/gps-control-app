@@ -1,11 +1,11 @@
-import 'package:gps_control/data/sim/sim_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:gps_control/data/sim/sim_repository.dart';
 
-/// [SimRepository] backed by the `bariox/sim` platform channel, which wraps
+/// [SimRepository] backed by the `gps_control/sim` platform channel, which wraps
 /// Android's `SubscriptionManager`. Returns an empty list on other platforms.
 class PlatformSimRepository implements SimRepository {
-  static const _channel = MethodChannel('bariox/sim');
+  static const _channel = MethodChannel('gps_control/sim');
 
   @override
   Future<List<SimCard>> getActiveSims() async {

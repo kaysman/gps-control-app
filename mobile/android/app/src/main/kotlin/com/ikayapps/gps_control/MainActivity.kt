@@ -10,7 +10,7 @@ import io.flutter.plugin.common.MethodChannel
 class MainActivity : FlutterActivity() {
 
     private companion object {
-        const val CHANNEL = "bariox/sim"
+        const val CHANNEL = "gps_control/sim"
     }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
