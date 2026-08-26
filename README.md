@@ -1,4 +1,4 @@
-# Bariox Control
+# GPS Control
 
 Configure GPS trackers without the manufacturer's Windows tool — over
 **Bluetooth** when you are standing next to the device, over **SMS** when you
