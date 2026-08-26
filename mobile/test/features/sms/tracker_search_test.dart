@@ -10,14 +10,23 @@ void main() {
     });
 
     test('matches the short name, either case, with or without the dash', () {
-      expect(searchTrackers(smsTrackers, 'BX-001').single, smsTrackers[0]);
-      expect(searchTrackers(smsTrackers, 'bx-001').single, smsTrackers[0]);
-      expect(searchTrackers(smsTrackers, 'bx001').single, smsTrackers[0]);
+      expect(searchTrackers(smsTrackers, 'FMB-001').single, smsTrackers[0]);
+      expect(searchTrackers(smsTrackers, 'fmb-001').single, smsTrackers[0]);
+      expect(searchTrackers(smsTrackers, 'fmb001').single, smsTrackers[0]);
     });
 
-    test('matches a serial fragment', () {
-      expect(searchTrackers(smsTrackers, '2500000002').single, smsTrackers[1]);
+    test('matches an IMEI fragment', () {
+      expect(
+        searchTrackers(smsTrackers, smsTrackers[1].id).single,
+        smsTrackers[1],
+      );
       expect(searchTrackers(smsTrackers, '001'), contains(smsTrackers[0]));
+    });
+
+    test('matches the model printed on the case', () {
+      final matches = searchTrackers(smsTrackers, 'fmb640');
+      expect(matches, isNotEmpty);
+      expect(matches.every((t) => t.name.contains('FMB640')), isTrue);
     });
 
     test('matches a phone number however it is punctuated', () {
@@ -32,8 +41,11 @@ void main() {
       expect(searchTrackers(smsTrackers, '999999999'), isEmpty);
     });
 
-    test('a broad query keeps every tracker', () {
-      expect(searchTrackers(smsTrackers, 'bx'), hasLength(smsTrackers.length));
+    test('a query every unit shares keeps the whole fleet', () {
+      expect(
+        searchTrackers(smsTrackers, '35209408'),
+        hasLength(smsTrackers.length),
+      );
     });
   });
 }

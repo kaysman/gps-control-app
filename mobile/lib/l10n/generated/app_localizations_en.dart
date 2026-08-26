@@ -157,9 +157,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get commandPickerHeading => 'COMMAND';
-
-  @override
   String get commandPickerTitle => 'Pick one';
 
   @override
@@ -200,124 +197,97 @@ class AppLocalizationsEn extends AppLocalizations {
   String get composeToggleOff => 'Off';
 
   @override
-  String get smsCmdBatteryName => 'Get battery';
+  String get smsCmdBatteryName => 'Battery voltage';
 
   @override
-  String get smsCmdBatterySub => 'Battery level & charging';
+  String get smsCmdBatterySub => 'Internal battery, AVL ID 67';
 
   @override
-  String get smsCmdStatusName => 'Get lock status';
+  String get smsCmdStatusName => 'Modem status';
 
   @override
-  String get smsCmdStatusSub => 'Sealed · cover · motor';
+  String get smsCmdStatusSub => 'GPRS · signal · SIM · cell';
 
   @override
-  String get smsCmdPositionName => 'Get position';
+  String get smsCmdPositionName => 'GPS position';
 
   @override
-  String get smsCmdPositionSub => 'GPS coordinates · speed';
+  String get smsCmdPositionSub => 'Coordinates · satellites · speed';
 
   @override
-  String get smsCmdRfidName => 'List RFID cards';
+  String get smsCmdFwName => 'Firmware version';
 
   @override
-  String get smsCmdRfidSub => 'All authorized cards';
+  String get smsCmdFwSub => 'Firmware · GPS · hardware · IMEI';
 
   @override
-  String get smsCmdSubsName => 'List sub-locks';
+  String get smsCmdSleepName => 'Sleep mode';
 
   @override
-  String get smsCmdSubsSub => 'Paired sub-locks & state';
+  String get smsCmdSleepInputLabel => 'GPS sleep (parameter 102)';
 
   @override
-  String get smsCmdFwName => 'Get firmware version';
+  String get smsCmdIntervalName => 'Tracking period';
 
   @override
-  String get smsCmdFwSub => '';
-
-  @override
-  String get smsCmdSleepName => 'Set sleep mode';
-
-  @override
-  String get smsCmdSleepInputLabel => 'Sleep mode';
-
-  @override
-  String get smsCmdIntervalName => 'Set position interval';
-
-  @override
-  String get smsCmdIntervalInputLabel => 'Send position every';
-
-  @override
-  String get smsCmdAutolockName => 'Set auto-lock time';
-
-  @override
-  String get smsCmdAutolockInputLabel => 'Auto-lock after';
-
-  @override
-  String get smsCmdAddrfidName => 'Add RFID card';
-
-  @override
-  String get smsCmdAddrfidInputLabel => 'Card number';
-
-  @override
-  String get smsCmdAddphoneName => 'Add authorized phone';
-
-  @override
-  String get smsCmdAddphoneInputLabel => 'Phone number';
-
-  @override
-  String get smsCmdPwdName => 'Change unlock password';
-
-  @override
-  String get smsCmdPwdInputLabel => 'New 6-digit password';
-
-  @override
-  String get smsCmdSensorName => 'Set sensor sensitivity';
-
-  @override
-  String get smsCmdSensorInputLabel => 'Sensitivity';
+  String get smsCmdIntervalInputLabel => 'Record while moving every';
 
   @override
   String get smsCmdUnlockName => 'Unlock';
 
   @override
-  String get smsCmdUnlockSub => 'Open the master lock';
+  String get smsCmdUnlockSub => 'Pull DOUT1 low';
 
   @override
   String get smsCmdLockName => 'Lock';
 
   @override
-  String get smsCmdLockSub => 'Seal the master lock';
+  String get smsCmdLockSub => 'Hold DOUT1 high';
 
   @override
   String get smsCmdRebootName => 'Restart device';
 
   @override
-  String get smsCmdRebootSub => '';
+  String get smsCmdRebootSub => 'CPU reset';
 
   @override
-  String get smsCmdClearName => 'Clear position cache';
+  String get smsCmdClearName => 'Delete records';
 
   @override
-  String get smsCmdClearSub => '';
+  String get smsCmdClearSub => 'Erases every record still on the device';
 
   @override
-  String get smsCmdResetName => 'Factory reset';
+  String get smsCmdInfoName => 'Device info';
 
   @override
-  String get smsCmdResetSub => 'Erases everything';
+  String get smsCmdInfoSub => 'Uptime · errors · GPS fix · records';
+
+  @override
+  String get smsCmdIoName => 'I/O readings';
+
+  @override
+  String get smsCmdIoSub => 'Digital inputs and outputs';
+
+  @override
+  String get smsCmdGetparamName => 'Read parameter';
+
+  @override
+  String get smsCmdGetparamInputLabel => 'Parameter ID';
+
+  @override
+  String get smsCmdSetparamName => 'Set parameter';
+
+  @override
+  String get smsCmdSetparamInputLabel => 'ID:value';
+
+  @override
+  String get smsCmdPulseName => 'Pulse output';
+
+  @override
+  String get smsCmdPulseSub => 'DOUT1 high for 5 seconds';
 
   @override
   String get smsUnitSeconds => 'seconds';
-
-  @override
-  String get sensorLow => 'Low';
-
-  @override
-  String get sensorMedium => 'Medium';
-
-  @override
-  String get sensorHigh => 'High';
 
   @override
   String get settingsTitle => 'Settings';
@@ -351,13 +321,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get brandBariox => 'Bariox';
 
   @override
-  String get brandBarioxSub => 'BLE and SMS · full command set';
+  String get brandBarioxSub => 'BLE · master locks and sub-locks';
 
   @override
   String get brandTeltonika => 'Teltonika';
 
   @override
-  String get brandTeltonikaSub => 'SMS only · FMB series';
+  String get brandTeltonikaSub => 'SMS · FMB series';
 
   @override
   String get simsNone => 'No SIM cards detected';
@@ -400,7 +370,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get smsSearchEmpty => 'No tracker matches that';
 
   @override
-  String get smsNoSimChip => 'No SIM';
+  String get smsPasswordNone => 'Not set';
 
   @override
   String get smsPasswordTitle => 'Tracker password';

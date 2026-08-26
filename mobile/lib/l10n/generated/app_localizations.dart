@@ -362,12 +362,6 @@ abstract class AppLocalizations {
     String minute,
   );
 
-  /// No description provided for @commandPickerHeading.
-  ///
-  /// In en, this message translates to:
-  /// **'COMMAND'**
-  String get commandPickerHeading;
-
   /// No description provided for @commandPickerTitle.
   ///
   /// In en, this message translates to:
@@ -449,158 +443,74 @@ abstract class AppLocalizations {
   /// No description provided for @smsCmdBatteryName.
   ///
   /// In en, this message translates to:
-  /// **'Get battery'**
+  /// **'Battery voltage'**
   String get smsCmdBatteryName;
 
   /// No description provided for @smsCmdBatterySub.
   ///
   /// In en, this message translates to:
-  /// **'Battery level & charging'**
+  /// **'Internal battery, AVL ID 67'**
   String get smsCmdBatterySub;
 
   /// No description provided for @smsCmdStatusName.
   ///
   /// In en, this message translates to:
-  /// **'Get lock status'**
+  /// **'Modem status'**
   String get smsCmdStatusName;
 
   /// No description provided for @smsCmdStatusSub.
   ///
   /// In en, this message translates to:
-  /// **'Sealed · cover · motor'**
+  /// **'GPRS · signal · SIM · cell'**
   String get smsCmdStatusSub;
 
   /// No description provided for @smsCmdPositionName.
   ///
   /// In en, this message translates to:
-  /// **'Get position'**
+  /// **'GPS position'**
   String get smsCmdPositionName;
 
   /// No description provided for @smsCmdPositionSub.
   ///
   /// In en, this message translates to:
-  /// **'GPS coordinates · speed'**
+  /// **'Coordinates · satellites · speed'**
   String get smsCmdPositionSub;
-
-  /// No description provided for @smsCmdRfidName.
-  ///
-  /// In en, this message translates to:
-  /// **'List RFID cards'**
-  String get smsCmdRfidName;
-
-  /// No description provided for @smsCmdRfidSub.
-  ///
-  /// In en, this message translates to:
-  /// **'All authorized cards'**
-  String get smsCmdRfidSub;
-
-  /// No description provided for @smsCmdSubsName.
-  ///
-  /// In en, this message translates to:
-  /// **'List sub-locks'**
-  String get smsCmdSubsName;
-
-  /// No description provided for @smsCmdSubsSub.
-  ///
-  /// In en, this message translates to:
-  /// **'Paired sub-locks & state'**
-  String get smsCmdSubsSub;
 
   /// No description provided for @smsCmdFwName.
   ///
   /// In en, this message translates to:
-  /// **'Get firmware version'**
+  /// **'Firmware version'**
   String get smsCmdFwName;
 
   /// No description provided for @smsCmdFwSub.
   ///
   /// In en, this message translates to:
-  /// **''**
+  /// **'Firmware · GPS · hardware · IMEI'**
   String get smsCmdFwSub;
 
   /// No description provided for @smsCmdSleepName.
   ///
   /// In en, this message translates to:
-  /// **'Set sleep mode'**
+  /// **'Sleep mode'**
   String get smsCmdSleepName;
 
   /// No description provided for @smsCmdSleepInputLabel.
   ///
   /// In en, this message translates to:
-  /// **'Sleep mode'**
+  /// **'GPS sleep (parameter 102)'**
   String get smsCmdSleepInputLabel;
 
   /// No description provided for @smsCmdIntervalName.
   ///
   /// In en, this message translates to:
-  /// **'Set position interval'**
+  /// **'Tracking period'**
   String get smsCmdIntervalName;
 
   /// No description provided for @smsCmdIntervalInputLabel.
   ///
   /// In en, this message translates to:
-  /// **'Send position every'**
+  /// **'Record while moving every'**
   String get smsCmdIntervalInputLabel;
-
-  /// No description provided for @smsCmdAutolockName.
-  ///
-  /// In en, this message translates to:
-  /// **'Set auto-lock time'**
-  String get smsCmdAutolockName;
-
-  /// No description provided for @smsCmdAutolockInputLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto-lock after'**
-  String get smsCmdAutolockInputLabel;
-
-  /// No description provided for @smsCmdAddrfidName.
-  ///
-  /// In en, this message translates to:
-  /// **'Add RFID card'**
-  String get smsCmdAddrfidName;
-
-  /// No description provided for @smsCmdAddrfidInputLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Card number'**
-  String get smsCmdAddrfidInputLabel;
-
-  /// No description provided for @smsCmdAddphoneName.
-  ///
-  /// In en, this message translates to:
-  /// **'Add authorized phone'**
-  String get smsCmdAddphoneName;
-
-  /// No description provided for @smsCmdAddphoneInputLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Phone number'**
-  String get smsCmdAddphoneInputLabel;
-
-  /// No description provided for @smsCmdPwdName.
-  ///
-  /// In en, this message translates to:
-  /// **'Change unlock password'**
-  String get smsCmdPwdName;
-
-  /// No description provided for @smsCmdPwdInputLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'New 6-digit password'**
-  String get smsCmdPwdInputLabel;
-
-  /// No description provided for @smsCmdSensorName.
-  ///
-  /// In en, this message translates to:
-  /// **'Set sensor sensitivity'**
-  String get smsCmdSensorName;
-
-  /// No description provided for @smsCmdSensorInputLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Sensitivity'**
-  String get smsCmdSensorInputLabel;
 
   /// No description provided for @smsCmdUnlockName.
   ///
@@ -611,7 +521,7 @@ abstract class AppLocalizations {
   /// No description provided for @smsCmdUnlockSub.
   ///
   /// In en, this message translates to:
-  /// **'Open the master lock'**
+  /// **'Pull DOUT1 low'**
   String get smsCmdUnlockSub;
 
   /// No description provided for @smsCmdLockName.
@@ -623,7 +533,7 @@ abstract class AppLocalizations {
   /// No description provided for @smsCmdLockSub.
   ///
   /// In en, this message translates to:
-  /// **'Seal the master lock'**
+  /// **'Hold DOUT1 high'**
   String get smsCmdLockSub;
 
   /// No description provided for @smsCmdRebootName.
@@ -635,56 +545,86 @@ abstract class AppLocalizations {
   /// No description provided for @smsCmdRebootSub.
   ///
   /// In en, this message translates to:
-  /// **''**
+  /// **'CPU reset'**
   String get smsCmdRebootSub;
 
   /// No description provided for @smsCmdClearName.
   ///
   /// In en, this message translates to:
-  /// **'Clear position cache'**
+  /// **'Delete records'**
   String get smsCmdClearName;
 
   /// No description provided for @smsCmdClearSub.
   ///
   /// In en, this message translates to:
-  /// **''**
+  /// **'Erases every record still on the device'**
   String get smsCmdClearSub;
 
-  /// No description provided for @smsCmdResetName.
+  /// No description provided for @smsCmdInfoName.
   ///
   /// In en, this message translates to:
-  /// **'Factory reset'**
-  String get smsCmdResetName;
+  /// **'Device info'**
+  String get smsCmdInfoName;
 
-  /// No description provided for @smsCmdResetSub.
+  /// No description provided for @smsCmdInfoSub.
   ///
   /// In en, this message translates to:
-  /// **'Erases everything'**
-  String get smsCmdResetSub;
+  /// **'Uptime · errors · GPS fix · records'**
+  String get smsCmdInfoSub;
+
+  /// No description provided for @smsCmdIoName.
+  ///
+  /// In en, this message translates to:
+  /// **'I/O readings'**
+  String get smsCmdIoName;
+
+  /// No description provided for @smsCmdIoSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Digital inputs and outputs'**
+  String get smsCmdIoSub;
+
+  /// No description provided for @smsCmdGetparamName.
+  ///
+  /// In en, this message translates to:
+  /// **'Read parameter'**
+  String get smsCmdGetparamName;
+
+  /// No description provided for @smsCmdGetparamInputLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Parameter ID'**
+  String get smsCmdGetparamInputLabel;
+
+  /// No description provided for @smsCmdSetparamName.
+  ///
+  /// In en, this message translates to:
+  /// **'Set parameter'**
+  String get smsCmdSetparamName;
+
+  /// No description provided for @smsCmdSetparamInputLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ID:value'**
+  String get smsCmdSetparamInputLabel;
+
+  /// No description provided for @smsCmdPulseName.
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse output'**
+  String get smsCmdPulseName;
+
+  /// No description provided for @smsCmdPulseSub.
+  ///
+  /// In en, this message translates to:
+  /// **'DOUT1 high for 5 seconds'**
+  String get smsCmdPulseSub;
 
   /// No description provided for @smsUnitSeconds.
   ///
   /// In en, this message translates to:
   /// **'seconds'**
   String get smsUnitSeconds;
-
-  /// No description provided for @sensorLow.
-  ///
-  /// In en, this message translates to:
-  /// **'Low'**
-  String get sensorLow;
-
-  /// No description provided for @sensorMedium.
-  ///
-  /// In en, this message translates to:
-  /// **'Medium'**
-  String get sensorMedium;
-
-  /// No description provided for @sensorHigh.
-  ///
-  /// In en, this message translates to:
-  /// **'High'**
-  String get sensorHigh;
 
   /// No description provided for @settingsTitle.
   ///
@@ -749,7 +689,7 @@ abstract class AppLocalizations {
   /// No description provided for @brandBarioxSub.
   ///
   /// In en, this message translates to:
-  /// **'BLE and SMS · full command set'**
+  /// **'BLE · master locks and sub-locks'**
   String get brandBarioxSub;
 
   /// No description provided for @brandTeltonika.
@@ -761,7 +701,7 @@ abstract class AppLocalizations {
   /// No description provided for @brandTeltonikaSub.
   ///
   /// In en, this message translates to:
-  /// **'SMS only · FMB series'**
+  /// **'SMS · FMB series'**
   String get brandTeltonikaSub;
 
   /// No description provided for @simsNone.
@@ -836,11 +776,11 @@ abstract class AppLocalizations {
   /// **'No tracker matches that'**
   String get smsSearchEmpty;
 
-  /// No description provided for @smsNoSimChip.
+  /// No description provided for @smsPasswordNone.
   ///
   /// In en, this message translates to:
-  /// **'No SIM'**
-  String get smsNoSimChip;
+  /// **'Not set'**
+  String get smsPasswordNone;
 
   /// No description provided for @smsPasswordTitle.
   ///

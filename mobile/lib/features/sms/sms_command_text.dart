@@ -1,37 +1,34 @@
 import 'package:gps_control/mock/mock_data.dart';
 
-/// Renders [cmd] as the text the tracker expects, with [password] substituted
-/// and [value] applied where the command takes one.
+/// Renders [cmd] as the SMS text a Teltonika FMB unit expects, with [password]
+/// and [value] applied.
 ///
-/// Kept in one place because it is the only thing standing between a tap and a
-/// real SMS to real hardware.
-String buildSmsText(SmsCommand cmd, String password, Object? value) {
-  final p = password.isEmpty ? '000000' : password;
-  if (cmd.id == 'sensor') {
-    final level = value == 'low'
-        ? 1
-        : value == 'high'
-        ? 3
-        : 2;
-    return '#$p,STPF:SENSORVAL,$level';
-  }
-  return switch (cmd.id) {
-    'battery' => '#$p,RDBL',
-    'status' => '#$p,RDLS',
-    'position' => '#$p,RDLO',
-    'rfid' => '#$p,RDRF',
-    'subs' => '#$p,SLRA',
-    'fw' => '#$p,RDVE',
-    'sleep' => '#$p,STPF:SLEEPEN,${(value as bool? ?? true) ? 1 : 0}',
-    'interval' => '#$p,STIN:$value',
-    'autolock' => '#$p,STPF:CTIME,$value',
-    'addrfid' => '#$p,STRF:1,$value',
-    'addphone' => '#$p,STPN:1,$value',
-    'pwd' => '(P44,$value,$p)',
-    'unlock' || 'lock' => '(P43,$p)',
-    'reboot' => '#$p,REST',
-    'clear' => '#$p,CLRD',
-    'reset' => '#$p,INIT:INIT-SYS',
-    _ => '#$p,${cmd.id.toUpperCase()}',
-  };
-}
+/// Teltonika reads an SMS as `<login> <password> <command>`. Both credentials
+/// are usually left unset on the device, which is why the documented form
+/// starts with two spaces — the empty login and empty password still need
+/// their separators. Anything else and the unit ignores the message.
+String buildSmsText(SmsCommand cmd, String password, Object? value) =>
+    ' $password ${_command(cmd, value)}';
+
+String _command(SmsCommand cmd, Object? value) => switch (cmd.id) {
+  'info' => 'getinfo',
+  'gps' => 'getgps',
+  'io' => 'getio',
+  'status' => 'getstatus',
+  'ver' => 'getver',
+  // AVL ID 67 is the internal battery voltage.
+  'battery' => 'readio 67',
+  // Sleep Mode, parameter 102: 0 disabled, 1 GPS sleep.
+  'sleep' => 'setparam 102:${(value as bool? ?? true) ? 1 : 0}',
+  // Min Period between records while moving, parameter 10050, in seconds.
+  'interval' => 'setparam 10050:$value',
+  'getparam' => 'getparam $value',
+  'setparam' => 'setparam $value',
+  // DOUT1 drives the lock relay: held high to lock, low to release.
+  'lock' => 'setdigout 1',
+  'unlock' => 'setdigout 0',
+  'pulse' => 'setdigout 1 5',
+  'cpureset' => 'cpureset',
+  'deleterecords' => 'deleterecords',
+  _ => cmd.id,
+};

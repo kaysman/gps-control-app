@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/app/widgets/app_logo.dart';
 import 'package:gps_control/features/sim/cubit/sim_cubit.dart';
 import 'package:gps_control/features/sms/cubit/conversation_cubit.dart';
 import 'package:gps_control/features/sms/sms_command_labels.dart';
@@ -61,18 +62,21 @@ class _SmsThreadsPageState extends State<SmsThreadsPage> {
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(22, 14, 22, 18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                Text(
-                  l10n.smsThreadsTitle,
-                  style: const TextStyle(
-                    fontFamily: kSans,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w800,
-                    color: kInk,
-                    letterSpacing: -1.4,
-                    height: 1,
+                const AppLogo(size: 30),
+                const SizedBox(width: 12),
+                Flexible(
+                  child: Text(
+                    l10n.smsThreadsTitle,
+                    style: const TextStyle(
+                      fontFamily: kSans,
+                      fontSize: 36,
+                      fontWeight: FontWeight.w800,
+                      color: kInk,
+                      letterSpacing: -1.4,
+                      height: 1,
+                    ),
                   ),
                 ),
               ],

@@ -56,7 +56,7 @@ void main() {
       expect(find.text(smsTrackers.last.short), findsOneWidget);
       // Each messaged thread previews its newest message — here, the
       // tracker's own reply.
-      expect(find.text('BAT:86%,CHG:1'), findsOneWidget);
+      expect(find.text('IO ID:67 Value:4102'), findsOneWidget);
       // A tracker nobody has messaged says so instead of showing nothing.
       expect(find.text('No messages yet'), findsWidgets);
     });
@@ -67,7 +67,7 @@ void main() {
       await tester.pumpWidget(_harness());
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byType(TextField), 'bx-002');
+      await tester.enterText(find.byType(TextField), 'fmb-002');
       await tester.pumpAndSettle();
       expect(find.text(smsTrackers[1].short), findsOneWidget);
       expect(find.text(smsTrackers[0].short), findsNothing);
@@ -102,17 +102,17 @@ void main() {
       await tester.pumpWidget(_harness());
       await tester.pumpAndSettle();
 
-      // The canned reply "BAT:86%,CHG:1" comes from the first tracker only.
+      // The 4102 reading came from the first tracker only.
       await tester.tap(find.text(smsTrackers[2].short));
       await tester.pumpAndSettle();
-      expect(find.textContaining('BAT:86%'), findsNothing);
+      expect(find.textContaining('Value:4102'), findsNothing);
 
       await tester.tap(find.byIcon(Icons.chevron_left));
       await tester.pumpAndSettle();
 
       await tester.tap(find.text(smsTrackers.first.short));
       await tester.pumpAndSettle();
-      expect(find.textContaining('BAT:86%'), findsOneWidget);
+      expect(find.textContaining('Value:4102'), findsOneWidget);
     });
 
     testWidgets('sending in a chat moves that thread preview in the list', (
@@ -127,7 +127,7 @@ void main() {
 
       await tester.tap(find.text('Pick a command to send'));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('Get battery'));
+      await tester.tap(find.text('Battery voltage'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Send'));
       await tester.pumpAndSettle();
@@ -137,12 +137,12 @@ void main() {
 
       // The list and the chat read one conversation, so the row updates
       // without reloading anything.
-      expect(find.text('You: Get battery'), findsOneWidget);
+      expect(find.text('You: Battery voltage'), findsOneWidget);
 
       // The canned device answers a moment later; the preview follows.
       await tester.pump(const Duration(milliseconds: 1400));
       await tester.pumpAndSettle();
-      expect(find.text('BAT:78%,CHG:0'), findsOneWidget);
+      expect(find.text('IO ID:67 Value:4021'), findsOneWidget);
     });
   });
 }

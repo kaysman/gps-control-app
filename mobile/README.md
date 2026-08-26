@@ -85,6 +85,16 @@ the chat, where the canvas is mist and the composer is an ink pill. Radii come
 from `kR14` / `kR22` / `kR30` and nothing else; every card shares the one
 `kShadow` value.
 
+**One mark, three places.** The launcher icon, the launch screen and the app
+mark in the page headers are all the same green arrow, cut from
+`AppIcons/gpslogo-transparent.png` at the repo root. `AppLogo` draws that
+transparent cut directly — no plate, no ground — so the arrow sits on whatever
+surface the header already has, ink on the radar screen and mist everywhere
+else. The splash is dark in both light and dark mode, because the first screen
+behind it is the dark radar view — see
+`android/.../values-v31/styles.xml` for API 31+, `drawable*/launch_background.xml`
+below that, and `ios/Runner/Base.lproj/LaunchScreen.storyboard`.
+
 **The SMS tab is a thread list; a chat is a pushed screen.** `/sms` lists the
 fleet with each thread's newest message; `/sms/:trackerId` is that tracker's
 chat, routed *outside* the shell so it gets the whole screen instead of sharing
@@ -101,9 +111,16 @@ message.
 
 **Every setting is a bottom sheet.** Language, tracker brand and active SIM are
 all one-of-N choices, so they share one row widget and one sheet widget
-(`features/settings/widgets/`) rather than each growing its own control. Only
-Bariox has a command implementation — `TrackerBrand.teltonika` is offered and
-flagged `BETA`, since the protocol lives in a package that does not exist yet.
+(`features/settings/widgets/`) rather than each growing its own control.
+
+**Two brands, split by transport.** SMS speaks Teltonika FMB — the command
+catalogue in `mock/mock_data.dart`, the wire strings in
+`features/sms/sms_command_text.dart`, both in the documented
+`<login> <password> <command>` form, which is why every message starts with two
+spaces when no credentials are set. BLE speaks Bariox and only Bariox, because
+that is what `packages/bariox_tracker` implements — see
+`TrackerBrand.hasBleSupport`. Teltonika is the default brand; the picker changes
+the label, not the protocol, until a second catalogue exists.
 
 ## Checks
 

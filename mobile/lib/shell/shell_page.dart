@@ -84,7 +84,6 @@ class _BottomTabBar extends StatelessWidget {
                 id: AppTab.sms,
                 label: l10n.tabSms,
                 active: tab == AppTab.sms,
-                showBeta: true,
                 onTap: () => onTab(AppTab.sms),
               ),
               _TabBtn(

@@ -9,14 +9,12 @@ class TrackerPasswordCubit extends Cubit<Map<String, String>> {
   /// Creates an empty password book.
   TrackerPasswordCubit() : super(const {});
 
-  /// The factory default every tracker ships with.
-  static const fallback = '000000';
+  /// What an FMB unit ships with: no SMS password at all. The wire format
+  /// keeps the separator either way, so an empty value is valid.
+  static const fallback = '';
 
   /// The password to send to [trackerId], or [fallback] if none was entered.
-  String passwordFor(String trackerId) {
-    final pw = state[trackerId]?.trim() ?? '';
-    return pw.isEmpty ? fallback : pw;
-  }
+  String passwordFor(String trackerId) => state[trackerId]?.trim() ?? fallback;
 
   /// Records [password] for [trackerId]. An empty value clears it.
   void set(String trackerId, String password) {

@@ -57,7 +57,7 @@ class _PasswordSheetState extends State<_PasswordSheet> {
           child: TextField(
             controller: _ctrl,
             keyboardType: TextInputType.number,
-            maxLength: 6,
+            maxLength: 10,
             // Saved as it is typed: the sheet has no submit button, so there
             // is no way to lose what was entered by dismissing it.
             onChanged: (v) =>
@@ -71,12 +71,12 @@ class _PasswordSheetState extends State<_PasswordSheet> {
             ),
             decoration: InputDecoration(
               counterText: '',
-              hintText: TrackerPasswordCubit.fallback,
+              hintText: l10n.smsPasswordNone,
               hintStyle: const TextStyle(
-                fontFamily: kTech,
-                fontSize: 17,
+                fontFamily: kSans,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
                 color: kMute2,
-                letterSpacing: 3,
               ),
               filled: true,
               fillColor: kCanvas,

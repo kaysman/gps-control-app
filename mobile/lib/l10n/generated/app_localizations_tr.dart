@@ -157,9 +157,6 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get commandPickerHeading => 'KOMUT';
-
-  @override
   String get commandPickerTitle => 'Birini seçin';
 
   @override
@@ -200,124 +197,97 @@ class AppLocalizationsTr extends AppLocalizations {
   String get composeToggleOff => 'Kapalı';
 
   @override
-  String get smsCmdBatteryName => 'Pili al';
+  String get smsCmdBatteryName => 'Pil voltajı';
 
   @override
-  String get smsCmdBatterySub => 'Pil seviyesi ve şarj';
+  String get smsCmdBatterySub => 'Dahili pil, AVL ID 67';
 
   @override
-  String get smsCmdStatusName => 'Kilit durumunu al';
+  String get smsCmdStatusName => 'Modem durumu';
 
   @override
-  String get smsCmdStatusSub => 'Mühürlü · kapak · motor';
+  String get smsCmdStatusSub => 'GPRS · sinyal · SIM · hücre';
 
   @override
-  String get smsCmdPositionName => 'Konumu al';
+  String get smsCmdPositionName => 'GPS konumu';
 
   @override
-  String get smsCmdPositionSub => 'GPS koordinatları · hız';
+  String get smsCmdPositionSub => 'Koordinatlar · uydular · hız';
 
   @override
-  String get smsCmdRfidName => 'RFID kartları listele';
+  String get smsCmdFwName => 'Firmware sürümü';
 
   @override
-  String get smsCmdRfidSub => 'Tüm yetkili kartlar';
+  String get smsCmdFwSub => 'Firmware · GPS · donanım · IMEI';
 
   @override
-  String get smsCmdSubsName => 'Alt kilitleri listele';
+  String get smsCmdSleepName => 'Uyku modu';
 
   @override
-  String get smsCmdSubsSub => 'Eşli alt kilitler ve durum';
+  String get smsCmdSleepInputLabel => 'GPS uykusu (parametre 102)';
 
   @override
-  String get smsCmdFwName => 'Firmware sürümünü al';
+  String get smsCmdIntervalName => 'Takip aralığı';
 
   @override
-  String get smsCmdFwSub => '';
-
-  @override
-  String get smsCmdSleepName => 'Uyku modunu ayarla';
-
-  @override
-  String get smsCmdSleepInputLabel => 'Uyku modu';
-
-  @override
-  String get smsCmdIntervalName => 'Konum aralığını ayarla';
-
-  @override
-  String get smsCmdIntervalInputLabel => 'Konumu her';
-
-  @override
-  String get smsCmdAutolockName => 'Otomatik kilit süresini ayarla';
-
-  @override
-  String get smsCmdAutolockInputLabel => 'Şu süreden sonra kilitle';
-
-  @override
-  String get smsCmdAddrfidName => 'RFID kart ekle';
-
-  @override
-  String get smsCmdAddrfidInputLabel => 'Kart numarası';
-
-  @override
-  String get smsCmdAddphoneName => 'Yetkili telefon ekle';
-
-  @override
-  String get smsCmdAddphoneInputLabel => 'Telefon numarası';
-
-  @override
-  String get smsCmdPwdName => 'Açma şifresini değiştir';
-
-  @override
-  String get smsCmdPwdInputLabel => 'Yeni 6 haneli şifre';
-
-  @override
-  String get smsCmdSensorName => 'Sensör hassasiyetini ayarla';
-
-  @override
-  String get smsCmdSensorInputLabel => 'Hassasiyet';
+  String get smsCmdIntervalInputLabel => 'Hareket hâlinde kayıt aralığı';
 
   @override
   String get smsCmdUnlockName => 'Kilidi aç';
 
   @override
-  String get smsCmdUnlockSub => 'Ana kilidi aç';
+  String get smsCmdUnlockSub => 'DOUT1\'i düşür';
 
   @override
   String get smsCmdLockName => 'Kilitle';
 
   @override
-  String get smsCmdLockSub => 'Ana kilidi mühürle';
+  String get smsCmdLockSub => 'DOUT1\'i yüksek tut';
 
   @override
   String get smsCmdRebootName => 'Cihazı yeniden başlat';
 
   @override
-  String get smsCmdRebootSub => '';
+  String get smsCmdRebootSub => 'CPU sıfırlama';
 
   @override
-  String get smsCmdClearName => 'Konum önbelleğini temizle';
+  String get smsCmdClearName => 'Kayıtları sil';
 
   @override
-  String get smsCmdClearSub => '';
+  String get smsCmdClearSub => 'Cihazdaki tüm kayıtları siler';
 
   @override
-  String get smsCmdResetName => 'Fabrika ayarlarına dön';
+  String get smsCmdInfoName => 'Cihaz bilgisi';
 
   @override
-  String get smsCmdResetSub => 'Her şeyi siler';
+  String get smsCmdInfoSub => 'Çalışma süresi · hatalar · GPS · kayıtlar';
+
+  @override
+  String get smsCmdIoName => 'Giriş/çıkış değerleri';
+
+  @override
+  String get smsCmdIoSub => 'Dijital girişler ve çıkışlar';
+
+  @override
+  String get smsCmdGetparamName => 'Parametre oku';
+
+  @override
+  String get smsCmdGetparamInputLabel => 'Parametre ID';
+
+  @override
+  String get smsCmdSetparamName => 'Parametre ayarla';
+
+  @override
+  String get smsCmdSetparamInputLabel => 'ID:değer';
+
+  @override
+  String get smsCmdPulseName => 'Çıkışı darbele';
+
+  @override
+  String get smsCmdPulseSub => 'DOUT1 5 saniye yüksek';
 
   @override
   String get smsUnitSeconds => 'saniye';
-
-  @override
-  String get sensorLow => 'Düşük';
-
-  @override
-  String get sensorMedium => 'Orta';
-
-  @override
-  String get sensorHigh => 'Yüksek';
 
   @override
   String get settingsTitle => 'Ayarlar';
@@ -351,13 +321,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get brandBariox => 'Bariox';
 
   @override
-  String get brandBarioxSub => 'BLE ve SMS · tüm komut seti';
+  String get brandBarioxSub => 'BLE · ana kilitler ve alt kilitler';
 
   @override
   String get brandTeltonika => 'Teltonika';
 
   @override
-  String get brandTeltonikaSub => 'Yalnızca SMS · FMB serisi';
+  String get brandTeltonikaSub => 'SMS · FMB serisi';
 
   @override
   String get simsNone => 'SIM kart bulunamadı';
@@ -400,7 +370,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get smsSearchEmpty => 'Eşleşen cihaz yok';
 
   @override
-  String get smsNoSimChip => 'SIM yok';
+  String get smsPasswordNone => 'Ayarlanmadı';
 
   @override
   String get smsPasswordTitle => 'Cihaz şifresi';

@@ -17,12 +17,12 @@ import 'package:gps_control/models/chat_message.dart';
 class FakeSmsRepository implements SmsRepository {
   final _incoming = StreamController<IncomingSms>.broadcast();
 
-  static const _batteryPct = 78;
-  static const _serial = '2500000016';
+  static const _batteryMv = 4021;
+  static const _imei = '352094081234505';
 
   /// The tracker every single-recipient reply comes from.
   static MockTracker get _unit => smsTrackers.firstWhere(
-    (t) => t.id == '2500000016',
+    (t) => t.id == _imei,
     orElse: () => smsTrackers.first,
   );
 
@@ -52,33 +52,33 @@ class FakeSmsRepository implements SmsRepository {
             .map((id) => smsTrackers.firstWhere((t) => t.id == id).short)
             .toList(),
         commandId: 'battery',
-        smsText: '#000000,RDBL',
+        smsText: '  readio 67',
       ),
       ReceivedChatMessage(
         timestamp: ago(33),
         from: smsTrackers[0].phone,
-        body: 'BAT:86%,CHG:1',
+        body: 'IO ID:67 Value:4102',
       ),
       ReceivedChatMessage(
         timestamp: ago(33),
         from: smsTrackers[1].phone,
-        body: 'BAT:41%,CHG:0',
+        body: 'IO ID:67 Value:3874',
       ),
       ReceivedChatMessage(
         timestamp: ago(32),
         from: _unit.phone,
-        body: 'BAT:$_batteryPct%,CHG:0',
+        body: 'IO ID:67 Value:$_batteryMv',
       ),
       SentChatMessage(
         timestamp: ago(18),
         recipientShorts: [_unit.short],
-        commandId: 'position',
-        smsText: '#000000,RDLO',
+        commandId: 'gps',
+        smsText: '  getgps',
       ),
       ReceivedChatMessage(
         timestamp: ago(17),
         from: _unit.phone,
-        body: _positionReport('09:14:22'),
+        body: _gpsReport(),
       ),
     ];
   }
@@ -103,39 +103,59 @@ class FakeSmsRepository implements SmsRepository {
 
   /// Picks a reply for a command the app sent.
   ///
-  /// Commands look like `#<password>,<KEY>[:<args>]`, except the two lock
-  /// controls, which use the parenthesised `(P4x,…)` form.
+  /// Teltonika messages arrive as `<login> <password> <command> [args]`, so
+  /// the credentials are dropped and the verb is whatever is left.
   static String _replyTo(String body) {
-    if (body.startsWith('(P43')) return 'P43 OK';
-    if (body.startsWith('(P44')) return 'PWD CHANGED OK';
+    final parts = body.trim().split(RegExp(r'\s+'));
+    // A password may or may not be present; the verb is the first token that
+    // is not one.
+    final verb = parts.firstWhere(
+      (p) => _verbs.contains(p),
+      orElse: () => parts.isEmpty ? '' : parts.last,
+    );
+    final args = parts.skipWhile((p) => p != verb).skip(1).join(' ');
 
-    final comma = body.indexOf(',');
-    if (comma == -1) return 'ERR:FORMAT';
-    final command = body.substring(comma + 1);
-    final colon = command.indexOf(':');
-    final key = (colon == -1 ? command : command.substring(0, colon)).trim();
-    final args = colon == -1 ? '' : command.substring(colon + 1).trim();
-
-    return switch (key) {
-      'RDBL' => 'BAT:$_batteryPct%,CHG:0',
-      'RDLS' => 'LOCK:1,COVER:0,ROPE:0,MOTOR:0',
-      'RDLO' => _positionReport(_clock()),
-      'RDRF' => 'RFID:2226557347,2226557351',
-      'SLRA' => 'PH1:${smsTrackers[0].phone},PH2:${smsTrackers[1].phone}',
-      'RDVE' => 'VER:HB_V1.0.0.07 2026-02-06',
-      'REST' => 'REST OK',
-      'CLRD' => 'CLRD OK',
-      'INIT' => 'INIT-SYS OK',
-      'STPF' => '$args OK',
-      _ => args.isEmpty ? '$key OK' : '$key:$args OK',
+    return switch (verb) {
+      'getinfo' =>
+        'INI:2026/8/25 09:02 RTC:2026/8/25 10:42 RST:2 ERR:0 SR:0 BR:0 '
+            'CF:0 FG:0 FL:0 SMS:2 NOGPS:0:04 GPS:3 SAT:9 RS:3 MD:4',
+      'getgps' => _gpsReport(),
+      'getio' => 'DI1:0 DI2:0 DI3:0 AIN1:0.0 DO1:1 DO2:0',
+      'getstatus' =>
+        'Data Link:1 GPRS:1 Phone:0 SIM:0 OP:43801 Signal:4 NewSMS:0 '
+            'Roaming:0 SMSFull:0 LAC:8322 Cell ID:51',
+      'getver' =>
+        'Ver:03.27.07 Rev:00 GPS:AXN_5.10 Hw:FMB920 Mod:11 '
+            'IMEI:$_imei Init:2026/1/9',
+      'readio' => 'IO ID:$args Value:$_batteryMv',
+      'getparam' => '$args:30',
+      'setparam' => '$args OK',
+      'setdigout' => 'DOUT1:${args.startsWith('1') ? 1 : 0} OK',
+      'cpureset' => 'CPU reset in progress',
+      'deleterecords' => 'Records deleted',
+      _ => 'Unknown command: $verb',
     };
   }
 
-  /// The documented status report: `*MM/DD/YY,HH:MM:SS,SN,lat,N,lon,E,speed,
-  /// height,&,battery,charging,unlock,chainBreak,simCover,topCover,motor#`
-  static String _positionReport(String time) =>
-      '*08/20/26,$time,$_serial,37.960077,N,58.326063,E,0,214,&,'
-      '$_batteryPct,0,1,0,0,0,0#';
+  /// Verbs this device answers to — the catalogue in `mock_data.dart`.
+  static const _verbs = {
+    'getinfo',
+    'getgps',
+    'getio',
+    'getstatus',
+    'getver',
+    'readio',
+    'getparam',
+    'setparam',
+    'setdigout',
+    'cpureset',
+    'deleterecords',
+  };
+
+  /// The documented `getgps` answer.
+  static String _gpsReport() =>
+      'GPS:1 Sat:9 Lat:37.960077 Long:58.326063 Alt:214 Speed:0 Dir:126 '
+      'Date:2026/8/25 Time:${_clock()}';
 
   static String _clock() {
     final now = DateTime.now();

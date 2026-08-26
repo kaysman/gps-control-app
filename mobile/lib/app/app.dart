@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gps_control/app/router.dart';
 import 'package:gps_control/app/tokens.dart';
@@ -12,6 +13,18 @@ import 'package:gps_control/features/sim/cubit/sim_cubit.dart';
 import 'package:gps_control/features/sms/cubit/conversation_cubit.dart';
 import 'package:gps_control/features/sms/cubit/tracker_password_cubit.dart';
 import 'package:gps_control/l10n/l10n.dart';
+
+/// Status bar treatment for the app's light pages: dark glyphs over the mist
+/// canvas. Only the radar screen is dark, and it paints its own light-on-ink
+/// style deeper in the tree, which wins over this one. Without a declared
+/// style iOS falls back to `.default`, which is white glyphs whenever the
+/// system is in dark appearance — invisible on every page but the radar.
+const _overlayOnLight = SystemUiOverlayStyle(
+  statusBarColor: Colors.transparent,
+  // iOS reads the background brightness, Android the icon brightness.
+  statusBarBrightness: Brightness.light,
+  statusBarIconBrightness: Brightness.dark,
+);
 
 /// Root widget. Receives the repositories it should run against, so swapping
 /// real hardware for canned data is a decision made once, in `main`.
@@ -79,6 +92,11 @@ class App extends StatelessWidget {
                 ),
               ),
               routerConfig: goRouter,
+              builder: (context, child) =>
+                  AnnotatedRegion<SystemUiOverlayStyle>(
+                    value: _overlayOnLight,
+                    child: child ?? const SizedBox.shrink(),
+                  ),
             );
           },
         ),

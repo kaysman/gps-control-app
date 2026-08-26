@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/app/widgets/app_logo.dart';
 import 'package:gps_control/data/tracker/tracker_repository.dart';
 import 'package:gps_control/features/bluetooth/bloc/bluetooth_bloc.dart';
 import 'package:gps_control/l10n/l10n.dart';
@@ -99,15 +100,21 @@ class _ScanViewState extends State<ScanView> with TickerProviderStateMixin {
                     Positioned(
                       top: topPad + 14,
                       left: 20,
-                      child: Text(
-                        l10n.appTitle,
-                        style: const TextStyle(
-                          fontFamily: kSans,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          color: kWhite,
-                          letterSpacing: -0.5,
-                        ),
+                      child: Row(
+                        children: [
+                          const AppLogo(size: 24),
+                          const SizedBox(width: 10),
+                          Text(
+                            l10n.appTitle,
+                            style: const TextStyle(
+                              fontFamily: kSans,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: kWhite,
+                              letterSpacing: -0.5,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     // Bottom status

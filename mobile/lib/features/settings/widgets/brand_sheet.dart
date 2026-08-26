@@ -32,9 +32,9 @@ class BrandSheet extends StatelessWidget {
       title: l10n.brandPickerTitle,
       subtitle: l10n.brandPickerSubtitle,
       children: [
-        // TODO(brand): Teltonika has no command implementation — see
-        // TrackerBrand.isImplemented. Selecting it changes the label and
-        // nothing else until the protocol package lands.
+        // TODO(brand): selecting a brand does not switch command sets
+        // yet. SMS speaks Teltonika; BLE speaks Bariox — see
+        // TrackerBrand.hasBleSupport.
         for (final brand in TrackerBrand.values)
           PickerRow(
             icon: brand == TrackerBrand.bariox

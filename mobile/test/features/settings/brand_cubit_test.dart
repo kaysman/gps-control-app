@@ -4,11 +4,13 @@ import 'package:gps_control/l10n/l10n.dart';
 
 void main() {
   group('BrandCubit', () {
-    test('starts on Bariox, the only implemented brand', () {
-      final cubit = BrandCubit();
-      expect(cubit.state, TrackerBrand.bariox);
-      expect(cubit.state.isImplemented, isTrue);
-      expect(TrackerBrand.teltonika.isImplemented, isFalse);
+    test('starts on Teltonika', () {
+      expect(BrandCubit().state, TrackerBrand.teltonika);
+    });
+
+    test('only Bariox reaches the Bluetooth tab', () {
+      expect(TrackerBrand.bariox.hasBleSupport, isTrue);
+      expect(TrackerBrand.teltonika.hasBleSupport, isFalse);
     });
 
     test('setBrand switches and ignores the current brand', () {
@@ -17,12 +19,12 @@ void main() {
       final sub = cubit.stream.listen(seen.add);
 
       cubit
-        ..setBrand(TrackerBrand.teltonika)
-        ..setBrand(TrackerBrand.teltonika);
+        ..setBrand(TrackerBrand.bariox)
+        ..setBrand(TrackerBrand.bariox);
 
-      expect(cubit.state, TrackerBrand.teltonika);
+      expect(cubit.state, TrackerBrand.bariox);
       return Future<void>.delayed(Duration.zero, () {
-        expect(seen, [TrackerBrand.teltonika]);
+        expect(seen, [TrackerBrand.bariox]);
         return sub.cancel();
       });
     });

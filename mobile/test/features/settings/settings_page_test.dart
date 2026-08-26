@@ -112,22 +112,22 @@ void main() {
       expect(find.text('Türkçe'), findsOneWidget);
     });
 
-    testWidgets('brand defaults to Bariox and switches to Teltonika', (
+    testWidgets('brand defaults to Teltonika and switches to Bariox', (
       tester,
     ) async {
       await tester.pumpWidget(_harness());
       await tester.pumpAndSettle();
 
-      expect(find.text('Bariox'), findsOneWidget);
+      expect(find.text('Teltonika'), findsOneWidget);
 
       await _openRow(tester, 'Tracker brand');
 
-      await tester.tap(find.text('Teltonika'));
+      await tester.tap(find.text('Bariox'));
       await tester.pumpAndSettle();
 
       expect(find.byType(PickerSheet), findsNothing);
-      expect(find.text('Teltonika'), findsOneWidget);
-      expect(find.text('Bariox'), findsNothing);
+      expect(find.text('Bariox'), findsOneWidget);
+      expect(find.text('Teltonika'), findsNothing);
     });
 
     testWidgets('the SIM picker is a sheet and switches the active SIM', (

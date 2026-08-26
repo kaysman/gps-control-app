@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gps_control/app/tokens.dart';
+import 'package:gps_control/app/widgets/app_logo.dart';
 import 'package:gps_control/app/widgets/picker_sheet.dart';
 import 'package:gps_control/features/settings/cubit/brand_cubit.dart';
 import 'package:gps_control/features/settings/widgets/brand_sheet.dart';
@@ -51,8 +52,9 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.memory,
                 label: l10n.settingsRowBrand,
                 value: BrandSheet.labelFor(l10n, brand),
-                // TODO(brand): only Bariox is implemented. Surface the gap
-                // here again once there is something to say about it.
+                // TODO(brand): the picker changes the label, not the
+                // protocol — the SMS catalogue is Teltonika's either way.
+                // Wire the catalogue to this once Bariox SMS lands.
                 onTap: () => openPickerSheet(
                   context: context,
                   builder: (_) => const BrandSheet(),
@@ -80,8 +82,9 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
-/// Oversized display header. The title carries the page on its own — no
-/// eyebrow, no subtitle explaining what "Settings" means.
+/// Oversized display header, with the app mark to its left. The title
+/// carries the page on its own — no eyebrow, no subtitle explaining what
+/// "Settings" means.
 class _Header extends StatelessWidget {
   const _Header({required this.title});
 
@@ -91,19 +94,24 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(22, 14, 22, 18),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontFamily: kSans,
-            fontSize: 36,
-            fontWeight: FontWeight.w800,
-            color: kInk,
-            letterSpacing: -1.4,
-            height: 1,
+      child: Row(
+        children: [
+          const AppLogo(size: 30),
+          const SizedBox(width: 12),
+          Flexible(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontFamily: kSans,
+                fontSize: 36,
+                fontWeight: FontWeight.w800,
+                color: kInk,
+                letterSpacing: -1.4,
+                height: 1,
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
